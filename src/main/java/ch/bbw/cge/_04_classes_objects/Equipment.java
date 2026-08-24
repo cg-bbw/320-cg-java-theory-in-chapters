@@ -1,4 +1,4 @@
-package ch.bbw.cge._06_inheritance;
+package ch.bbw.cge._04_classes_objects;
 
 public class Equipment {
     public Equipment(){

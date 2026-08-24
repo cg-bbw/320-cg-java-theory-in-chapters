@@ -1,4 +1,4 @@
-package ch.bbw.cge._06_inheritance;
+package ch.bbw.cge._04_classes_objects;
 
 /**
  * Class declaration and definition: SimpleCar class with an access modifier (public)
@@ -48,7 +48,7 @@ public class SimpleCar {
 
     // This method has a parameter called targetSpeed.
     // The parameter name and the name of the argument (= value passed to the method) in the method call do NOT have to be the same.
-    private void accelerate(int targetSpeed) {
+    public void accelerate(int targetSpeed) {
         while(speed < targetSpeed) {
             speed++;
         }
@@ -93,16 +93,4 @@ public class SimpleCar {
     public void setModel(String model) {
         this.model = model;
     }
-
-    public static void main(String[] args) {
-        SimpleCar car = new SimpleCar("VW Golf", 2023);
-        System.out.println("Current speed before starting engine is: " + car.getSpeed());
-        car.startEngine();
-        System.out.println("Current speed after starting engine is: " + car.getSpeed());
-        int targetSpeed = 100;
-        car.accelerate(targetSpeed);
-        System.out.println("Current speed after accelerating is: " + car.getSpeed());
-    }
-
-
 }
