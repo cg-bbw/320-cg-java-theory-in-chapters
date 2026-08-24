@@ -1,0 +1,9 @@
+Typically we work with generics but don't write them ourselves,
+as we do in the util classes List, Set and Map.
+Class definitions with Generics are written like this example of ArrayList:
+
+public class ArrayList<E> extends AbstractList<E>
+        implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+
+We can store any complex datatype in those classes. They work as container holding
+elements of one datatype. That is the reason why

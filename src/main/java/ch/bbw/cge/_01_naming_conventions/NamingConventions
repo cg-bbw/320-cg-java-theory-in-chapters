@@ -1,0 +1,13 @@
+In Java some structures are well described who they should / must be named, e.g. classes.
+See the official Java Documentation by Oracle:
+https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html
+
+As mentioned by Oracle, some structures do not have strict conventions to follow
+and just have technical boundaries, e.g. packages. For package names there are
+multiple styles seen in the community. Here are some good hints:
+https://stackoverflow.com/questions/3179216/what-is-the-convention-for-word-separator-in-java-package-names
+
+As for this project we define our own package naming convention:
+1. Every package starts with a _ prefix because it can't start with a number
+2. After the _ prefix there comes a number to generate a clear chapter structure
+3. In consideration we want better readability, we separate the rest of the package name with _ between each word.
