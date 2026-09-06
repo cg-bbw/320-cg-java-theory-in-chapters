@@ -1,0 +1,510 @@
+= Java Basics Glossary
+:toc:
+:toclevels: 2
+:sectanchors:
+
+This glossary contains the basic vocabulary used when reading, writing, discussing, and debugging Java programs.
+The glossary is a short reference to all java related topics of the modules 319, 320 and beyond.
+Where a term belongs to one of the learning chapters, a cross-reference points to the corresponding chapter README.
+
+== Source Code and Program Structure
+
+[[jb-source-code]]
+Source code::
+Human-readable program text written in a programming language. Java source code is normally stored in files with the `.java` extension and is translated by a Java compiler before it can be executed by the JVM.
+
+[[jb-source-file]]
+Source file::
+A file that contains source code. A Java source file normally has the extension `.java`; if it contains a `public` top-level class, interface, enum, or record, the file name must normally match the name of that public type.
+
+[[jb-syntax]]
+Syntax::
+The formal grammar rules that describe how valid Java source code must be written. A syntax error means that the compiler cannot interpret the code according to Java's grammar rules.
+
+[[jb-token]]
+Token::
+A token is one of the smallest meaningful units recognized by the Java compiler, for example an identifier, keyword, literal, operator, or separator. Whitespace and comments usually separate or surround tokens but are not executed as program instructions.
+
+[[jb-identifier]]
+Identifier::
+An identifier is a name chosen for a program element such as a variable, method, class, parameter, or package component. Identifiers must follow Java's lexical rules and should also follow the established Java naming conventions so that code remains readable.
+See also: xref:../../_01_naming_conventions/README.adoc[Naming Conventions].
+
+[[jb-keyword]]
+Keyword::
+A keyword is a word that has a special grammatical meaning in Java and therefore cannot always be used as a normal identifier. Java distinguishes reserved keywords, such as `class`, `if`, and `return`, from contextual keywords, such as `var` and `record`, whose special meaning depends on where they appear in the source code.
+
+[[jb-reserved-keyword]]
+Reserved keyword::
+A reserved keyword is a character sequence that Java permanently reserves for language syntax and that therefore cannot be used as an identifier. Examples include `public`, `class`, `new`, `return`, and `while`.
+
+[[jb-contextual-keyword]]
+Contextual keyword::
+A contextual keyword is interpreted as a keyword only in specific grammatical contexts. Examples include `var`, `record`, `sealed`, and `yield`; outside the relevant context, some contextual keywords may still be usable as identifiers.
+
+[[jb-literal]]
+Literal::
+A literal is source-code notation for a value written directly into the program, for example `42`, `3.14`, `'A'`, `"Hello"`, `true`, or `null`. The words `true`, `false`, and `null` are literals rather than Java keywords.
+
+[[jb-statement]]
+Statement::
+A statement is a complete instruction or control-flow unit in Java. Examples include an assignment statement, a method-invocation statement, a `return` statement, an `if` statement, or a loop statement.
+
+[[jb-expression]]
+Expression::
+An expression is a piece of code that is evaluated to produce a value, a variable, or another result defined by the language. Examples include `2 + 3`, `age >= 18`, `person.getName()`, and `new Person()`.
+
+[[jb-block]]
+Block::
+A block is a sequence of zero or more statements enclosed in curly braces `{ ... }`. Blocks define structure and often introduce a new local scope, for example in methods, loops, conditionals, constructors, and class bodies.
+
+[[jb-package]]
+Package::
+The Java keyword `package` declares the package to which a source file belongs. A package acts as a namespace for related types and also participates in Java's package-private access rules; package names are conventionally written in lowercase.
+
+[[jb-import]]
+Import::
+The Java keyword `import` makes a type or static member from another package available by a shorter name in the current source file. An import does not copy code into the file and does not create an object; it only affects how names are resolved by the compiler.
+
+[[jb-main-method]]
+Main method::
+The commonly used Java application entry point is `public static void main(String[] args)`. When a class is launched as a traditional Java application, the JVM invokes this method to start the program.
+
+[[jb-entry-point]]
+Entry point::
+An entry point is the location where execution of an application begins. In the examples of this learning project, the entry point is normally the `main` method of the package's `Main` class.
+
+== Naming and Documentation
+
+[[jb-naming-convention]]
+Naming convention::
+A naming convention is an agreed set of rules for naming program elements consistently. Naming conventions normally do not decide whether code compiles, but they make code easier to read, discuss, search, and maintain.
+See also: xref:../../_01_naming_conventions/README.adoc[Naming Conventions].
+
+[[jb-camel-case]]
+camelCase::
+`camelCase` is a naming style in which the first word starts with a lowercase letter and each following word starts with an uppercase letter, for example `numberOfStudents`. Java convention normally uses camelCase for variables, parameters, and methods.
+See also: xref:../../_01_naming_conventions/README.adoc[Naming Conventions].
+
+[[jb-pascal-case]]
+PascalCase::
+`PascalCase` is a naming style in which every word starts with an uppercase letter, for example `BankAccount`. Java convention normally uses PascalCase for classes, interfaces, records, enum types, and annotation types.
+See also: xref:../../_01_naming_conventions/README.adoc[Naming Conventions].
+
+[[jb-upper-snake-case]]
+UPPER_SNAKE_CASE::
+`UPPER_SNAKE_CASE` is a naming style in which words are written in uppercase letters and separated by underscores, for example `MAX_NUMBER_OF_USERS`. Java convention commonly uses this style for constants, especially `static final` fields.
+See also: xref:../../_01_naming_conventions/README.adoc[Naming Conventions].
+
+[[jb-snake-case]]
+snake_case::
+`snake_case` is a naming style in which lowercase words are separated by underscores, for example `number_of_students`. It is common in some programming languages and file formats but is normally not used for Java variable or method names.
+
+[[jb-lowercase]]
+lowercase::
+Lowercase naming uses only lowercase letters, for example `ch.school.examples`. Java package names are conventionally written in lowercase; for multiword package components, Java style normally avoids underscores and uppercase letters.
+
+[[jb-comment]]
+Comment::
+A comment is text in source code intended for human readers rather than program execution. Java supports line comments with `//`, block comments with `/* ... */`, and documentation comments with `/** ... */`; good comments explain intent, reasons, constraints, or newly introduced theory rather than simply repeating obvious code.
+See also: xref:../../_02_documentation/README.adoc[Documentation].
+
+[[jb-javadoc]]
+Javadoc::
+Javadoc is Java's documentation system based on documentation comments beginning with `/**`. Javadoc comments can contain descriptive text, inline tags such as `{@code ...}`, and block tags such as `@param`, `@return`, and `@throws`; these tags are not Java annotations.
+See also: xref:../../_02_documentation/README.adoc[Documentation].
+
+[[jb-annotation]]
+Annotation::
+An annotation is metadata written with an annotation marker beginning with `@`, for example `@Override` or `@Deprecated`. Annotations can provide information to the compiler, development tools, frameworks, or runtime code; unlike Javadoc tags, they are part of Java's language model.
+See also: xref:../../_02_documentation/README.adoc[Documentation].
+
+[[jb-todo-fixme]]
+TODO / FIXME::
+`TODO` and `FIXME` are conventional words placed in comments to mark unfinished work or known problems. They are not Java keywords and have no special meaning to the Java compiler, although IDEs and quality checks can search for them and display them prominently.
+See also: xref:../../_02_documentation/README.adoc[Documentation].
+
+== Variables and Data Types
+
+[[jb-variable]]
+Variable::
+A variable is a named storage location whose value can be used by the program and, unless restricted, changed later. Every Java variable has a compile-time type, a scope, and a lifetime determined by where and how it is declared.
+
+[[jb-data-type]]
+Data type::
+A data type defines which values an expression or variable can represent and which operations are valid for those values. Java distinguishes primitive types from reference types, and the compiler uses type information to check many errors before the program runs.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-primitive-type]]
+Primitive type::
+Java has eight built-in primitive types: `boolean`, `byte`, `short`, `int`, `long`, `char`, `float`, and `double`. Primitive values are not objects and are stored and passed as values; wrapper classes provide object representations when an API requires reference types.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-boolean]]
+Boolean primitive type::
+The Java keyword `boolean` declares a variable, parameter, field, or return type whose values are `true` or `false`. Boolean values are commonly used for conditions and logical decisions.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-byte]]
+Byte primitive type::
+The Java keyword `byte` declares an 8-bit signed integer type. It is useful when values are known to be small or when working with raw binary data, but `int` is more common for ordinary integer calculations.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-short]]
+Short primitive type::
+The Java keyword `short` declares a 16-bit signed integer type. It exists for compact numeric storage and interoperability, while `int` is normally preferred for everyday integer arithmetic.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-int]]
+Integer primitive type::
+The Java keyword `int` declares a 32-bit signed integer type. It is the standard primitive type for whole-number calculations when the range of `long` is not required.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-long]]
+Long primitive type::
+The Java keyword `long` declares a 64-bit signed integer type. Integer literals that must be treated as `long` are commonly written with the suffix `L`, for example `5_000_000_000L`.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-char]]
+Character primitive type::
+The Java keyword `char` declares a 16-bit UTF-16 code unit. A `char` literal is written with single quotes, for example `'A'`; a `char` does not necessarily represent a complete Unicode character in every case.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-float]]
+Float primitive type::
+The Java keyword `float` declares a 32-bit IEEE 754 floating-point type. Float literals normally require an `F` suffix, for example `3.5F`; `double` is more common for general floating-point calculations.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-double]]
+Double primitive type::
+The Java keyword `double` declares a 64-bit IEEE 754 floating-point type. It is Java's default type for floating-point literals such as `3.5` and is commonly used for approximate decimal calculations.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-reference-type]]
+Reference type::
+A reference type is a type whose values are references to objects or arrays, or the special value `null`. Classes, interfaces, arrays, records, and enum types are reference types; `String` is one of the most frequently used examples.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-wrapper-class]]
+Wrapper class::
+A wrapper class is a reference type that represents a primitive value as an object, for example `Integer` for `int`, `Double` for `double`, and `Boolean` for `boolean`. Wrapper classes are needed when an API expects objects, as is common with generic collections.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-declaration]]
+Declaration::
+A declaration introduces a program element and gives the compiler information about it, such as its name and type. Java has declarations for variables, parameters, fields, methods, constructors, classes, interfaces, enum types, records, and other elements.
+
+[[jb-definition]]
+Definition::
+Definition is an informal programming term often used to mean the complete description or implementation of a program element. In Java terminology, the language specification usually speaks of declarations rather than maintaining a strict general distinction between declaration and definition.
+
+[[jb-initialization]]
+Initialization::
+Initialization gives a variable its first value. Fields receive Java-defined default values if they are not explicitly initialized, while local variables must be definitely assigned before they are read.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-assignment]]
+Assignment::
+Assignment stores a value in a variable using an assignment operator such as `=`. The assigned value must be compatible with the variable's type; for a reference variable, the assigned value is a reference value rather than a copy of the object itself.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-reassignment]]
+Reassignment::
+Reassignment means assigning a new value to a variable after it has already received an earlier value. A variable declared with `final` cannot be reassigned after it has been assigned once.
+See also: xref:../../_05_static_final/README.adoc[Static and Final].
+
+[[jb-local-variable]]
+Local variable::
+A local variable is declared inside a method, constructor, initializer, or block and is available only within its defined scope. Local variables do not have access modifiers and must be definitely assigned before their value is read.
+
+[[jb-scope]]
+Scope::
+Scope describes the region of source code in which a declared name can be referred to directly. A local variable, for example, is visible only in the block where it is declared and in appropriate nested blocks where no conflicting declaration hides it.
+
+[[jb-access-modifier]]
+Access Modifier::
+An access modifier controls from which parts of a Java program a class, field, constructor, or method can be accessed. Java provides the access modifiers `public`, `protected`, and `private`. If no access modifier is declared, Java uses package-private access; package-private is not a Java keyword. Access control is related to scope, but the two concepts are not the same: scope determines where a name is visible, while access modifiers restrict who may access a declared element. Access control is an important tool for encapsulation and information hiding.
+See also: xref:../../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[jb-lifetime]]
+Lifetime::
+Lifetime describes how long a variable or object exists during program execution. Scope is a source-code visibility rule, while lifetime is a runtime concept; the two are related but are not the same thing.
+
+[[jb-final]]
+Final::
+The Java keyword `final` prevents certain kinds of later change, depending on where it is used. A final variable cannot be reassigned after its single assignment, a final method cannot be overridden, and a final class cannot be extended; a final reference does not automatically make the referenced object immutable.
+See also: xref:../../_05_static_final/README.adoc[Static and Final].
+
+[[jb-constant]]
+Constant::
+A constant is a value that is intended not to change during the relevant part of a program. In Java, constants are commonly represented by `static final` fields and conventionally named in `UPPER_SNAKE_CASE`, although `final` by itself does not guarantee deep immutability of referenced objects.
+See also: xref:../../_05_static_final/README.adoc[Static and Final].
+
+[[jb-var]]
+Var::
+The contextual Java keyword `var` enables local-variable type inference in specific local contexts. The compiler still determines one fixed static type from the initializer; `var` does not make Java dynamically typed and cannot be used as a general replacement for every written type.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-type-inference]]
+Type inference::
+Type inference means that the compiler determines a type from surrounding source-code information instead of requiring the programmer to write the type explicitly. Java uses type inference in several places, including local variables declared with `var` and many generic method invocations.
+
+[[jb-casting]]
+Casting::
+Casting explicitly requests that Java treat or convert a value as another compatible type, using syntax such as `(int) 3.8` or `(Dog) animal`. Numeric casts can lose information, and reference casts can fail at runtime if the actual object is not compatible with the requested type.
+See also: xref:../../_03_datatypes/README.adoc[Data Types].
+
+[[jb-widening-conversion]]
+Widening conversion::
+A widening conversion converts a value to a type that can represent at least the required range or a more general reference type without an explicit cast in many common situations. Examples include converting an `int` to a `long` or using a `Dog` reference where an `Animal` reference is expected.
+
+[[jb-narrowing-conversion]]
+Narrowing conversion::
+A narrowing conversion converts a value to a type with a smaller numeric range or a more specific reference type and therefore may require an explicit cast. Numeric narrowing can lose information, while reference narrowing can produce a `ClassCastException` if the actual object is incompatible.
+
+[[jb-autoboxing]]
+Autoboxing::
+Autoboxing is the automatic conversion performed by the Java compiler from a primitive value to the corresponding wrapper object, for example from `int` to `Integer`. It is especially common when primitive-looking values are added to generic collections.
+
+[[jb-unboxing]]
+Unboxing::
+Unboxing is the automatic conversion performed by the Java compiler from a wrapper object to the corresponding primitive value, for example from `Integer` to `int`. Unboxing a `null` wrapper reference causes a `NullPointerException` at runtime.
+
+[[jb-null]]
+Null::
+`null` is Java's null literal and represents the absence of an object or array reference. A reference variable may contain `null` unless a program or API establishes a stricter rule; dereferencing `null` causes a `NullPointerException`.
+
+[[jb-pass-by-value]]
+Pass-by-value::
+Java uses pass-by-value for every method and constructor argument. The argument value is copied into the parameter; when the value is an object reference, both the caller's variable and the parameter can refer to the same object, so the object can be modified through either reference even though the caller's variable itself cannot be replaced by the called method.
+See also: xref:../../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[jb-pass-by-reference]]
+Pass-by-reference::
+Pass-by-reference is a parameter-passing model in which a called routine receives direct access to the caller's variable and can replace that variable itself. Java does not use pass-by-reference for method arguments; the frequently used phrase “objects are passed by reference” is therefore imprecise for Java.
+
+== Operators, Expressions, and Program Flow
+
+[[jb-operator]]
+Operator::
+An operator is a symbol or keyword that performs an operation on one or more operands. Examples include arithmetic operators such as `+`, comparison operators such as `>=`, logical operators such as `&&`, and the type-test operator `instanceof`.
+
+[[jb-operand]]
+Operand::
+An operand is a value, variable, or expression on which an operator acts. In the expression `price * quantity`, `price` and `quantity` are the operands and `*` is the operator.
+
+[[jb-arithmetic-operator]]
+Arithmetic operator::
+An arithmetic operator performs a numeric calculation. Common Java arithmetic operators are `+`, `-`, `*`, `/`, and `%`; the exact result depends on the operand types, so integer division behaves differently from floating-point division.
+
+[[jb-comparison-operator]]
+Comparison operator::
+A comparison operator compares values and produces a boolean result. Java uses operators such as `==`, `!=`, `<`, `<=`, `>`, and `>=`; for objects, `==` compares reference identity rather than logical object equality.
+
+[[jb-logical-operator]]
+Logical operator::
+A logical operator combines or negates boolean values. Java commonly uses `&&` for short-circuit AND, `||` for short-circuit OR, and `!` for logical NOT.
+
+[[jb-assignment-operator]]
+Assignment operator::
+An assignment operator stores a value in a variable. Besides the basic operator `=`, Java provides compound assignment operators such as `+=`, `-=`, `*=`, and `/=`.
+
+[[jb-control-structure]]
+Control structure::
+A control structure changes the normal sequential flow of a program. Java provides selection structures such as `if` and `switch`, repetition structures such as `for` and `while`, and control-transfer statements such as `break`, `continue`, and `return`.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-condition]]
+Condition::
+A condition is an expression whose result is used to decide which path of execution should be taken or whether a loop should continue. In Java, conditions used by `if`, `while`, and similar constructs must evaluate to the primitive type `boolean` or be unboxed to it.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-branch]]
+Branch::
+A branch is one possible path through a program's control flow. Conditional structures such as `if`/`else` and `switch` choose between branches according to values or conditions.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-iteration]]
+Iteration::
+An iteration is one execution cycle of a loop body. A loop may perform zero, one, or many iterations depending on its initialization, condition, input data, and control-transfer statements.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-loop]]
+Loop::
+A loop repeatedly executes a statement or block while its control rule permits further iterations. Java provides `for`, enhanced `for`, `while`, and `do`/`while` loops.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-if]]
+If::
+The Java keyword `if` starts a conditional statement whose body executes when its boolean condition evaluates to `true`. An `if` statement can be followed by an optional `else` branch.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-else]]
+Else::
+The Java keyword `else` introduces the alternative branch of an `if` statement. The `else` branch executes when the associated `if` condition evaluates to `false`.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-switch]]
+Switch::
+The Java keyword `switch` starts a multi-way selection construct that chooses behavior based on a selector expression. Modern Java supports both traditional `switch` statements and `switch` expressions with arrow labels.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-case]]
+Case::
+The Java keyword `case` introduces a label in a `switch` construct for one or more matching values or patterns. When the selector matches that label, the corresponding branch can execute or produce a result.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-default]]
+Default::
+The Java keyword `default` introduces the fallback label in a `switch` when no preceding `case` label matches. The same keyword also has other language uses, such as default methods in interfaces, but in basic program flow it is most commonly encountered in `switch` constructs.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-for]]
+For::
+The Java keyword `for` starts a loop. Java supports the traditional `for (initialization; condition; update)` form and the enhanced `for (Type item : source)` form for iterating over arrays and iterable objects.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-while]]
+While::
+The Java keyword `while` starts a pre-test loop whose condition is checked before each iteration. If the condition is initially `false`, the loop body is not executed.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-do]]
+Do::
+The Java keyword `do` starts a post-test loop that ends with `while (condition);`. Because the condition is checked after the loop body, a `do`/`while` loop executes its body at least once.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-break]]
+Break::
+The Java keyword `break` immediately terminates the nearest enclosing loop or terminates a traditional `switch` statement. It is commonly used when execution should leave a loop before the loop's regular termination condition becomes false.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+[[jb-continue]]
+Continue::
+The Java keyword `continue` skips the remaining statements of the current loop iteration and proceeds with the next iteration. It affects loops rather than terminating the entire method.
+See also: xref:../../_06_program_flow/README.adoc[Program Flow].
+
+== Methods
+
+[[jb-method]]
+Method::
+A method is a named block of behavior declared as part of a class, interface, record, or enum type. A method can receive values through parameters, perform work, and optionally return a value to its caller.
+
+[[jb-method-declaration]]
+Method declaration::
+A method declaration introduces a method and normally contains modifiers, a return type, a method name, a parameter list, optional additional clauses, and a body. Abstract or native methods are special cases that can be declared without a normal method body.
+
+[[jb-method-body]]
+Method body::
+A method body is the block that contains the statements executed when the method is invoked. It begins with `{` and ends with `}` for ordinary concrete methods.
+
+[[jb-method-header]]
+Method header::
+The method header is the part of a method declaration before its body. It can include modifiers, type parameters, the return type, method name, parameter list, and an optional `throws` clause.
+
+[[jb-method-signature]]
+Method signature::
+For ordinary Java methods, the method signature consists of the method name together with the parameter types after type adaptation rules defined by Java. For introductory programming, it is useful to remember it as “method name + parameter types in their order”; the return type and access modifier are not part of the signature.
+
+[[jb-method-invocation]]
+Method invocation / method call::
+A method invocation asks a method to execute. The call can supply argument expressions that are matched with parameters, and the invocation can itself produce a value when the method has a non-`void` return type.
+
+[[jb-parameter]]
+Parameter::
+A parameter is a variable declared in a method or constructor declaration. When the method or constructor is invoked, the corresponding argument value is copied into that parameter according to Java's pass-by-value semantics.
+
+[[jb-argument]]
+Argument::
+An argument is a value or expression supplied when a method or constructor is invoked. The argument must be compatible with the corresponding parameter after Java's applicable conversion and method-selection rules.
+
+[[jb-return-type]]
+Return type::
+A return type is the type written before a method name that describes the kind of value produced by a normal completion of the method. If a method does not return a value to its caller, its return type is written as `void`.
+
+[[jb-void]]
+Void::
+The Java keyword `void` is used as a method return type to state that the method does not return a value to its caller. `void` is not a normal value type from which variables or objects can be created.
+
+[[jb-return]]
+Return::
+The Java keyword `return` immediately ends execution of the current method and returns control to the caller. In a method with a non-`void` return type, `return` must provide a compatible expression value; in a `void` method, `return;` may be used without a value.
+
+== Compilation, Runtime, and Development Tools
+
+[[jb-compiler]]
+Compiler::
+A compiler translates source code into another representation and checks language rules during that process. The Java compiler `javac` translates `.java` source files into JVM bytecode stored in `.class` files.
+
+[[jb-compilation]]
+Compilation::
+Compilation is the process of translating Java source code and checking it against Java's compile-time rules. Many problems, such as syntax errors and incompatible types, prevent successful compilation before the program can run.
+
+[[jb-bytecode]]
+Bytecode::
+Java bytecode is the instruction format stored in compiled `.class` files and executed or further compiled by a Java Virtual Machine. Bytecode is one reason the same compiled Java program can run on different operating systems when a compatible JVM is available.
+
+[[jb-jvm]]
+JVM::
+JVM stands for Java Virtual Machine. The JVM loads Java classes, verifies and executes bytecode, manages memory and garbage collection, and provides the runtime environment in which Java applications execute.
+
+[[jb-jdk]]
+JDK::
+JDK stands for Java Development Kit. A JDK contains the tools needed to develop Java software, including a Java compiler, runtime components, standard APIs, diagnostic tools, and utilities such as Javadoc.
+
+[[jb-runtime]]
+Runtime::
+Runtime refers to the period and environment in which a program is actually executing. A condition that cannot be detected until execution, such as dereferencing `null` on a specific path, is a runtime issue rather than a compile-time issue.
+
+[[jb-compile-time-error]]
+Compile-time error::
+A compile-time error is a violation detected while Java source code is being compiled. Examples include invalid syntax, incompatible types, inaccessible members, and references to names that cannot be resolved.
+
+[[jb-runtime-error]]
+Runtime error::
+A runtime error is a problem that occurs while the program is executing after successful compilation. In Java, many runtime failures are represented by exceptions, such as `NullPointerException`, `ArithmeticException`, or `ClassCastException`.
+
+[[jb-logical-error]]
+Logical error::
+A logical error occurs when a program compiles and runs but produces an incorrect result because the implemented logic does not match the intended behavior. Logical errors are found through reasoning, debugging, testing, and careful validation rather than by syntax checking alone.
+
+[[jb-stack-trace]]
+Stack trace::
+A stack trace is a diagnostic list showing the chain of method calls that led to a point in program execution, especially when an exception is thrown. Reading the exception type, message, and first relevant lines of the stack trace is an important debugging skill.
+
+[[jb-ide]]
+IDE::
+IDE stands for Integrated Development Environment. An IDE such as IntelliJ IDEA combines source-code editing, navigation, refactoring, compiler integration, debugging, testing, version-control tools, and other development support in one application.
+
+[[jb-version-control-system]]
+Version control system::
+A version control system records changes to files so that development history can be reviewed, compared, restored, and shared. Git is a distributed version control system commonly used for Java projects and collaborative software development.
+
+[[jb-git]]
+Git::
+Git is a distributed version control system in which each local repository contains project history and can exchange commits with remote repositories. Git is independent of hosting platforms such as GitHub or GitLab, although those platforms provide services around Git repositories.
+
+[[jb-build-tool]]
+Build tool::
+A build tool automates repeatable project tasks such as compiling source code, running tests, packaging applications, and managing dependencies. Build tools make the same project workflow reproducible on different development machines and CI systems.
+
+[[jb-maven]]
+Maven::
+Apache Maven is a build and dependency-management tool commonly used for Java projects. Maven reads project configuration from `pom.xml` and follows standard directory conventions to compile, test, package, and manage external dependencies.
+
+[[jb-gradle]]
+Gradle::
+Gradle is a build automation and dependency-management tool commonly used for Java projects. Gradle build files are typically written using the Groovy DSL in `build.gradle` or the Kotlin DSL in `build.gradle.kts`. Like Maven, Gradle can compile source code, run tests, package applications, and manage external dependencies.
+
+== Reserved and Specialized Words Outside This Course
+
+The following words are part of Java's lexical or language rules but do not need a normal glossary explanation for this learning project.
+
+* `const` and `goto` are reserved Java keywords but are not used by the Java language.
+* `strictfp` is still a reserved keyword but is obsolete and should not be used in new Java code.
+* `native`, `synchronized`, `transient`, and `volatile` are valid specialized Java keywords, but they are outside the scope of this learning project.
+* Module-system words such as `module`, `requires`, `exports`, `opens`, `uses`, and `provides` are valid contextual keywords but are outside the scope of this learning project.
+
+== Summary
+
+Use precise vocabulary when reading and discussing code. Distinguishing terms such as parameter and argument, declaration and initialization, primitive and reference type, or compile time and runtime makes later object-oriented concepts much easier to understand.

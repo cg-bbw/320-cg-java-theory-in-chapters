@@ -1,0 +1,687 @@
+= Java Programming Cheat Sheet
+:toc:
+:toclevels: 2
+:sectanchors:
+
+This cheat sheet is a quick orientation aid.
+Use it when you remember the topic but not the exact term.
+For full explanations, follow the links to the three glossaries.
+
+== Program Structure
+
+[cols="1,3,3",options="header"]
+|===
+|Term |Typical Java syntax |Quick meaning
+
+|xref:01_JAVA_BASICS.adoc#jb-source-code[Source code]
+|`*.java`
+|Human-readable Java program text.
+
+|xref:01_JAVA_BASICS.adoc#jb-package[Package]
+|`package ch.school.example;`
+|Groups related types in a namespace.
+
+|xref:01_JAVA_BASICS.adoc#jb-import[Import]
+|`import java.util.List;`
+|Makes a type or static member available by a shorter name.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-class[Class]
+|`class Car { ... }`
+|Defines a reference type and the structure/behavior of its objects.
+
+|xref:01_JAVA_BASICS.adoc#jb-main-method[Main method]
+|`public static void main(String[] args)`
+|Common entry point of a Java application.
+
+|xref:01_JAVA_BASICS.adoc#jb-block[Block]
+|`{ ... }`
+|Groups statements and usually defines a local scope.
+
+|xref:01_JAVA_BASICS.adoc#jb-statement[Statement]
+|`total = price * amount;`
+|A complete instruction or control-flow unit.
+
+|xref:01_JAVA_BASICS.adoc#jb-expression[Expression]
+|`price * amount`
+|Code that is evaluated to produce a value or result.
+|===
+
+== Naming Conventions
+
+[cols="2,2,3,3",options="header"]
+|===
+|Java element |Convention |Example |Note
+
+|Class
+|xref:01_JAVA_BASICS.adoc#jb-pascal-case[PascalCase]
+|`BankAccount`
+|Nouns are common class names.
+
+|Interface
+|xref:01_JAVA_BASICS.adoc#jb-pascal-case[PascalCase]
+|`Printable`
+|Often describes a capability or role.
+
+|Record
+|xref:01_JAVA_BASICS.adoc#jb-pascal-case[PascalCase]
+|`CustomerAddress`
+|Same type-naming style as classes.
+
+|Enum type
+|xref:01_JAVA_BASICS.adoc#jb-pascal-case[PascalCase]
+|`OrderStatus`
+|Enum constants themselves normally use UPPER_SNAKE_CASE.
+
+|Method
+|xref:01_JAVA_BASICS.adoc#jb-camel-case[camelCase]
+|`calculateTotal()`
+|Verb or verb phrase is common.
+
+|Variable
+|xref:01_JAVA_BASICS.adoc#jb-camel-case[camelCase]
+|`numberOfStudents`
+|Describe the value's meaning, not only its type.
+
+|Parameter
+|xref:01_JAVA_BASICS.adoc#jb-camel-case[camelCase]
+|`maximumSpeed`
+|Same convention as local variables.
+
+|Constant
+|xref:01_JAVA_BASICS.adoc#jb-upper-snake-case[UPPER_SNAKE_CASE]
+|`MAX_SPEED`
+|Commonly used for `static final` constants.
+
+|Package
+|xref:01_JAVA_BASICS.adoc#jb-lowercase[lowercase]
+|`ch.school.examples`
+|Normally lowercase, often based on a reversed domain/company structure.
+|===
+
+NOTE: xref:01_JAVA_BASICS.adoc#jb-snake-case[snake_case] is a common naming style in other technologies, but it is normally not used for ordinary Java variables or methods.
+
+== Variables and Data Types
+
+[cols="2,2,5",options="header"]
+|===
+|Term |Example |Quick meaning
+
+|xref:01_JAVA_BASICS.adoc#jb-variable[Variable]
+|`int age = 18;`
+|A named storage location with a compile-time type.
+
+|xref:01_JAVA_BASICS.adoc#jb-declaration[Declaration]
+|`int age;`
+|Introduces a program element to the compiler.
+
+|xref:01_JAVA_BASICS.adoc#jb-initialization[Initialization]
+|`int age = 18;`
+|Gives a variable its first value.
+
+|xref:01_JAVA_BASICS.adoc#jb-assignment[Assignment]
+|`age = 18;`
+|Stores a value in a variable.
+
+|xref:01_JAVA_BASICS.adoc#jb-reassignment[Reassignment]
+|`age = 19;`
+|Assigns another value after an earlier one.
+
+|xref:01_JAVA_BASICS.adoc#jb-primitive-type[Primitive type]
+|`int`, `double`, `boolean`
+|One of Java's eight built-in non-reference types.
+
+|xref:01_JAVA_BASICS.adoc#jb-reference-type[Reference type]
+|`String`, `Car`, `int[]`
+|Type whose values refer to objects or arrays, or are `null`.
+
+|xref:01_JAVA_BASICS.adoc#jb-wrapper-class[Wrapper class]
+|`Integer`, `Double`
+|Object representation corresponding to a primitive type.
+
+|xref:01_JAVA_BASICS.adoc#jb-var[Var]
+|`var name = "Ada";`
+|Local-variable type inference; Java remains statically typed.
+
+|xref:01_JAVA_BASICS.adoc#jb-final[Final]
+|`final int max = 10;`
+|Prevents reassignment or, in other contexts, overriding/extension.
+
+|xref:01_JAVA_BASICS.adoc#jb-casting[Casting]
+|`(int) 3.9`
+|Explicitly requests a compatible type conversion.
+
+|xref:01_JAVA_BASICS.adoc#jb-scope[Scope]
+|`{ int x = 1; }`
+|Source-code region in which a declared name is visible.
+|===
+
+=== Primitive Datatype Keywords
+
+[cols="1,3,4",options="header"]
+|===
+|Keyword |Example |Typical purpose
+
+|`boolean`
+|`boolean active = true;`
+|True/false decisions.
+
+|`byte`
+|`byte value = 100;`
+|Small integer or raw binary data.
+
+|`short`
+|`short year = 2026;`
+|16-bit integer; uncommon in ordinary calculations.
+
+|`int`
+|`int count = 42;`
+|Default whole-number type.
+
+|`long`
+|`long population = 9_000_000_000L;`
+|Large whole numbers.
+
+|`char`
+|`char grade = 'A';`
+|One UTF-16 code unit.
+
+|`float`
+|`float ratio = 1.5F;`
+|32-bit floating-point value.
+
+|`double`
+|`double price = 19.95;`
+|Default floating-point type.
+|===
+
+== Operators and Program Flow
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Example |Quick meaning
+
+|xref:01_JAVA_BASICS.adoc#jb-arithmetic-operator[Arithmetic operator]
+|`+ - * / %`
+|Performs numeric calculations.
+
+|xref:01_JAVA_BASICS.adoc#jb-comparison-operator[Comparison operator]
+|`== != < <= > >=`
+|Compares values and produces `boolean`.
+
+|xref:01_JAVA_BASICS.adoc#jb-logical-operator[Logical operator]
+|`&& \|\| !`
+|Combines or negates boolean values.
+
+|xref:01_JAVA_BASICS.adoc#jb-if[If]
+|`if (condition) { ... }`
+|Executes a branch when a condition is true.
+
+|xref:01_JAVA_BASICS.adoc#jb-else[Else]
+|`else { ... }`
+|Alternative branch when the associated `if` is false.
+
+|xref:01_JAVA_BASICS.adoc#jb-switch[Switch]
+|`switch (value) { case 1: ... break; default: ... }` +
+`switch (value) { case ... -> ...; default -> ...; }`
+|Two ways of a switch statement. Selects among several branches using `case`. `default` handles values that do not match another case.
+
+|xref:01_JAVA_BASICS.adoc#jb-for[For]
+|`for (int i = 0; i < 10; i++) { ... }` +
+`for (String name : names) { ... }`
+|Repeats code using either a traditional loop with a counter or an enhanced for loop over elements.
+
+|xref:01_JAVA_BASICS.adoc#jb-while[While]
+|`while (condition) { ... }`
+|Pre-test loop.
+
+|xref:01_JAVA_BASICS.adoc#jb-do[Do]
+|`do { ... } while (condition);`
+|Post-test loop that runs at least once.
+
+|xref:01_JAVA_BASICS.adoc#jb-break[Break]
+|`break;`
+|Leaves the nearest loop or traditional switch.
+
+|xref:01_JAVA_BASICS.adoc#jb-continue[Continue]
+|`continue;`
+|Skips to the next loop iteration.
+|===
+
+== Methods
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Example |Quick meaning
+
+|xref:01_JAVA_BASICS.adoc#jb-method[Method]
+|`int add(int a, int b) { ... }`
+|Named behavior belonging to a type.
+
+|xref:01_JAVA_BASICS.adoc#jb-parameter[Parameter]
+|`int a`
+|Variable declared by a method or constructor.
+
+|xref:01_JAVA_BASICS.adoc#jb-argument[Argument]
+|`add(4, 5)` +
+`add(2 + 2, 10 / 2)`
+|A value or expression supplied to a method call.
+
+|xref:01_JAVA_BASICS.adoc#jb-return-type[Return type]
+|`int`
+|Type of value a method returns.
+
+|xref:01_JAVA_BASICS.adoc#jb-void[Void]
+|`void print()`
+|States that a method returns no value.
+
+|xref:01_JAVA_BASICS.adoc#jb-return[Return]
+|`return result;`
+|Ends the method and optionally supplies a value.
+
+|xref:01_JAVA_BASICS.adoc#jb-method-signature[Method signature]
+|`add(int, int)`
+|Method name plus parameter types for introductory terminology.
+|===
+
+== Classes and Objects
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Example |Quick meaning
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-object[Object]
+|`Car car = ...`
+|Runtime entity with type, state, behavior, and identity.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-new[New]
+|`new Car()`
+|Starts creation of a new object or array.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-constructor[Constructor]
+|`Car(String model) { ... }`
+|Initializes a newly created object; not a method.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-this[This]
+|`this.model = model;`
+|Refers to the current object.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-instance-field[Instance field]
+|`private String model;`
+|Each object has its own value.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-static-field[Static field]
+|`private static int count;`
+|One shared field belongs to the class.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-instance-method[Instance method]
+|`car.accelerate();`
+|Method executed for a particular object.
+
+|xref:01_JAVA_BASICS.adoc#jb-access-modifier[Access Modifier]
+|`public`, `protected`, `private`
+|Controls where a class member can be accessed. If no access modifier is declared, Java uses package-private access (that has no key word).
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-state[State]
+|field values
+|Information currently stored by an object.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-behavior[Behavior]
+|methods
+|Operations an object can perform or provide.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-identity[Identity]
+|`a == b`
+|Whether references point to the same object.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-equality[Equality]
+|`a.equals(b)`
+|Whether objects are logically equivalent.
+|===
+
+== Object Relationships and OOP
+
+[cols="2,2,5",options="header"]
+|===
+|Term |Typical idea |Quick meaning
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-encapsulation[Encapsulation]
+|protect state
+|Keeps state and behavior together behind controlled access.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-abstraction[Abstraction]
+|focus on essentials
+|Expose relevant behavior while hiding unnecessary details.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-association[Association]
+|objects know/interact
+|General relationship between objects.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-aggregation[Aggregation]
+|weak has-a
+|Part can conceptually exist independently of the whole.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-composition[Composition]
+|strong has-a
+|Whole conceptually owns and controls the part's lifecycle.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-delegation[Delegation]
+|forward work
+|One object gives a task to another object.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-inheritance[Inheritance]
+|is-a
+|Subclass extends a superclass.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-interface[Interface]
+|contract
+|Defines behavior that implementing types promise to provide.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-polymorphism[Polymorphism]
+|general type, specific behavior
+|Runtime object selects overridden instance behavior.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-coupling[Coupling]
+|dependency strength
+|How strongly modules/classes depend on each other.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-cohesion[Cohesion]
+|focused responsibility
+|How closely a class's responsibilities belong together.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-responsibility[Responsibility]
+|knowing / doing
+|What a class or object should be responsible for.
+|===
+
+== Inheritance, Interfaces, and Polymorphism
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Example |Quick meaning
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-extends[Extends]
+|`class Dog extends Animal`
+|Creates a class inheritance relationship.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-super[Super]
+|`super.method()`
+|Accesses direct-superclass behavior from an instance context.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-super-constructor[Super constructor invocation]
+|`super(name);`
+|Invokes a direct-superclass constructor.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-implements[Implements]
+|`class Dog implements Trainable`
+|Declares implementation of an interface contract.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-abstract-class[Abstract class]
+|`abstract class Animal`
+|Cannot be instantiated directly; may mix shared and abstract behavior.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-runtime-polymorphism[Runtime Polymorphism]
+|Method overriding
+|The actual object type determines at runtime which overridden method implementation is executed.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-method-overriding[Overriding]
+|`@Override`
+|Subclass provides a new implementation of an inherited method.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-compile-time-polymorphism[Compile-Time Polymorphism]
+|Method overloading
+|The compiler determines which method implementation is used based on the method signature and the arguments at the call site.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-method-overloading[Method Overloading]
+|`print(int value)` +
+`print(String value)`
+|Multiple methods have the same name but different parameter lists. The compiler determines which method is called.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-upcasting[Upcasting]
+|`Animal a = new Dog();`
+|Views a subtype through a supertype reference.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-downcasting[Downcasting]
+|`Dog d = (Dog) a;`
+|Explicitly requests a more specific reference type.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-instanceof[Instanceof]
+|`a instanceof Dog`
+|Tests runtime type compatibility.
+
+|xref:02_OBJECT_ORIENTED_PROGRAMMING.adoc#oop-dynamic-dispatch[Dynamic dispatch]
+|`a.makeSound()`
+|Runtime object determines overridden method implementation.
+|===
+
+== Exception Handling
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Example |Quick meaning
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-exception[Exception]
+|`IllegalArgumentException`
+|Object representing an abnormal runtime condition.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-try[Try]
+|`try { ... }`
+|Starts protected execution / resource handling.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-catch[Catch]
+|`catch (Exception e) { ... }`
+|Handles a compatible propagated exception.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-finally[Finally]
+|`finally { ... }`
+|Cleanup block normally executed after try/catch processing.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-throw[Throw]
+|`throw new ...;`
+|Throws one exception object now.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-throws[Throws]
+|`throws IOException`
+|Declares exception types that may propagate from an operation.
+|===
+
+== Testing
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Typical form |Quick meaning
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-unit-test[Unit test]
+|one focused automated test
+|Checks one unit of behavior under controlled conditions.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-arrange-act-assert[Arrange-Act-Assert]
+|Arrange -> Act -> Assert
+|Readable structure for a test case.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-assertion[Assertion]
+|`assertEquals(expected, actual)`
+|Checks an expected result and fails the test when it differs.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-junit[JUnit]
+|`@Test`
+|Standard Java testing framework commonly used with Maven.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-test-double[Test double]
+|stub / fake / mock / spy
+|Controlled replacement for a real collaborator.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-mockito[Mockito]
+|mocking library
+|External library for creating mocks and spies.
+|===
+
+== Generics and Collections
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Example |Quick meaning
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-generic[Generic]
+|`Box<T>`
+|Reusable type-safe code parameterized by types.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-type-parameter[Type parameter]
+|`T`
+|Placeholder type declared by generic code.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-type-argument[Type argument]
+|`String` in `List<String>`
+|Concrete type supplied to generic code.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-array[Array]
+|`String[] names`
+|Fixed-length indexed container built into Java.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-list[List]
+|`List<String>`
+|Ordered collection, duplicates normally allowed.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-set[Set]
+|`Set<String>`
+|Collection without duplicate elements.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-map[Map]
+|`Map<String, Integer>`
+|Associates keys with values.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-optional[Optional]
+|`Optional<User>`
+|Container with one non-null value or no value.
+|===
+
+== Design Principles and Patterns
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Short form |Quick meaning
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-kiss[KISS]
+|Keep It Simple
+|Avoid unnecessary complexity.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-dry[DRY]
+|Don't Repeat Yourself
+|Avoid duplicated knowledge and rules.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-yagni[YAGNI]
+|You Aren't Gonna Need It
+|Do not build speculative features too early.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-srp[SRP]
+|Single Responsibility Principle
+|Give a class/module a focused reason to change.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-ocp[OCP]
+|Open/Closed Principle
+|Prefer extension without repeatedly changing stable code.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-lsp[LSP]
+|Liskov Substitution Principle
+|Subtypes must preserve expected supertype behavior.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-isp[ISP]
+|Interface Segregation Principle
+|Do not force clients to depend on operations they do not need.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-dip[DIP]
+|Dependency Inversion Principle
+|Depend on suitable abstractions rather than low-level details.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-builder[Builder]
+|construction pattern
+|Builds complex objects step by step.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-mvc[MVC]
+|Model-View-Controller
+|Separates model/domain, presentation, and interaction/control concerns.
+|===
+
+== Java Platform, Tools, and Framework Vocabulary
+
+[cols="2,3,5",options="header"]
+|===
+|Term |Example |Quick meaning
+
+|xref:01_JAVA_BASICS.adoc#jb-compiler[Compiler]
+|`javac`
+|Translates source code and checks compile-time rules.
+
+|xref:01_JAVA_BASICS.adoc#jb-bytecode[Bytecode]
+|`.class`
+|Instructions executed/further compiled by the JVM.
+
+|xref:01_JAVA_BASICS.adoc#jb-jvm[JVM]
+|Java Virtual Machine
+|Runtime that loads and executes Java bytecode.
+
+|xref:01_JAVA_BASICS.adoc#jb-jdk[JDK]
+|Java Development Kit
+|Development tools, compiler, runtime components, and standard APIs.
+
+|xref:01_JAVA_BASICS.adoc#jb-maven[Maven]
+|`pom.xml`
+|Build and dependency management tool that follows a convention-based project structure.
+
+|xref:01_JAVA_BASICS.adoc#jb-gradle[Gradle]
+|`build.gradle` / `build.gradle.kts`
+|Build automation and dependency management tool commonly configured using Groovy or Kotlin.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-api[API]
+|public classes/methods/protocol
+|Contract through which software components interact.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-library[Library]
+|reusable code
+|Application calls library functionality when needed.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-framework[Framework]
+|Spring
+|Provides larger application structure and often controls lifecycle.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-dependency-injection[Dependency injection]
+|constructor injection
+|Required collaborators are supplied from outside the object.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-ioc[Inversion of Control]
+|framework-managed lifecycle
+|Control is transferred from application code to another component/framework.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-jpa[Jakarta Persistence / JPA]
+|entity mapping
+|Standard persistence specification for Java.
+
+|xref:03_ADVANCED_JAVA_CONCEPTS.adoc#adv-spring-boot[Spring Boot]
+|Spring application framework
+|Simplifies Spring configuration and application startup.
+|===
+
+== Reserved and Specialized Words Not Required Here
+
+* `const` and `goto`: reserved Java keywords, but the Java language does not use them.
+* `strictfp`: reserved but obsolete; do not use it in new Java code.
+* `native`, `synchronized`, `transient`, `volatile`: valid specialized keywords, but outside this learning project.
+* Java module-system contextual keywords such as `module`, `requires`, `exports`, `opens`, `uses`, and `provides`: valid Java syntax, but outside this learning project.
+
+== How the Four Files Fit Together
+
+[cols="2,5",options="header"]
+|===
+|File |Purpose
+
+|`00_CHEATSHEET.adoc`
+|“What was that term again?” — quick orientation by topic.
+
+|`01_JAVA_BASICS.adoc`
+|Detailed definitions for basic Java syntax, variables, methods, control flow, naming, compilation, and tools.
+
+|`02_OBJECT_ORIENTED_PROGRAMMING.adoc`
+|Detailed definitions for classes, objects, relationships, inheritance, interfaces, polymorphism, and OO design vocabulary.
+
+|`03_ADVANCED_JAVA_CONCEPTS.adoc`
+|Detailed definitions for exceptions, testing, generics, collections, design principles, patterns, frameworks, and persistence.
+|===

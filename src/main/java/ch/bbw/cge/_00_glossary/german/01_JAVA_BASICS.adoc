@@ -1,0 +1,510 @@
+= Glossar: Java-Grundlagen
+:toc:
+:toclevels: 2
+:sectanchors:
+
+Dieses Glossar enthält den grundlegenden Wortschatz zum Lesen, Schreiben, Besprechen und Debuggen von Java-Programmen.
+Das Glossar dient als kurze Referenz zu Java-bezogenen Themen der Module 319, 320 und darüber hinaus.
+Wenn ein Begriff zu einem der Lernkapitel gehört, verweist ein Querverweis auf die entsprechende Kapitel-README.
+
+== Quellcode und Programmstruktur
+
+[[jb-source-code]]
+Quellcode (source code)::
+Für Menschen lesbarer Programmtext, der in einer Programmiersprache geschrieben ist. Java-Quellcode wird normalerweise in Dateien mit der Endung `.java` gespeichert und von einem Java-Compiler übersetzt, bevor er von der JVM ausgeführt werden kann.
+
+[[jb-source-file]]
+Quelldatei (source file)::
+Eine Datei, die Quellcode enthält. Eine Java-Quelldatei hat normalerweise die Endung `.java`; enthält sie eine `public` Top-Level-Klasse, ein Interface, einen Enum-Typ oder einen Record, muss der Dateiname normalerweise mit dem Namen dieses öffentlichen Typs übereinstimmen.
+
+[[jb-syntax]]
+Syntax::
+Die formalen Grammatikregeln, die festlegen, wie gültiger Java-Quellcode geschrieben werden muss. Ein Syntaxfehler bedeutet, dass der Compiler den Code gemäss den Grammatikregeln von Java nicht interpretieren kann.
+
+[[jb-token]]
+Token::
+Ein Token ist eine der kleinsten bedeutungstragenden Einheiten, die der Java-Compiler erkennt, zum Beispiel ein Bezeichner, Schlüsselwort, Literal, Operator oder Trennzeichen. Leerraum und Kommentare trennen oder umgeben Tokens normalerweise, werden aber nicht als Programmanweisungen ausgeführt.
+
+[[jb-identifier]]
+Bezeichner (identifier)::
+Ein Bezeichner ist ein Name, der für ein Programmelement wie eine Variable, Methode, Klasse, einen Parameter oder einen Bestandteil eines Package-Namens gewählt wird. Bezeichner müssen die lexikalischen Regeln von Java erfüllen und sollten zusätzlich den etablierten Java-Namenskonventionen folgen, damit der Code gut lesbar bleibt.
+Siehe auch: xref:../../_01_naming_conventions/README.adoc[Namenskonventionen].
+
+[[jb-keyword]]
+Schlüsselwort (keyword)::
+Ein Schlüsselwort ist ein Wort mit einer besonderen grammatikalischen Bedeutung in Java und kann deshalb nicht immer als normaler Bezeichner verwendet werden. Java unterscheidet zwischen reservierten Schlüsselwörtern wie `class`, `if` und `return` und kontextabhängigen Schlüsselwörtern wie `var` und `record`, deren besondere Bedeutung davon abhängt, an welcher Stelle sie im Quellcode vorkommen.
+
+[[jb-reserved-keyword]]
+Reserviertes Schlüsselwort (reserved keyword)::
+Ein reserviertes Schlüsselwort ist eine Zeichenfolge, die Java dauerhaft für die Sprachsyntax reserviert und die deshalb nicht als Bezeichner verwendet werden kann. Beispiele sind `public`, `class`, `new`, `return` und `while`.
+
+[[jb-contextual-keyword]]
+Kontextabhängiges Schlüsselwort (contextual keyword)::
+Ein kontextabhängiges Schlüsselwort wird nur in bestimmten grammatikalischen Zusammenhängen als Schlüsselwort interpretiert. Beispiele sind `var`, `record`, `sealed` und `yield`; ausserhalb des jeweiligen Kontexts können einige kontextabhängige Schlüsselwörter weiterhin als Bezeichner verwendet werden.
+
+[[jb-literal]]
+Literal::
+Ein Literal ist eine Schreibweise im Quellcode für einen Wert, der direkt in das Programm geschrieben wird, zum Beispiel `42`, `3.14`, `'A'`, `"Hello"`, `true` oder `null`. Die Wörter `true`, `false` und `null` sind Literale und keine Java-Schlüsselwörter.
+
+[[jb-statement]]
+Anweisung (statement)::
+Eine Anweisung ist eine vollständige Instruktion oder Kontrollflusseinheit in Java. Beispiele sind eine Zuweisungsanweisung, ein Methodenaufruf, eine `return`-Anweisung, eine `if`-Anweisung oder eine Schleifenanweisung.
+
+[[jb-expression]]
+Ausdruck (expression)::
+Ein Ausdruck ist ein Codeteil, der ausgewertet wird und dabei einen Wert, eine Variable oder ein anderes durch die Sprache definiertes Ergebnis erzeugt. Beispiele sind `2 + 3`, `age >= 18`, `person.getName()` und `new Person()`.
+
+[[jb-block]]
+Block::
+Ein Block ist eine Folge von null oder mehr Anweisungen innerhalb geschweifter Klammern `{ ... }`. Blöcke strukturieren den Code und führen häufig einen neuen lokalen Gültigkeitsbereich ein, zum Beispiel in Methoden, Schleifen, Verzweigungen, Konstruktoren und Klassenrümpfen.
+
+[[jb-package]]
+Package::
+Das Java-Schlüsselwort `package` deklariert das Package, zu dem eine Quelldatei gehört. Ein Package dient als Namensraum für zusammengehörige Typen und spielt ausserdem bei den package-private-Zugriffsregeln von Java eine Rolle; Package-Namen werden konventionsgemäss kleingeschrieben.
+
+[[jb-import]]
+Import::
+Das Java-Schlüsselwort `import` macht einen Typ oder ein statisches Member aus einem anderen Package in der aktuellen Quelldatei unter einem kürzeren Namen verfügbar. Ein Import kopiert keinen Code in die Datei und erzeugt kein Objekt; er beeinflusst lediglich, wie der Compiler Namen auflöst.
+
+[[jb-main-method]]
+Main-Methode (main method)::
+Der häufig verwendete Einstiegspunkt einer Java-Anwendung ist `public static void main(String[] args)`. Wird eine Klasse als klassische Java-Anwendung gestartet, ruft die JVM diese Methode auf, um das Programm zu beginnen.
+
+[[jb-entry-point]]
+Einstiegspunkt (entry point)::
+Ein Einstiegspunkt ist die Stelle, an der die Ausführung einer Anwendung beginnt. In den Beispielen dieses Lernprojekts ist der Einstiegspunkt normalerweise die `main`-Methode der `Main`-Klasse eines Packages.
+
+== Namenskonventionen und Dokumentation
+
+[[jb-naming-convention]]
+Namenskonvention (naming convention)::
+Eine Namenskonvention ist eine vereinbarte Menge von Regeln, um Programmelemente konsistent zu benennen. Namenskonventionen entscheiden normalerweise nicht darüber, ob Code kompiliert, erleichtern aber das Lesen, Besprechen, Suchen und Warten von Code.
+Siehe auch: xref:../../_01_naming_conventions/README.adoc[Namenskonventionen].
+
+[[jb-camel-case]]
+camelCase::
+`camelCase` ist ein Namensstil, bei dem das erste Wort mit einem Kleinbuchstaben beginnt und jedes folgende Wort mit einem Grossbuchstaben, zum Beispiel `numberOfStudents`. Die Java-Konvention verwendet camelCase normalerweise für Variablen, Parameter und Methoden.
+Siehe auch: xref:../../_01_naming_conventions/README.adoc[Namenskonventionen].
+
+[[jb-pascal-case]]
+PascalCase::
+`PascalCase` ist ein Namensstil, bei dem jedes Wort mit einem Grossbuchstaben beginnt, zum Beispiel `BankAccount`. Die Java-Konvention verwendet PascalCase normalerweise für Klassen, Interfaces, Records, Enum-Typen und Annotation-Typen.
+Siehe auch: xref:../../_01_naming_conventions/README.adoc[Namenskonventionen].
+
+[[jb-upper-snake-case]]
+UPPER_SNAKE_CASE::
+`UPPER_SNAKE_CASE` ist ein Namensstil, bei dem Wörter in Grossbuchstaben geschrieben und durch Unterstriche getrennt werden, zum Beispiel `MAX_NUMBER_OF_USERS`. Die Java-Konvention verwendet diesen Stil häufig für Konstanten, insbesondere für `static final`-Felder.
+Siehe auch: xref:../../_01_naming_conventions/README.adoc[Namenskonventionen].
+
+[[jb-snake-case]]
+snake_case::
+`snake_case` ist ein Namensstil, bei dem kleingeschriebene Wörter durch Unterstriche getrennt werden, zum Beispiel `number_of_students`. Dieser Stil ist in einigen Programmiersprachen und Dateiformaten üblich, wird aber normalerweise nicht für Java-Variablen oder -Methoden verwendet.
+
+[[jb-lowercase]]
+lowercase (Kleinschreibung)::
+Bei lowercase werden ausschliesslich Kleinbuchstaben verwendet, zum Beispiel `ch.school.examples`. Java-Package-Namen werden konventionsgemäss kleingeschrieben; bei Package-Bestandteilen aus mehreren Wörtern werden nach Java-Stil normalerweise weder Unterstriche noch Grossbuchstaben verwendet.
+
+[[jb-comment]]
+Kommentar (comment)::
+Ein Kommentar ist Text im Quellcode, der für menschliche Leser und nicht für die Programmausführung bestimmt ist. Java unterstützt Zeilenkommentare mit `//`, Blockkommentare mit `/* ... */` und Dokumentationskommentare mit `/** ... */`; gute Kommentare erklären Absicht, Gründe, Einschränkungen oder neu eingeführte Theorie, anstatt lediglich offensichtlichen Code zu wiederholen.
+Siehe auch: xref:../../_02_documentation/README.adoc[Dokumentation].
+
+[[jb-javadoc]]
+Javadoc::
+Javadoc ist das Dokumentationssystem von Java und basiert auf Dokumentationskommentaren, die mit `/**` beginnen. Javadoc-Kommentare können beschreibenden Text, Inline-Tags wie `{@code ...}` und Block-Tags wie `@param`, `@return` und `@throws` enthalten; diese Tags sind keine Java-Annotations.
+Siehe auch: xref:../../_02_documentation/README.adoc[Dokumentation].
+
+[[jb-annotation]]
+Annotation::
+Eine Annotation ist Metadateninformation, die mit einem `@`-Zeichen beginnt, zum Beispiel `@Override` oder `@Deprecated`. Annotations können Informationen für den Compiler, Entwicklungswerkzeuge, Frameworks oder zur Laufzeit ausgeführten Code bereitstellen; im Gegensatz zu Javadoc-Tags sind sie Teil des Java-Sprachmodells.
+Siehe auch: xref:../../_02_documentation/README.adoc[Dokumentation].
+
+[[jb-todo-fixme]]
+TODO / FIXME::
+`TODO` und `FIXME` sind konventionelle Wörter in Kommentaren, mit denen unerledigte Arbeit oder bekannte Probleme markiert werden. Sie sind keine Java-Schlüsselwörter und haben für den Java-Compiler keine besondere Bedeutung, obwohl IDEs und Qualitätsprüfungen danach suchen und sie hervorgehoben anzeigen können.
+Siehe auch: xref:../../_02_documentation/README.adoc[Dokumentation].
+
+== Variablen und Datentypen
+
+[[jb-variable]]
+Variable::
+Eine Variable ist ein benannter Speicherort, dessen Wert vom Programm verwendet und – sofern dies nicht eingeschränkt ist – später verändert werden kann. Jede Java-Variable besitzt einen zur Compile-Zeit bestimmten Typ, einen Gültigkeitsbereich und eine Lebensdauer, die davon abhängen, wo und wie sie deklariert wurde.
+
+[[jb-data-type]]
+Datentyp (data type)::
+Ein Datentyp legt fest, welche Werte ein Ausdruck oder eine Variable darstellen kann und welche Operationen für diese Werte gültig sind. Java unterscheidet zwischen primitiven Datentypen und Referenzdatentypen; der Compiler verwendet Typinformationen, um viele Fehler bereits vor der Programmausführung zu erkennen.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-primitive-type]]
+Primitiver Datentyp (primitive type)::
+Java besitzt acht eingebaute primitive Datentypen: `boolean`, `byte`, `short`, `int`, `long`, `char`, `float` und `double`. Primitive Werte sind keine Objekte und werden als Werte gespeichert und übergeben; Wrapper-Klassen stellen entsprechende Objektformen bereit, wenn eine API Referenztypen verlangt.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-boolean]]
+Primitiver Datentyp boolean (boolean primitive type)::
+Das Java-Schlüsselwort `boolean` deklariert eine Variable, einen Parameter, ein Feld oder einen Rückgabetyp, dessen Werte `true` oder `false` sind. Boolean-Werte werden häufig für Bedingungen und logische Entscheidungen verwendet.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-byte]]
+Primitiver Datentyp byte (byte primitive type)::
+Das Java-Schlüsselwort `byte` deklariert einen vorzeichenbehafteten 8-Bit-Ganzzahltyp. Er ist nützlich, wenn Werte bekanntermassen klein sind oder wenn mit rohen Binärdaten gearbeitet wird; für gewöhnliche Ganzzahlberechnungen ist `int` jedoch gebräuchlicher.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-short]]
+Primitiver Datentyp short (short primitive type)::
+Das Java-Schlüsselwort `short` deklariert einen vorzeichenbehafteten 16-Bit-Ganzzahltyp. Er existiert für kompakte numerische Speicherung und Interoperabilität, während `int` für alltägliche Ganzzahlberechnungen normalerweise bevorzugt wird.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-int]]
+Primitiver Datentyp int (integer primitive type)::
+Das Java-Schlüsselwort `int` deklariert einen vorzeichenbehafteten 32-Bit-Ganzzahltyp. Er ist der Standardtyp für Ganzzahlberechnungen, wenn der grössere Wertebereich von `long` nicht benötigt wird.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-long]]
+Primitiver Datentyp long (long primitive type)::
+Das Java-Schlüsselwort `long` deklariert einen vorzeichenbehafteten 64-Bit-Ganzzahltyp. Ganzzahlliterale, die als `long` behandelt werden müssen, werden üblicherweise mit dem Suffix `L` geschrieben, zum Beispiel `5_000_000_000L`.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-char]]
+Primitiver Datentyp char (character primitive type)::
+Das Java-Schlüsselwort `char` deklariert eine 16-Bit-UTF-16-Codeeinheit. Ein `char`-Literal wird mit einfachen Anführungszeichen geschrieben, zum Beispiel `'A'`; ein `char` stellt nicht in jedem Fall ein vollständiges Unicode-Zeichen dar.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-float]]
+Primitiver Datentyp float (float primitive type)::
+Das Java-Schlüsselwort `float` deklariert einen 32-Bit-Gleitkommatyp nach IEEE 754. Float-Literale benötigen normalerweise das Suffix `F`, zum Beispiel `3.5F`; `double` ist für allgemeine Gleitkommaberechnungen gebräuchlicher.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-double]]
+Primitiver Datentyp double (double primitive type)::
+Das Java-Schlüsselwort `double` deklariert einen 64-Bit-Gleitkommatyp nach IEEE 754. Er ist der Standardtyp von Java für Gleitkommaliterale wie `3.5` und wird häufig für näherungsweise Dezimalberechnungen verwendet.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-reference-type]]
+Referenzdatentyp (reference type)::
+Ein Referenzdatentyp ist ein Typ, dessen Werte Referenzen auf Objekte oder Arrays oder den besonderen Wert `null` darstellen. Klassen, Interfaces, Arrays, Records und Enum-Typen sind Referenzdatentypen; `String` ist eines der am häufigsten verwendeten Beispiele.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-wrapper-class]]
+Wrapper-Klasse (wrapper class)::
+Eine Wrapper-Klasse ist ein Referenzdatentyp, der einen primitiven Wert als Objekt repräsentiert, zum Beispiel `Integer` für `int`, `Double` für `double` und `Boolean` für `boolean`. Wrapper-Klassen werden benötigt, wenn eine API Objekte erwartet, wie dies häufig bei generischen Collections der Fall ist.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-declaration]]
+Deklaration (declaration)::
+Eine Deklaration führt ein Programmelement ein und liefert dem Compiler Informationen darüber, beispielsweise seinen Namen und Typ. Java kennt Deklarationen für Variablen, Parameter, Felder, Methoden, Konstruktoren, Klassen, Interfaces, Enum-Typen, Records und weitere Elemente.
+
+[[jb-definition]]
+Definition::
+Definition ist ein informeller Programmierbegriff, der häufig die vollständige Beschreibung oder Implementierung eines Programmelements meint. In der Java-Terminologie spricht die Sprachspezifikation meistens von Deklarationen, anstatt allgemein streng zwischen Deklaration und Definition zu unterscheiden.
+
+[[jb-initialization]]
+Initialisierung (initialization)::
+Bei der Initialisierung erhält eine Variable ihren ersten Wert. Felder erhalten von Java definierte Standardwerte, wenn sie nicht explizit initialisiert werden, während lokale Variablen definitiv zugewiesen sein müssen, bevor ihr Wert gelesen werden kann.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-assignment]]
+Zuweisung (assignment)::
+Eine Zuweisung speichert mit einem Zuweisungsoperator wie `=` einen Wert in einer Variable. Der zugewiesene Wert muss mit dem Typ der Variable kompatibel sein; bei einer Referenzvariable ist der zugewiesene Wert ein Referenzwert und keine Kopie des Objekts selbst.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-reassignment]]
+Neuzuweisung (reassignment)::
+Neuzuweisung bedeutet, einer Variable einen neuen Wert zuzuweisen, nachdem sie bereits zuvor einen Wert erhalten hat. Einer mit `final` deklarierten Variable kann nach ihrer einmaligen Zuweisung kein neuer Wert zugewiesen werden.
+Siehe auch: xref:../../_05_static_final/README.adoc[Static und Final].
+
+[[jb-local-variable]]
+Lokale Variable (local variable)::
+Eine lokale Variable wird innerhalb einer Methode, eines Konstruktors, Initializers oder Blocks deklariert und ist nur innerhalb ihres definierten Gültigkeitsbereichs verfügbar. Lokale Variablen besitzen keine Zugriffsmodifikatoren und müssen definitiv zugewiesen sein, bevor ihr Wert gelesen werden kann.
+
+[[jb-scope]]
+Gültigkeitsbereich (scope)::
+Der Gültigkeitsbereich beschreibt den Bereich des Quellcodes, in dem direkt auf einen deklarierten Namen Bezug genommen werden kann. Eine lokale Variable ist beispielsweise nur in dem Block sichtbar, in dem sie deklariert wurde, sowie in geeigneten verschachtelten Blöcken, in denen keine kollidierende Deklaration den Namen verdeckt.
+
+[[jb-access-modifier]]
+Zugriffsmodifikator (Access Modifier)::
+Ein Zugriffsmodifikator legt fest, aus welchen Teilen eines Java-Programms auf eine Klasse, ein Feld, einen Konstruktor oder eine Methode zugegriffen werden darf. Java stellt die Zugriffsmodifikatoren `public`, `protected` und `private` zur Verfügung. Wird kein Zugriffsmodifikator angegeben, verwendet Java package-private Zugriff; package-private ist kein Java-Schlüsselwort. Zugriffskontrolle steht in Beziehung zum Gültigkeitsbereich (scope), die beiden Konzepte sind jedoch nicht identisch: Der Gültigkeitsbereich bestimmt, wo ein Name sichtbar ist, während Zugriffsmodifikatoren einschränken, wer auf ein deklariertes Element zugreifen darf. Zugriffskontrolle ist ein wichtiges Werkzeug für Kapselung (encapsulation) und Information Hiding.
+Siehe auch: xref:../../_04_classes_objects/README.adoc[Klassen und Objekte].
+
+[[jb-lifetime]]
+Lebensdauer (lifetime)::
+Die Lebensdauer beschreibt, wie lange eine Variable oder ein Objekt während der Programmausführung existiert. Der Gültigkeitsbereich ist eine Sichtbarkeitsregel im Quellcode, während die Lebensdauer ein Laufzeitkonzept ist; beide hängen zusammen, sind aber nicht dasselbe.
+
+[[jb-final]]
+Final::
+Das Java-Schlüsselwort `final` verhindert abhängig von seinem Einsatzort bestimmte spätere Änderungen. Einer finalen Variable kann nach ihrer einmaligen Zuweisung kein neuer Wert zugewiesen werden, eine finale Methode kann nicht überschrieben und eine finale Klasse nicht erweitert werden; eine finale Referenz macht das referenzierte Objekt nicht automatisch unveränderlich.
+Siehe auch: xref:../../_05_static_final/README.adoc[Static und Final].
+
+[[jb-constant]]
+Konstante (constant)::
+Eine Konstante ist ein Wert, der sich im relevanten Teil eines Programms nicht verändern soll. In Java werden Konstanten häufig durch `static final`-Felder dargestellt und konventionsgemäss in `UPPER_SNAKE_CASE` benannt, obwohl `final` allein keine tiefe Unveränderlichkeit referenzierter Objekte garantiert.
+Siehe auch: xref:../../_05_static_final/README.adoc[Static und Final].
+
+[[jb-var]]
+Var::
+Das kontextabhängige Java-Schlüsselwort `var` ermöglicht in bestimmten lokalen Kontexten die Typinferenz für lokale Variablen. Der Compiler bestimmt weiterhin einen festen statischen Typ aus dem Initialisierungswert; `var` macht Java nicht dynamisch typisiert und kann nicht allgemein als Ersatz für jeden ausgeschriebenen Typ verwendet werden.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-type-inference]]
+Typinferenz (type inference)::
+Typinferenz bedeutet, dass der Compiler einen Typ aus den umgebenden Quellcodeinformationen bestimmt, anstatt vom Programmierer zu verlangen, den Typ explizit hinzuschreiben. Java verwendet Typinferenz an mehreren Stellen, unter anderem bei lokalen Variablen mit `var` und bei vielen Aufrufen generischer Methoden.
+
+[[jb-casting]]
+Casting::
+Casting fordert Java explizit dazu auf, einen Wert als einen anderen kompatiblen Typ zu behandeln oder in einen solchen umzuwandeln, beispielsweise mit `(int) 3.8` oder `(Dog) animal`. Numerische Casts können Informationen verlieren, und Referenz-Casts können zur Laufzeit fehlschlagen, wenn das tatsächliche Objekt nicht mit dem angeforderten Typ kompatibel ist.
+Siehe auch: xref:../../_03_datatypes/README.adoc[Datentypen].
+
+[[jb-widening-conversion]]
+Erweiternde Typumwandlung (widening conversion)::
+Eine erweiternde Typumwandlung wandelt einen Wert in einen Typ um, der mindestens den benötigten Wertebereich abbilden kann, oder in einen allgemeineren Referenztyp. In vielen üblichen Situationen ist dafür kein expliziter Cast nötig. Beispiele sind die Umwandlung von `int` nach `long` oder die Verwendung einer `Dog`-Referenz an einer Stelle, an der eine `Animal`-Referenz erwartet wird.
+
+[[jb-narrowing-conversion]]
+Einschränkende Typumwandlung (narrowing conversion)::
+Eine einschränkende Typumwandlung wandelt einen Wert in einen Typ mit kleinerem numerischem Wertebereich oder in einen spezifischeren Referenztyp um und kann deshalb einen expliziten Cast erfordern. Numerisches Narrowing kann Informationen verlieren; bei Referenzen kann eine `ClassCastException` entstehen, wenn das tatsächliche Objekt nicht kompatibel ist.
+
+[[jb-autoboxing]]
+Autoboxing::
+Autoboxing ist die automatische Umwandlung, die der Java-Compiler von einem primitiven Wert in das entsprechende Wrapper-Objekt vornimmt, zum Beispiel von `int` nach `Integer`. Sie tritt besonders häufig auf, wenn Werte primitiver Typen zu generischen Collections hinzugefügt werden.
+
+[[jb-unboxing]]
+Unboxing::
+Unboxing ist die automatische Umwandlung, die der Java-Compiler von einem Wrapper-Objekt in den entsprechenden primitiven Wert vornimmt, zum Beispiel von `Integer` nach `int`. Das Unboxing einer `null`-Wrapper-Referenz führt zur Laufzeit zu einer `NullPointerException`.
+
+[[jb-null]]
+Null::
+`null` ist das Null-Literal von Java und steht für das Fehlen einer Objekt- oder Array-Referenz. Eine Referenzvariable kann `null` enthalten, sofern ein Programm oder eine API keine strengere Regel festlegt; das Dereferenzieren von `null` führt zu einer `NullPointerException`.
+
+[[jb-pass-by-value]]
+Wertübergabe (pass-by-value)::
+Java verwendet für jedes Methoden- und Konstruktorargument pass-by-value. Der Argumentwert wird in den Parameter kopiert; handelt es sich bei diesem Wert um eine Objektreferenz, können sowohl die Variable des Aufrufers als auch der Parameter auf dasselbe Objekt verweisen. Das Objekt kann deshalb über beide Referenzen verändert werden, obwohl die Variable des Aufrufers durch die aufgerufene Methode selbst nicht ersetzt werden kann.
+Siehe auch: xref:../../_04_classes_objects/README.adoc[Klassen und Objekte].
+
+[[jb-pass-by-reference]]
+Referenzübergabe (pass-by-reference)::
+Pass-by-reference ist ein Parameterübergabemodell, bei dem eine aufgerufene Routine direkten Zugriff auf die Variable des Aufrufers erhält und diese Variable selbst ersetzen kann. Java verwendet für Methodenargumente kein pass-by-reference; die häufig verwendete Formulierung „objects are passed by reference“ ist für Java deshalb unpräzise.
+
+== Operatoren, Ausdrücke und Programmablauf
+
+[[jb-operator]]
+Operator::
+Ein Operator ist ein Symbol oder Schlüsselwort, das eine Operation auf einem oder mehreren Operanden ausführt. Beispiele sind arithmetische Operatoren wie `+`, Vergleichsoperatoren wie `>=`, logische Operatoren wie `&&` und der Typprüfungsoperator `instanceof`.
+
+[[jb-operand]]
+Operand::
+Ein Operand ist ein Wert, eine Variable oder ein Ausdruck, auf den ein Operator angewendet wird. Im Ausdruck `price * quantity` sind `price` und `quantity` die Operanden und `*` ist der Operator.
+
+[[jb-arithmetic-operator]]
+Arithmetischer Operator (arithmetic operator)::
+Ein arithmetischer Operator führt eine numerische Berechnung aus. Häufige arithmetische Operatoren in Java sind `+`, `-`, `*`, `/` und `%`; das genaue Ergebnis hängt von den Operandentypen ab, weshalb sich Ganzzahldivision und Gleitkommadivision unterschiedlich verhalten.
+
+[[jb-comparison-operator]]
+Vergleichsoperator (comparison operator)::
+Ein Vergleichsoperator vergleicht Werte und erzeugt ein boolesches Ergebnis. Java verwendet Operatoren wie `==`, `!=`, `<`, `<=`, `>` und `>=`; bei Objekten vergleicht `==` die Referenzidentität und nicht die logische Gleichheit der Objekte.
+
+[[jb-logical-operator]]
+Logischer Operator (logical operator)::
+Ein logischer Operator verknüpft oder negiert boolesche Werte. Java verwendet üblicherweise `&&` für das kurzschliessende AND, `||` für das kurzschliessende OR und `!` für das logische NOT.
+
+[[jb-assignment-operator]]
+Zuweisungsoperator (assignment operator)::
+Ein Zuweisungsoperator speichert einen Wert in einer Variable. Neben dem grundlegenden Operator `=` stellt Java kombinierte Zuweisungsoperatoren wie `+=`, `-=`, `*=` und `/=` bereit.
+
+[[jb-control-structure]]
+Kontrollstruktur (control structure)::
+Eine Kontrollstruktur verändert den normalen sequenziellen Ablauf eines Programms. Java bietet Auswahlstrukturen wie `if` und `switch`, Wiederholungsstrukturen wie `for` und `while` sowie Kontrollflussanweisungen wie `break`, `continue` und `return`.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-condition]]
+Bedingung (condition)::
+Eine Bedingung ist ein Ausdruck, dessen Ergebnis verwendet wird, um zu entscheiden, welcher Ausführungspfad gewählt wird oder ob eine Schleife fortgesetzt werden soll. In Java müssen Bedingungen von `if`, `while` und ähnlichen Konstrukten den primitiven Typ `boolean` ergeben oder zu diesem entpackt werden.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-branch]]
+Verzweigung (branch)::
+Eine Verzweigung ist einer der möglichen Pfade durch den Kontrollfluss eines Programms. Bedingte Strukturen wie `if`/`else` und `switch` wählen abhängig von Werten oder Bedingungen zwischen mehreren Verzweigungen aus.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-iteration]]
+Iteration::
+Eine Iteration ist ein einzelner Ausführungsdurchlauf eines Schleifenrumpfs. Eine Schleife kann abhängig von Initialisierung, Bedingung, Eingabedaten und Kontrollflussanweisungen null, eine oder viele Iterationen ausführen.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-loop]]
+Schleife (loop)::
+Eine Schleife führt eine Anweisung oder einen Block wiederholt aus, solange ihre Steuerungsregel weitere Iterationen zulässt. Java stellt `for`, enhanced `for`, `while` und `do`/`while`-Schleifen bereit.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-if]]
+If::
+Das Java-Schlüsselwort `if` beginnt eine bedingte Anweisung, deren Rumpf ausgeführt wird, wenn ihre boolesche Bedingung `true` ergibt. Auf eine `if`-Anweisung kann optional ein `else`-Zweig folgen.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-else]]
+Else::
+Das Java-Schlüsselwort `else` leitet den alternativen Zweig einer `if`-Anweisung ein. Der `else`-Zweig wird ausgeführt, wenn die zugehörige `if`-Bedingung `false` ergibt.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-switch]]
+Switch::
+Das Java-Schlüsselwort `switch` beginnt ein Auswahlkonstrukt mit mehreren möglichen Zweigen, das sein Verhalten anhand eines Selektorausdrucks auswählt. Modernes Java unterstützt sowohl klassische `switch`-Anweisungen als auch `switch`-Ausdrücke mit Pfeil-Labels.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-case]]
+Case::
+Das Java-Schlüsselwort `case` führt in einem `switch`-Konstrukt ein Label für einen oder mehrere passende Werte oder Patterns ein. Passt der Selektor zu diesem Label, kann der entsprechende Zweig ausgeführt werden oder ein Ergebnis liefern.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-default]]
+Default::
+Das Java-Schlüsselwort `default` führt in einem `switch` das Fallback-Label ein, wenn kein vorheriges `case`-Label passt. Dasselbe Schlüsselwort wird in Java auch an anderen Stellen verwendet, beispielsweise für Default-Methoden in Interfaces; im grundlegenden Programmablauf begegnet es jedoch am häufigsten in `switch`-Konstrukten.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-for]]
+For::
+Das Java-Schlüsselwort `for` beginnt eine Schleife. Java unterstützt die klassische Form `for (initialization; condition; update)` und die erweiterte Form `for (Type item : source)` zum Iterieren über Arrays und iterierbare Objekte.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-while]]
+While::
+Das Java-Schlüsselwort `while` beginnt eine kopfgesteuerte Schleife, deren Bedingung vor jeder Iteration geprüft wird. Ist die Bedingung bereits zu Beginn `false`, wird der Schleifenrumpf nicht ausgeführt.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-do]]
+Do::
+Das Java-Schlüsselwort `do` beginnt eine fussgesteuerte Schleife, die mit `while (condition);` endet. Da die Bedingung erst nach dem Schleifenrumpf geprüft wird, führt eine `do`/`while`-Schleife ihren Rumpf mindestens einmal aus.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-break]]
+Break::
+Das Java-Schlüsselwort `break` beendet sofort die nächstgelegene umschliessende Schleife oder eine klassische `switch`-Anweisung. Es wird häufig verwendet, wenn eine Schleife verlassen werden soll, bevor ihre reguläre Abbruchbedingung `false` wird.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+[[jb-continue]]
+Continue::
+Das Java-Schlüsselwort `continue` überspringt die verbleibenden Anweisungen der aktuellen Schleifeniteration und fährt mit der nächsten Iteration fort. Es wirkt auf Schleifen und beendet nicht die gesamte Methode.
+Siehe auch: xref:../../_06_program_flow/README.adoc[Programmablauf].
+
+== Methoden
+
+[[jb-method]]
+Methode (method)::
+Eine Methode ist ein benannter Verhaltensblock, der als Teil einer Klasse, eines Interfaces, Records oder Enum-Typs deklariert wird. Eine Methode kann über Parameter Werte empfangen, Arbeit ausführen und optional einen Wert an ihren Aufrufer zurückgeben.
+
+[[jb-method-declaration]]
+Methodendeklaration (method declaration)::
+Eine Methodendeklaration führt eine Methode ein und enthält normalerweise Modifikatoren, einen Rückgabetyp, einen Methodennamen, eine Parameterliste, optionale zusätzliche Klauseln und einen Rumpf. Abstrakte oder native Methoden sind Sonderfälle, die ohne normalen Methodenrumpf deklariert werden können.
+
+[[jb-method-body]]
+Methodenrumpf (method body)::
+Ein Methodenrumpf ist der Block mit den Anweisungen, die ausgeführt werden, wenn die Methode aufgerufen wird. Bei gewöhnlichen konkreten Methoden beginnt er mit `{` und endet mit `}`.
+
+[[jb-method-header]]
+Methodenkopf (method header)::
+Der Methodenkopf ist der Teil einer Methodendeklaration vor ihrem Rumpf. Er kann Modifikatoren, Typparameter, Rückgabetyp, Methodennamen, Parameterliste und eine optionale `throws`-Klausel enthalten.
+
+[[jb-method-signature]]
+Methodensignatur (method signature)::
+Bei gewöhnlichen Java-Methoden besteht die Methodensignatur aus dem Methodennamen zusammen mit den Parametertypen nach den von Java definierten Typanpassungsregeln. Für den Einstieg ist die Merkregel „Methodenname + Parametertypen in ihrer Reihenfolge“ hilfreich; Rückgabetyp und Zugriffsmodifikator sind nicht Teil der Signatur.
+
+[[jb-method-invocation]]
+Methodenaufruf (method invocation / method call)::
+Ein Methodenaufruf fordert eine Methode zur Ausführung auf. Der Aufruf kann Argumentausdrücke übergeben, die den Parametern zugeordnet werden; besitzt die Methode einen Rückgabetyp ungleich `void`, kann der Aufruf selbst einen Wert erzeugen.
+
+[[jb-parameter]]
+Parameter::
+Ein Parameter ist eine Variable, die in der Deklaration einer Methode oder eines Konstruktors deklariert wird. Beim Aufruf der Methode oder des Konstruktors wird der entsprechende Argumentwert gemäss der pass-by-value-Semantik von Java in diesen Parameter kopiert.
+
+[[jb-argument]]
+Argument::
+Ein Argument ist ein Wert oder Ausdruck, der beim Aufruf einer Methode oder eines Konstruktors übergeben wird. Das Argument muss nach den anwendbaren Umwandlungs- und Methodenauswahlregeln von Java mit dem entsprechenden Parameter kompatibel sein.
+
+[[jb-return-type]]
+Rückgabetyp (return type)::
+Ein Rückgabetyp ist der vor einem Methodennamen geschriebene Typ, der beschreibt, welche Art von Wert die Methode bei normaler Beendigung erzeugt. Gibt eine Methode keinen Wert an ihren Aufrufer zurück, wird ihr Rückgabetyp als `void` geschrieben.
+
+[[jb-void]]
+Void::
+Das Java-Schlüsselwort `void` wird als Rückgabetyp einer Methode verwendet, um anzugeben, dass die Methode keinen Wert an ihren Aufrufer zurückgibt. `void` ist kein normaler Werttyp, aus dem Variablen oder Objekte erzeugt werden können.
+
+[[jb-return]]
+Return::
+Das Java-Schlüsselwort `return` beendet sofort die Ausführung der aktuellen Methode und gibt die Kontrolle an den Aufrufer zurück. In einer Methode mit einem Rückgabetyp ungleich `void` muss `return` einen kompatiblen Ausdruckswert liefern; in einer `void`-Methode kann `return;` ohne Wert verwendet werden.
+
+== Kompilierung, Laufzeit und Entwicklungswerkzeuge
+
+[[jb-compiler]]
+Compiler::
+Ein Compiler übersetzt Quellcode in eine andere Darstellung und prüft währenddessen Sprachregeln. Der Java-Compiler `javac` übersetzt `.java`-Quelldateien in JVM-Bytecode, der in `.class`-Dateien gespeichert wird.
+
+[[jb-compilation]]
+Kompilierung (compilation)::
+Kompilierung ist der Prozess, bei dem Java-Quellcode übersetzt und gegen die Compile-Time-Regeln von Java geprüft wird. Viele Probleme wie Syntaxfehler oder inkompatible Typen verhindern eine erfolgreiche Kompilierung, bevor das Programm überhaupt ausgeführt werden kann.
+
+[[jb-bytecode]]
+Bytecode::
+Java-Bytecode ist das Anweisungsformat, das in kompilierten `.class`-Dateien gespeichert und von einer Java Virtual Machine ausgeführt oder weiter kompiliert wird. Bytecode ist ein Grund dafür, dass dasselbe kompilierte Java-Programm auf verschiedenen Betriebssystemen laufen kann, sofern eine kompatible JVM verfügbar ist.
+
+[[jb-jvm]]
+JVM::
+JVM steht für Java Virtual Machine. Die JVM lädt Java-Klassen, verifiziert und führt Bytecode aus, verwaltet Speicher und Garbage Collection und stellt die Laufzeitumgebung bereit, in der Java-Anwendungen ausgeführt werden.
+
+[[jb-jdk]]
+JDK::
+JDK steht für Java Development Kit. Ein JDK enthält die Werkzeuge, die zur Entwicklung von Java-Software benötigt werden, darunter einen Java-Compiler, Laufzeitkomponenten, Standard-APIs, Diagnosewerkzeuge und Hilfsprogramme wie Javadoc.
+
+[[jb-runtime]]
+Laufzeit (runtime)::
+Laufzeit bezeichnet den Zeitraum und die Umgebung, in der ein Programm tatsächlich ausgeführt wird. Eine Bedingung, die erst während der Ausführung erkannt werden kann – beispielsweise das Dereferenzieren von `null` auf einem bestimmten Ausführungspfad – ist ein Laufzeitproblem und kein Compile-Time-Problem.
+
+[[jb-compile-time-error]]
+Compile-Time-Fehler (compile-time error)::
+Ein Compile-Time-Fehler ist ein Verstoss, der beim Kompilieren von Java-Quellcode erkannt wird. Beispiele sind ungültige Syntax, inkompatible Typen, nicht zugängliche Member und Verweise auf Namen, die nicht aufgelöst werden können.
+
+[[jb-runtime-error]]
+Laufzeitfehler (runtime error)::
+Ein Laufzeitfehler ist ein Problem, das während der Programmausführung nach erfolgreicher Kompilierung auftritt. In Java werden viele Laufzeitfehler durch Exceptions dargestellt, zum Beispiel `NullPointerException`, `ArithmeticException` oder `ClassCastException`.
+
+[[jb-logical-error]]
+Logikfehler (logical error)::
+Ein Logikfehler liegt vor, wenn ein Programm kompiliert und ausgeführt wird, aber ein falsches Ergebnis liefert, weil die implementierte Logik nicht dem beabsichtigten Verhalten entspricht. Logikfehler werden durch Nachdenken, Debugging, Tests und sorgfältige Validierung gefunden und nicht allein durch Syntaxprüfung.
+
+[[jb-stack-trace]]
+Stack Trace::
+Ein Stack Trace ist eine diagnostische Liste, die die Kette von Methodenaufrufen zeigt, die zu einem bestimmten Punkt der Programmausführung geführt hat, insbesondere wenn eine Exception geworfen wird. Das Lesen des Exception-Typs, der Meldung und der ersten relevanten Zeilen des Stack Traces ist eine wichtige Debugging-Fähigkeit.
+
+[[jb-ide]]
+IDE::
+IDE steht für Integrated Development Environment. Eine IDE wie IntelliJ IDEA vereint Quellcodebearbeitung, Navigation, Refactoring, Compiler-Integration, Debugging, Testing, Versionsverwaltungswerkzeuge und weitere Entwicklungsunterstützung in einer Anwendung.
+
+[[jb-version-control-system]]
+Versionsverwaltungssystem (version control system)::
+Ein Versionsverwaltungssystem zeichnet Änderungen an Dateien auf, sodass die Entwicklungshistorie betrachtet, verglichen, wiederhergestellt und geteilt werden kann. Git ist ein verteiltes Versionsverwaltungssystem, das häufig für Java-Projekte und kollaborative Softwareentwicklung verwendet wird.
+
+[[jb-git]]
+Git::
+Git ist ein verteiltes Versionsverwaltungssystem, bei dem jedes lokale Repository die Projekthistorie enthält und Commits mit Remote-Repositories austauschen kann. Git ist unabhängig von Hosting-Plattformen wie GitHub oder GitLab, auch wenn diese Plattformen Dienste rund um Git-Repositories bereitstellen.
+
+[[jb-build-tool]]
+Build-Tool::
+Ein Build-Tool automatisiert wiederholbare Projektaufgaben wie das Kompilieren von Quellcode, Ausführen von Tests, Paketieren von Anwendungen und Verwalten von Dependencies. Build-Tools sorgen dafür, dass derselbe Projektablauf auf verschiedenen Entwicklungsrechnern und in CI-Systemen reproduzierbar ist.
+
+[[jb-maven]]
+Maven::
+Apache Maven ist ein Build- und Dependency-Management-Tool, das häufig für Java-Projekte verwendet wird. Maven liest die Projektkonfiguration aus `pom.xml` und folgt standardisierten Verzeichniskonventionen, um Code zu kompilieren, Tests auszuführen, Anwendungen zu paketieren und externe Dependencies zu verwalten.
+
+[[jb-gradle]]
+Gradle::
+Gradle ist ein Build-Automatisierungs- und Dependency-Management-Tool, das häufig für Java-Projekte verwendet wird. Gradle-Build-Dateien werden typischerweise mit der Groovy DSL in `build.gradle` oder der Kotlin DSL in `build.gradle.kts` geschrieben. Wie Maven kann Gradle Quellcode kompilieren, Tests ausführen, Anwendungen paketieren und externe Dependencies verwalten.
+
+== Reservierte und spezialisierte Wörter ausserhalb dieses Kurses
+
+Die folgenden Wörter sind Teil der lexikalischen oder sprachlichen Regeln von Java, benötigen für dieses Lernprojekt aber keinen normalen Glossareintrag.
+
+* `const` und `goto` sind reservierte Java-Schlüsselwörter, werden von der Java-Sprache aber nicht verwendet.
+* `strictfp` ist weiterhin ein reserviertes Schlüsselwort, gilt jedoch als obsolet und sollte in neuem Java-Code nicht verwendet werden.
+* `native`, `synchronized`, `transient` und `volatile` sind gültige spezialisierte Java-Schlüsselwörter, liegen aber ausserhalb des Umfangs dieses Lernprojekts.
+* Wörter des Java-Modulsystems wie `module`, `requires`, `exports`, `opens`, `uses` und `provides` sind gültige kontextabhängige Schlüsselwörter, liegen aber ausserhalb des Umfangs dieses Lernprojekts.
+
+== Zusammenfassung
+
+Verwende beim Lesen und Besprechen von Code einen präzisen Wortschatz. Die Unterscheidung von Begriffen wie Parameter und Argument, Deklaration und Initialisierung, primitiver und Referenzdatentyp oder Compile-Zeit und Laufzeit erleichtert das Verständnis späterer objektorientierter Konzepte deutlich.
