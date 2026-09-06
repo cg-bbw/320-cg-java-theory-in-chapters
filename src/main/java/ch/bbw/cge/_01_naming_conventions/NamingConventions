@@ -9,5 +9,5 @@ https://stackoverflow.com/questions/3179216/what-is-the-convention-for-word-sepa
 
 As for this project we define our own package naming convention:
 1. Every package starts with a _ prefix because it can't start with a number
-2. After the _ prefix there comes a number to generate a clear chapter structure
-3. In consideration we want better readability, we separate the rest of the package name with _ between each word.
+2. After the _ prefix there comes a number to generate a clear chapter structure that follows the lessons structure
+3. In consideration of better readability we separate the rest of the package name with _ between each word.
