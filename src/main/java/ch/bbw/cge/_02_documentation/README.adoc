@@ -1,0 +1,82 @@
+= Comments and Javadoc
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* choose between line comments, block comments, and Javadoc;
+* write comments that explain useful information instead of repeating the code;
+* document methods with `@param`, `@return`, and `@throws`;
+* distinguish Javadoc tags from Java annotations;
+* use `TODO` and `FIXME` comments intentionally.
+
+== Key Terms
+
+Comment::
+Human-readable source text that is not executed as Java instructions.
+
+Javadoc::
+Documentation written in `/** ... */` comments. The Javadoc tool can generate HTML documentation from it.
+
+Javadoc tag::
+A special documentation marker such as `@param`, `@return`, `@throws`, or `@see`. Javadoc tags are not Java annotations.
+
+Annotation::
+Java metadata written with `@`, for example `@Override` or `@Deprecated`. An annotation is part of Java syntax and has a different purpose from a Javadoc tag.
+
+== Three Comment Forms
+
+[source,java]
+----
+// Line comment
+
+/*
+ * Block comment
+ */
+
+/**
+ * Javadoc comment
+ */
+----
+
+== When Should You Comment?
+
+Do not explain code that is already obvious from good names.
+Comments are most useful when they explain:
+
+* why a decision was made;
+* what a teaching example is intended to demonstrate;
+* a non-obvious limitation or risk;
+* new theory at the point where it is introduced.
+
+In later chapters, concepts that have already been learned are no longer commented repeatedly.
+
+== Important Javadoc Tags
+
+`@param`::
+Explains one parameter.
+
+`@return`::
+Explains the value returned by a non-`void` method.
+
+`@throws`::
+Explains which exception can occur and under which condition. It can be useful for both checked and unchecked exceptions. Whether an IDE generates the tag automatically depends on its code analysis and the method declaration; the documentation should still describe relevant exceptions for callers.
+
+`@see`::
+Creates a reference to related documentation.
+
+`{@code ...}`::
+Formats a short code fragment inside Javadoc text.
+
+`{@link ...}`::
+Creates an inline link to another documented program element.
+
+== TODO and FIXME
+
+`TODO` usually marks unfinished work. `FIXME` usually marks a known problem that needs correction.
+IDEs such as IntelliJ IDEA can collect these comments in a dedicated tool window.
+A CI pipeline can also be configured to search for them, but Java itself does not make a build fail because a TODO exists.
+
+== Summary
+
+Prefer readable code first. Add documentation where it gives readers information that the code alone does not express clearly.

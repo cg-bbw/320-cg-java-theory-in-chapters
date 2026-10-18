@@ -1,0 +1,84 @@
+= Naming Conventions
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* distinguish language rules from naming conventions;
+* apply common Java naming conventions consistently;
+* choose names that communicate intent;
+* explain the special package naming convention used in this learning project.
+
+== Key Terms
+
+Naming convention::
+A shared rule for naming code elements. A convention is usually not enforced by the Java compiler, but it improves readability and collaboration.
+
+Identifier::
+A name used for a program element such as a class, method, variable, or package.
+
+== Common Java Conventions
+
+[cols="1,2,2"]
+|===
+|Element |Convention |Example
+
+|Class / interface / enum
+|`PascalCase`
+|`BankAccount`, `PaymentService`
+
+|Method
+|`camelCase`, usually beginning with a verb
+|`calculateTotal()`
+
+|Variable / parameter
+|`camelCase`
+|`customerName`, `targetSpeed`
+
+|Constant
+|`UPPER_SNAKE_CASE`
+|`MAX_LOGIN_ATTEMPTS`
+
+|Package
+|normally lowercase, usually without underscores
+|`ch.example.shop`
+|===
+
+== Names Should Explain Intent
+
+Prefer:
+
+[source,java]
+----
+int completedExercises = 7;
+----
+
+instead of:
+
+[source,java]
+----
+int x = 7;
+----
+
+A short name is acceptable when its meaning is obvious in a tiny scope, for example a loop index such as `i`.
+
+== The Package Names in This Project
+
+This learning project deliberately uses package segments such as `_01_naming_conventions`.
+That is a project-specific teaching convention, not the usual convention used in production Java projects.
+
+The reasons are:
+
+. the leading number makes the chapter order visible in the IDE;
+. a Java identifier cannot start with a digit, so the number is prefixed with `_`;
+. underscores make multi-word chapter names easier to scan in this deliberately numbered structure.
+
+The package name is technically valid Java, but in a normal production project you would usually prefer a conventional package such as `ch.bbw.cge.namingconventions` or a domain-oriented package structure.
+
+== Clean-Code Guideline
+
+A good name reduces the need for comments. A comment should explain something that the name and structure cannot express clearly on their own.
+
+== Summary
+
+Consistent naming makes code easier to read. Follow standard Java conventions unless a project has a documented reason to use a different convention.

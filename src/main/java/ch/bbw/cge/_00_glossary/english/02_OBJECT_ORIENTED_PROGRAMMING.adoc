@@ -1,0 +1,369 @@
+= Object-Oriented Programming in Java Glossary
+:toc:
+:toclevels: 2
+:sectanchors:
+
+This glossary contains the vocabulary used to describe classes, objects, relationships, inheritance, interfaces, and object-oriented design in Java.
+The definitions are intended to be understandable on their own while still linking to the learning chapters where the concepts are demonstrated in code.
+
+== Classes, Objects, and Members
+
+[[oop-class]]
+Class::
+The Java keyword `class` declares a class. A class defines a reference type and describes the structure and behavior of objects that can be created from it, typically through fields, constructors, and methods.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-object]]
+Object::
+An object is a runtime entity with a type, state, behavior, and identity. Objects are normally created from classes and are accessed through reference values; two objects of the same class can hold different state even though they share the same class definition.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-instance]]
+Instance::
+An instance is an object viewed as an occurrence of a particular class or other instantiable type. The expressions “object” and “instance” are often used almost interchangeably, but “instance” emphasizes the relationship between the runtime object and its type.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-instantiation]]
+Instantiation::
+Instantiation is the process of creating a new object instance. In ordinary Java code this often involves the keyword `new` together with a constructor invocation, although some objects can also be created by factory methods, deserialization, reflection, or framework mechanisms.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-new]]
+New::
+The Java keyword `new` begins the creation of a new class instance or a new array. For class instances, `new` is followed by a constructor invocation, for example `new Car("Volvo")`, and the resulting expression produces a reference to the newly created object.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-constructor]]
+Constructor::
+A constructor is a special class declaration that is invoked during object creation and has the same name as the class without a return type. Constructors initialize the newly created object's state and can validate constructor arguments; they are not methods and are not inherited by subclasses.
+If a class declares no constructor at all, the compiler can provide a default no-argument constructor.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-this]]
+This::
+The Java keyword `this` refers to the current object inside an instance context. It is often used to distinguish an object's field from a parameter with the same name, to pass the current object as an argument, or to call another constructor of the same class with `this(...)`.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-field]]
+Field::
+A field is a variable declared directly in a class or interface body rather than inside a method or constructor. In a class, a field can belong to each individual object as an instance field or to the class itself as a static field.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-instance-field]]
+Instance field / instance variable::
+An instance field is a field declared without the keyword `static`. Every object of the class has its own field value, so instance fields are a common way of representing the individual state of an object.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-static-field]]
+Static field / class variable::
+The Java keyword `static` makes a field belong to the class itself rather than to each individual object. One static field is shared by all instances of the class for a given class loader, which makes it suitable for class-wide counters, constants together with `final`, or other shared data that truly belongs to the type.
+See also: xref:../_05_static_final/README.adoc[Static and Final].
+
+[[oop-static]]
+Static::
+The Java keyword `static` declares a member or initialization context that belongs to the class rather than to an individual instance. A static method has no current object and therefore cannot directly use `this` or access instance members without an object reference.
+See also: xref:../_05_static_final/README.adoc[Static and Final].
+
+[[oop-member]]
+Member::
+A member is a declaration that belongs to a class or interface, such as a field, method, nested type, or certain other declarations. The informal phrase “member variable” is widely used for fields, but “instance field” or “static field” is more precise when the distinction matters.
+
+[[oop-method]]
+Method::
+A method is a named block of behavior that belongs to a class, interface, record, or enum type. In object-oriented design, instance methods commonly express behavior that works with or protects an object's state.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-instance-method]]
+Instance method::
+An instance method is a non-static method that executes for a particular object and therefore has access to `this`. It can directly read or modify that object's instance fields according to the class's access and design rules.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-getter]]
+Getter::
+A getter is a method whose purpose is to return information from an object, commonly using a name such as `getName()` or, for boolean properties, `isActive()`. Getters are a naming and design convention rather than a special Java language feature, and exposing every field with a getter is not automatically good encapsulation.
+
+[[oop-setter]]
+Setter::
+A setter is a method whose purpose is to change part of an object's state, commonly using a name such as `setName(...)`. Setters are a convention rather than a language feature; well-designed setters can validate values and protect class invariants instead of merely exposing fields for unrestricted modification.
+
+[[oop-object-reference]]
+Object reference::
+An object reference is a reference value that identifies an object or array, or the value `null`. A reference is best understood as a handle through which Java can access an object; Java does not expose ordinary object references as raw pointer values that programmers can perform pointer arithmetic on.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-state]]
+State::
+The state of an object is the information currently stored by that object, usually represented by the values of its instance fields. Two objects of the same class can therefore have the same structure but different state.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-behavior]]
+Behavior::
+The behavior of an object describes what the object can do or what operations can be requested from it. In Java, behavior is primarily expressed through methods and through the collaborations between objects.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-identity]]
+Object identity::
+Object identity means that every object is a distinct runtime entity, even when another object contains exactly the same field values. Reference comparison with `==` can test whether two references point to the same object, while logical equality is normally expressed through `equals(...)`.
+
+[[oop-equality]]
+Object equality::
+Object equality describes whether two objects should be considered equivalent according to their meaningful content or domain rules. Java's `equals(Object)` method is the conventional mechanism for logical equality; if a class overrides `equals`, it must normally implement a compatible `hashCode` as well.
+
+[[oop-object-class]]
+Object class::
+`java.lang.Object` is the ultimate superclass of ordinary Java classes. Methods such as `equals`, `hashCode`, and `toString` are therefore available to objects unless their behavior is overridden by a more specific class.
+
+[[oop-equals]]
+Equals method::
+The method `equals(Object)` defines logical equality for objects when a class chooses to override the default identity-based behavior inherited from `Object`. A correct implementation must follow the equality contract, including reflexivity, symmetry, transitivity, consistency, and correct handling of `null`.
+
+[[oop-hash-code]]
+Hash code::
+The method `hashCode()` produces an integer used by hash-based collections such as `HashMap` and `HashSet`. Objects that are equal according to `equals(...)` must produce the same hash code during the same relevant state, although unequal objects may still have the same hash code.
+
+[[oop-to-string]]
+ToString method::
+The method `toString()` returns a textual representation of an object. Overriding it with meaningful information makes debugging, logging, and console output easier, but it should not normally be used as a replacement for structured application data.
+
+== Core Object-Oriented Concepts
+
+[[oop-abstraction]]
+Abstraction::
+Abstraction means focusing on the relevant characteristics and operations of something while leaving unnecessary implementation details in the background. In object-oriented programming, classes and interfaces can provide abstractions that let other code work with a meaningful model rather than with every low-level implementation detail.
+See also: xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes].
+
+[[oop-encapsulation]]
+Encapsulation::
+Encapsulation means keeping related state and behavior together and controlling how the internal state of an object can be accessed or changed. In Java, private fields combined with carefully designed public methods are a common way to protect valid state and hide implementation decisions.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-information-hiding]]
+Information hiding::
+Information hiding is the design principle of exposing only what other parts of the program need to know while keeping implementation details private. Encapsulation provides language and design mechanisms that help achieve information hiding, but the two terms are not exact synonyms.
+
+[[oop-class-invariant]]
+Class invariant::
+A class invariant is a condition that should remain true for every valid object of a class whenever its public operations complete. Constructors and methods can enforce invariants by rejecting invalid input and preventing external code from placing the object into an inconsistent state.
+
+[[oop-responsibility]]
+Responsibility::
+A responsibility describes what a class or object is responsible for knowing or doing. Clear responsibilities make it easier to decide which class should contain a field or method and help prevent one class from becoming responsible for unrelated parts of the application.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[oop-cohesion]]
+Cohesion::
+Cohesion describes how closely the responsibilities and elements inside one module or class belong together. High cohesion is generally desirable because a class with a focused purpose is easier to understand, test, reuse, and change.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[oop-coupling]]
+Coupling::
+Coupling describes how strongly one class, object, or module depends on another. Lower and more intentional coupling usually makes software easier to change and test, although some dependencies are necessary for objects to collaborate.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[oop-dependency]]
+Dependency::
+A dependency exists when one class or object needs another type, object, service, or implementation detail in order to perform its work. Dependencies can be created through fields, parameters, return types, local variables, inheritance, static calls, object creation, and other forms of collaboration.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-mutable]]
+Mutable object::
+A mutable object is an object whose observable state can change after construction. Mutability is often useful, but uncontrolled mutation can make programs harder to reason about, especially when several references point to the same object.
+
+[[oop-immutable]]
+Immutable object::
+An immutable object is an object whose observable state cannot change after construction. Immutability can simplify reasoning and sharing, but declaring a reference `final` does not by itself make the referenced object immutable.
+See also: xref:../_05_static_final/README.adoc[Static and Final].
+
+== Object Relationships
+
+[[oop-association]]
+Association::
+Association is a general object-oriented and UML relationship in which objects know about, refer to, or interact with each other. Java has no `association` keyword; associations are represented through normal references and method collaborations.
+See also: xref:../_07_object_relationships/README.adoc[Object Relationships].
+
+[[oop-has-a]]
+Has-a relationship::
+A has-a relationship describes a situation in which one object contains, owns, uses, or refers to another object as part of its structure or collaboration. Association, aggregation, composition, and delegation can all describe different forms of has-a relationships.
+See also: xref:../_07_object_relationships/README.adoc[Object Relationships].
+
+[[oop-aggregation]]
+Aggregation::
+Aggregation is a UML form of a has-a relationship in which one object refers to another object that can conceptually exist independently of it. Java has no special aggregation syntax, so the distinction from other associations comes from the model and intended lifecycle rather than from a keyword.
+See also: xref:../_07_object_relationships/README.adoc[Object Relationships].
+
+[[oop-composition]]
+Composition::
+Composition is a strong UML has-a relationship in which the containing object conceptually owns a part and controls its lifecycle as part of the whole. Java has no special composition keyword; the relationship is expressed through ordinary references and through how the program creates, exposes, and manages the part.
+See also: xref:../_07_object_relationships/README.adoc[Object Relationships].
+
+[[oop-delegation]]
+Delegation::
+Delegation means giving a responsibility to another object and forwarding work to that collaborator instead of implementing the whole task in the current object. Delegation is often used together with composition and is a common alternative to inheritance when the relationship is “uses-a” or “has-a” rather than “is-a”.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-unidirectional]]
+Unidirectional relationship::
+A unidirectional relationship can be navigated in only one direction because only one participant stores or otherwise knows how to reach the other participant. For example, an `Order` might know its `Customer` while the `Customer` does not store a collection of all orders.
+See also: xref:../_07_object_relationships/README.adoc[Object Relationships].
+
+[[oop-bidirectional]]
+Bidirectional relationship::
+A bidirectional relationship can be navigated in both directions because both participants know or can reach each other. Such relationships can be useful but require additional care to keep both sides consistent when links are added or removed.
+See also: xref:../_07_object_relationships/README.adoc[Object Relationships].
+
+[[oop-multiplicity]]
+Multiplicity::
+Multiplicity is a UML concept that describes how many instances may participate at each end of a relationship, for example `1`, `0..1`, `*`, or `1..*`. In Java, multiplicity is represented by design choices such as a single reference, an optional reference, or a collection of references rather than by a dedicated language keyword.
+See also: xref:../_07_object_relationships/README.adoc[Object Relationships].
+
+[[oop-class-diagram]]
+Class diagram::
+A UML class diagram shows the static structure of a model, including selected classes, attributes, operations, and relationships. It describes types and their relationships rather than the concrete objects that happen to exist at one moment.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-object-diagram]]
+Object diagram::
+A UML object diagram shows concrete object instances, selected values, and links at a particular moment in time. It can be understood as a snapshot that complements the more general structure shown by a class diagram.
+See also: xref:../_04_classes_objects/README.adoc[Classes and Objects].
+
+[[oop-sequence-diagram]]
+Sequence diagram::
+A UML sequence diagram shows interactions between participants over time, especially the order in which messages or method calls occur. It is useful for describing dynamic program flow and object collaboration rather than static class structure.
+See also: xref:../_06_program_flow/README.adoc[Program Flow].
+
+== Inheritance and Polymorphism
+
+[[oop-inheritance]]
+Inheritance::
+Inheritance is an is-a type relationship in which a subclass extends a superclass and receives the inherited members and behavior defined by that hierarchy. Inheritance should model a genuine substitutable type relationship rather than merely being used to reuse a few lines of code.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-extends]]
+Extends::
+The Java keyword `extends` declares an inheritance or extension relationship. A class can directly extend one superclass, while an interface can extend one or more interfaces.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-is-a]]
+Is-a relationship::
+An is-a relationship means that one type is a more specific form of another and can be used where the more general type is expected, subject to the behavioral contract. Java models is-a relationships mainly through class inheritance and interface implementation.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-superclass]]
+Superclass::
+A superclass is a class that another class directly or indirectly extends. It defines state structure and behavior that can be inherited or specialized by subclasses; every ordinary Java class ultimately has `Object` in its superclass chain.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-subclass]]
+Subclass::
+A subclass is a class that directly or indirectly extends another class. It is a more specific type than its superclass and can add new members or override inherited instance methods, subject to Java's access and overriding rules.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-super]]
+Super::
+The Java keyword `super` refers to members of the direct superclass from an instance context. It is commonly used to access an inherited member that is hidden or overridden, for example `super.toString()`.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-super-constructor]]
+Super constructor invocation::
+The Java keyword `super` can be used as `super(...)` to invoke a constructor of the direct superclass from a subclass constructor. An explicit `super(...)` constructor invocation must appear before ordinary constructor statements; if no explicit constructor invocation is written, Java may insert an implicit no-argument superclass-constructor call when valid.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-polymorphism]]
+Polymorphism::
+Polymorphism allows code to work with objects through a common superclass or interface while different object types can provide different behavior. In Java, this is especially important when subclasses override inherited methods and the actual object type determines which implementation is executed at runtime.
+See also: xref:../../_10_polymorphism/README.adoc[Polymorphism].
+
+[[oop-runtime-polymorphism]]
+Runtime Polymorphism::
+Runtime polymorphism occurs when the actual object type determines at runtime which overridden instance-method implementation is executed. A variable can therefore use a superclass or interface type while the object it refers to provides its own overridden behavior. This mechanism is also called dynamic method dispatch.
+See also: xref:../../_10_polymorphism/README.adoc[Polymorphism].
+
+[[oop-method-overriding]]
+Method Overriding::
+Method overriding means providing a new implementation of an inherited instance method in a subclass with a compatible signature and return type. The `@Override` annotation is strongly recommended because it lets the compiler verify that the intended overriding relationship really exists.
+See also: xref:../../_10_polymorphism/README.adoc[Polymorphism].
+
+[[oop-compile-time-polymorphism]]
+Compile-Time Polymorphism::
+Compile-time polymorphism is a commonly used term for method overloading because the compiler determines which overloaded method is called before the program runs. It selects the matching method based on the method name and the number, types, and order of the supplied arguments.
+
+[[oop-method-overloading]]
+Method Overloading::
+Method overloading means that multiple methods have the same name but different parameter lists. The methods must differ in the number, types, or order of their parameters; the return type alone is not enough. The compiler determines which overloaded method matches the supplied arguments, which is why method overloading is commonly described as a form of xref:#oop-compile-time-polymorphism[compile-time polymorphism].
+[[oop-dynamic-dispatch]]
+Dynamic method dispatch::
+Dynamic method dispatch is the runtime mechanism by which Java selects the most specific overridden instance-method implementation for the actual object. For example, if an `Animal` variable refers to a `Dog`, a call to an overridden `makeSound()` method executes the `Dog` implementation.
+See also: xref:../_10_polymorphism/README.adoc[Polymorphism].
+
+[[oop-upcasting]]
+Upcasting::
+Upcasting means viewing a reference to a more specific type as a reference to one of its supertypes, for example assigning a `Dog` reference to an `Animal` variable. Upcasting is normally implicit because every valid instance of the subtype is also an instance of its supertype.
+See also: xref:../_10_polymorphism/README.adoc[Polymorphism].
+
+[[oop-downcasting]]
+Downcasting::
+Downcasting means explicitly treating a reference of a more general compile-time type as a more specific subtype, for example `(Dog) animal`. A downcast is only valid at runtime if the referenced object is actually compatible with the requested subtype, otherwise Java throws `ClassCastException`.
+See also: xref:../_10_polymorphism/README.adoc[Polymorphism].
+
+[[oop-instanceof]]
+Instanceof::
+The Java keyword `instanceof` tests whether an object reference is compatible with a specified reference type or pattern. It can be used before a downcast and, in modern Java, can combine the type check with a pattern variable such as `if (animal instanceof Dog dog)`.
+See also: xref:../_10_polymorphism/README.adoc[Polymorphism].
+
+== Interfaces and Abstract Types
+
+[[oop-interface]]
+Interface::
+The Java keyword `interface` declares an interface, which is a reference type that defines a contract that implementing types can provide. Interfaces can declare abstract methods and may also contain constants, default methods, static methods, private methods, and nested types according to Java's rules.
+See also: xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes].
+
+[[oop-implements]]
+Implements::
+The Java keyword `implements` declares that a class or enum type implements one or more interfaces. The implementing type must satisfy the interface's abstract-method contract unless the implementing class is itself abstract.
+See also: xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes].
+
+[[oop-contract]]
+Contract::
+A contract describes the behavior, guarantees, and expectations that a type or operation promises to its clients. Interfaces are often described as contracts because users can depend on the declared operations without depending on one particular implementation class.
+See also: xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes].
+
+[[oop-abstract-class]]
+Abstract class::
+The Java keyword `abstract` can declare a class that cannot be instantiated directly. An abstract class can contain fields, constructors, concrete methods, and abstract methods, making it useful when related subclasses should share both implementation and an incomplete common abstraction.
+See also: xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes].
+
+[[oop-abstract-method]]
+Abstract method::
+The Java keyword `abstract` can declare an instance method without providing a method body. A concrete subclass must implement inherited abstract methods unless another language rule already provides an implementation.
+See also: xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes].
+
+[[oop-default-interface-method]]
+Default interface method::
+The Java keyword `default` can declare an interface method with an implementation body. Default methods let interfaces add reusable behavior while still allowing implementing classes to override that behavior when necessary.
+See also: xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes].
+
+== Design Quality Vocabulary
+
+[[oop-favor-composition]]
+Favor composition over inheritance::
+“Favor composition over inheritance” is a design guideline suggesting that behavior should often be assembled through object collaboration and delegation rather than through deep inheritance hierarchies. Inheritance remains useful for genuine is-a relationships, but composition usually creates looser coupling and more flexible replacement of collaborators.
+See also: xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+[[oop-program-to-abstraction]]
+Program to an abstraction::
+Programming to an abstraction means depending on a suitable interface or general type instead of unnecessarily depending on one concrete implementation. This makes alternative implementations easier to substitute and prepares the code for ideas such as dependency inversion and dependency injection.
+See also: xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes].
+
+[[oop-final-class]]
+Final class::
+The Java keyword `final` prevents a class from being extended. A final class can be useful when its implementation or invariants should not be changed through subclassing, although finality alone does not make every instance of that class immutable.
+See also: xref:../_05_static_final/README.adoc[Static and Final].
+
+[[oop-final-method]]
+Final method::
+The Java keyword `final` prevents an instance method from being overridden in subclasses. This can protect behavior that must remain unchanged in an inheritance hierarchy, but it should be used deliberately rather than as a substitute for careful class design.
+See also: xref:../_05_static_final/README.adoc[Static and Final].
+
+== Summary
+
+Object-oriented vocabulary is most useful when it helps explain design decisions precisely. Terms such as state, responsibility, association, composition, inheritance, interface, coupling, cohesion, and polymorphism describe different aspects of a model and should not be treated as interchangeable synonyms.

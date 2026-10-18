@@ -1,0 +1,328 @@
+= Advanced Java Concepts Glossary
+:toc:
+:toclevels: 2
+:sectanchors:
+
+This glossary contains concepts that build on the Java basics and object-oriented vocabulary.
+Some entries belong directly to later chapters of this learning project, while others provide vocabulary learners are likely to encounter in professional Java development, documentation, testing, frameworks, and modern Java code.
+
+== Exception Handling
+
+[[adv-exception]]
+Exception::
+An exception is an object that represents an abnormal condition or failure during program execution. Java exceptions form a class hierarchy rooted in `Throwable`; code can throw an exception, allow it to propagate, or handle it where a meaningful recovery or translation is possible.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-try]]
+Try::
+The Java keyword `try` starts a block whose execution is associated with one or more exception-handling mechanisms. A `try` block can be followed by `catch` blocks, a `finally` block, or can use try-with-resources syntax for resources that should be closed automatically.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-catch]]
+Catch::
+The Java keyword `catch` introduces an exception handler for a compatible exception type thrown while executing the associated `try` block. A catch block should handle an exception only when it can respond meaningfully, add useful context, translate the problem, or restore a valid program state.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-finally]]
+Finally::
+The Java keyword `finally` introduces a block that is normally executed after the associated `try` and `catch` processing, whether or not an exception was handled. It has historically been used for cleanup work, although try-with-resources is usually preferable for resources that implement `AutoCloseable`.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-throw]]
+Throw::
+The Java keyword `throw` immediately throws one exception object, for example `throw new IllegalArgumentException("Invalid age")`. Throwing an exception interrupts the normal control flow until a matching handler is found or the exception leaves the current call stack.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-throws]]
+Throws::
+The Java keyword `throws` introduces a clause in a method or constructor declaration that lists exception types the operation may allow to propagate to its caller. A `throws` clause does not itself throw an exception; it documents and, for checked exceptions, participates in the compiler's handling requirements.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-checked-exception]]
+Checked exception::
+A checked exception is an exception type, other than subclasses of `RuntimeException`, that the Java compiler requires callers to catch or declare when it can be thrown by an operation. Checked exceptions are often used for recoverable conditions that form part of an API's explicit contract.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-unchecked-exception]]
+Unchecked exception::
+An unchecked exception is an exception whose handling is not enforced by Java's compile-time catch-or-declare rule, most commonly a subclass of `RuntimeException`. Unchecked exceptions often represent programming errors, violated preconditions, or invalid runtime states, although their exact use depends on API design.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-runtime-exception]]
+RuntimeException::
+`RuntimeException` is a Java standard-library superclass for many unchecked exceptions. Examples include `IllegalArgumentException`, `NullPointerException`, `IndexOutOfBoundsException`, and `ClassCastException`.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-custom-exception]]
+Custom exception::
+A custom exception is an application-specific exception class created by the developer, usually by extending an appropriate existing exception type. A custom exception can give a domain problem a meaningful name and can carry context that is more useful than a generic exception.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-propagation]]
+Exception propagation::
+Exception propagation describes how an exception moves up the chain of method calls when the current method does not handle it. Understanding propagation is important because the code that detects a problem is not always the best place to decide how the application should respond.
+See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+
+[[adv-try-with-resources]]
+Try-with-resources::
+The Java keyword `try` can be used with a resource declaration in parentheses so that resources implementing `AutoCloseable` are closed automatically. This reduces cleanup errors and is normally preferred over manually closing such resources in a `finally` block.
+
+== Testing
+
+[[adv-unit-test]]
+Unit test::
+A unit test is a small automated test that checks one unit of behavior, usually a method or class behavior, under controlled conditions. Good unit tests are repeatable, focused, fast enough to run frequently, and describe expected behavior clearly.
+See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+
+[[adv-test-case]]
+Test case::
+A test case is one concrete test scenario with a defined setup, action, and expected result. Several test cases are often needed for normal behavior, boundary values, invalid input, and important alternative branches.
+See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+
+[[adv-assertion]]
+Assertion::
+An assertion in testing compares the observed behavior with an expected result and causes the test to fail when the expectation is not satisfied. Testing frameworks provide assertion methods such as equality, truth, nullability, and exception assertions.
+See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+
+[[adv-arrange-act-assert]]
+Arrange-Act-Assert::
+Arrange-Act-Assert is a common structure for organizing a test: Arrange prepares the required objects and inputs, Act performs the behavior being tested, and Assert checks the result. The structure helps keep tests readable and makes the purpose of each part explicit.
+See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+
+[[adv-junit]]
+JUnit::
+JUnit is a widely used testing framework for Java. It provides annotations such as `@Test`, lifecycle annotations, parameterized testing support, and assertion APIs; unlike the dependency-free examples in the early learning project, a real JUnit setup requires a test dependency in Maven or another build system.
+See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+
+[[adv-test-double]]
+Test double::
+A test double is a replacement used in a test instead of a real collaborator. Different forms include stubs, fakes, spies, and mocks; the purpose is to make tests more controlled, focused, or independent from slow and unpredictable external systems.
+
+[[adv-mock]]
+Mock::
+A mock is a type of test double that is configured with expected interactions or behavior and can verify how the code under test collaborated with it. Mocking is useful for some dependencies but can make tests brittle when it is used to verify too many internal implementation details.
+
+[[adv-mockito]]
+Mockito::
+Mockito is a popular Java library for creating and configuring mocks and spies in tests. It is commonly used together with JUnit, but it is an external dependency and should be introduced only when learners already understand why a test double is needed.
+
+[[adv-tdd]]
+Test-Driven Development::
+Test-Driven Development, often abbreviated TDD, is a development approach in which a small failing test is written before the corresponding production change, followed by the minimal implementation and then refactoring. The commonly described cycle is Red, Green, Refactor.
+
+== Generics and Collections
+
+[[adv-generic]]
+Generic::
+A generic type or method is written with type parameters so that the same implementation can work safely with different reference types. Generics provide compile-time type checking and reduce the need for manual casts, for example `List<String>` or `Box<Integer>`.
+See also: xref:../_90_generics/README.adoc[Generics].
+
+[[adv-type-parameter]]
+Type parameter::
+A type parameter is a placeholder type declared by a generic class, interface, record, or method, commonly written as `T`, `E`, `K`, or `V`. The type parameter can then be used inside the generic declaration as if it were a type within the allowed bounds.
+See also: xref:../_90_generics/README.adoc[Generics].
+
+[[adv-type-argument]]
+Type argument::
+A type argument is the concrete type supplied when a generic type or method is used, for example `String` in `List<String>`. The relationship is similar to parameter and argument terminology for methods: the generic declaration defines a type parameter, while its use supplies a type argument.
+See also: xref:../_90_generics/README.adoc[Generics].
+
+[[adv-generic-method]]
+Generic method::
+A generic method declares its own type parameter list before the return type, for example `<T> T first(List<T> values)`. Its type parameters belong to the method rather than necessarily to the surrounding class.
+See also: xref:../_90_generics/README.adoc[Generics].
+
+[[adv-bounded-type-parameter]]
+Bounded type parameter::
+A bounded type parameter restricts which type arguments are allowed, for example `<T extends Number>`. Bounds make it possible to use operations guaranteed by the upper bound while retaining generic type safety.
+
+[[adv-wildcard]]
+Wildcard::
+The symbol `?` is used as a wildcard in a generic type argument when the exact type is intentionally unspecified, for example `List<?>`. Bounded wildcards such as `? extends Number` and `? super Integer` express variance-like constraints for reading from or writing to generic structures.
+
+[[adv-data-structure]]
+Data structure::
+A data structure is a way of organizing multiple values so that they can be stored, accessed, updated, searched, or removed according to a particular structure. Arrays, lists, sets, queues, stacks, trees, and maps provide different trade-offs and should be chosen according to the operations the program needs.
+
+[[adv-array]]
+Array::
+An array is a fixed-length Java object that stores multiple values of one component type and provides indexed access beginning at index `0`. Arrays are part of the Java language itself, whereas most dynamic collection types are provided by the Java Collections Framework.
+
+[[adv-collection]]
+Collection::
+A collection is an object that groups multiple elements. In Java, `Collection<E>` is also the root interface for major collection families such as `List`, `Set`, and `Queue`; `Map` belongs to the Collections Framework but does not extend `Collection`.
+
+[[adv-list]]
+List::
+`List<E>` is a Java Collections Framework interface for an ordered sequence of elements in which positional access is meaningful and duplicates are normally allowed. Common implementations include `ArrayList` and `LinkedList`.
+
+[[adv-set]]
+Set::
+`Set<E>` is a Java Collections Framework interface representing a collection that does not contain duplicate elements according to its equality rules. Common implementations include `HashSet`, `LinkedHashSet`, and `TreeSet`.
+
+[[adv-map]]
+Map::
+`Map<K,V>` is a Java Collections Framework interface that associates keys with values. Each key maps to at most one value at a time, and common implementations include `HashMap`, `LinkedHashMap`, and `TreeMap`.
+
+[[adv-optional]]
+Optional::
+`java.util.Optional<T>` is a container that either contains one non-null value or is empty. It can make an intentionally missing return value explicit, but it is not a universal replacement for every use of `null` and should be used according to API design rather than mechanically everywhere.
+
+== Modern Java Type Features
+
+[[adv-enum]]
+Enum::
+The Java keyword `enum` declares an enum type representing a fixed set of named enum constants. Enum constants are objects of the enum type, and enum declarations can also contain fields, constructors, methods, and implemented interfaces.
+
+[[adv-record]]
+Record::
+The contextual Java keyword `record` declares a record class designed as a concise carrier for a fixed set of component values. Java automatically derives members such as accessors, `equals`, `hashCode`, and `toString`, while the programmer can still add validation and additional behavior.
+
+[[adv-sealed]]
+Sealed type::
+The contextual Java keyword `sealed` restricts which classes or interfaces may directly extend or implement a type. Permitted subtypes are controlled through Java's sealed-type rules and may be declared `final`, `sealed`, or `non-sealed` as appropriate.
+
+[[adv-permits]]
+Permits::
+The contextual Java keyword `permits` can explicitly list the direct subclasses or subinterfaces allowed for a sealed class or interface. In some source layouts Java can infer the permitted direct subtypes, so an explicit `permits` clause is not always required.
+
+[[adv-non-sealed]]
+Non-sealed::
+The contextual Java keyword `non-sealed` reopens inheritance below a permitted subtype of a sealed hierarchy. It states that subclasses of that permitted type are no longer restricted by the original sealed type's closed set.
+
+[[adv-lambda]]
+Lambda expression::
+A lambda expression is a concise expression that provides an implementation of the single abstract method of a compatible functional interface. Syntax such as `(a, b) -> a + b` lets behavior be passed as a value-like object without declaring a separate named implementation class.
+
+[[adv-functional-interface]]
+Functional interface::
+A functional interface is an interface with exactly one abstract method for the purposes of lambda conversion, although it may also have default, static, private, or inherited `Object` methods. The annotation `@FunctionalInterface` is optional but lets the compiler verify the intended design.
+
+[[adv-stream]]
+Stream API::
+The Java Stream API provides a declarative way to process sequences of elements through operations such as filtering, mapping, sorting, grouping, and reduction. A stream is not a data structure that stores elements; it represents a computation pipeline over a source.
+
+== Design Principles and Patterns
+
+[[adv-design-principle]]
+Design principle::
+A design principle is a guideline that helps developers make software easier to understand, change, test, and extend. Principles are not compiler rules and sometimes compete with each other, so they should be applied according to the actual design problem rather than as automatic recipes.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-kiss]]
+KISS::
+KISS stands for “Keep It Simple, Stupid” or more neutrally “Keep It Simple”. The principle encourages choosing the simplest design that solves the real problem clearly instead of adding complexity for hypothetical future needs.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-dry]]
+DRY::
+DRY stands for “Don't Repeat Yourself”. The principle aims to avoid duplicated knowledge or rules that would otherwise have to be changed in several places, but superficially similar code should not be forced together when it represents different responsibilities.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-yagni]]
+YAGNI::
+YAGNI stands for “You Aren't Gonna Need It”. The principle recommends avoiding speculative functionality and abstractions until there is a real requirement, which helps keep early designs smaller and easier to understand.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-solid]]
+SOLID::
+SOLID is a mnemonic for five object-oriented design principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion. The principles provide vocabulary for discussing maintainability and dependencies rather than a mechanical checklist that guarantees good design.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-srp]]
+Single Responsibility Principle::
+The Single Responsibility Principle, or SRP, says that a module or class should have one focused reason to change. The idea is closely related to clear responsibilities and high cohesion rather than to the literal rule that a class may contain only one method.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-ocp]]
+Open/Closed Principle::
+The Open/Closed Principle, or OCP, says that software entities should be open for extension but closed for modification. In practice, stable abstractions can allow new behavior to be added without repeatedly editing already trusted decision logic, although unnecessary abstraction should still be avoided.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-lsp]]
+Liskov Substitution Principle::
+The Liskov Substitution Principle, or LSP, says that objects of a subtype should be usable wherever the supertype is expected without breaking the behavioral expectations of the program. It therefore concerns behavioral compatibility, not merely whether Java's type system accepts an inheritance relationship.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-isp]]
+Interface Segregation Principle::
+The Interface Segregation Principle, or ISP, says that clients should not be forced to depend on operations they do not need. Several focused interfaces can therefore be preferable to one large interface that mixes unrelated responsibilities.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-dip]]
+Dependency Inversion Principle::
+The Dependency Inversion Principle, or DIP, recommends that high-level policy should not depend directly on low-level implementation details and that both should depend on suitable abstractions. The principle is about the direction and quality of dependencies; dependency injection is one technique that can help implement such a design.
+See also: xref:../_11_design_principles/README.adoc[Design Principles].
+
+[[adv-design-pattern]]
+Design pattern::
+A design pattern is a named, reusable design idea for a recurring software-design problem. A pattern describes roles, relationships, and consequences rather than providing one fixed code template that should be copied unchanged into every project.
+See also: xref:../_12_builder_pattern/README.adoc[Builder Pattern].
+
+[[adv-builder]]
+Builder pattern::
+The Builder pattern separates the step-by-step construction of a complex object from the final object itself. It is especially useful when an object has many optional configuration choices or when readable chained construction is preferable to a constructor with many parameters.
+See also: xref:../_12_builder_pattern/README.adoc[Builder Pattern].
+
+[[adv-director]]
+Director::
+A Director is an optional participant in some Builder pattern descriptions that coordinates a predefined sequence of builder steps. It can be useful when the application repeatedly constructs standard configurations, but a Builder does not require a Director in every implementation.
+See also: xref:../_12_builder_pattern/README.adoc[Builder Pattern].
+
+[[adv-mvc]]
+MVC::
+MVC stands for Model-View-Controller and describes an architectural separation between application/domain state, presentation, and interaction or control responsibilities. Concrete frameworks interpret these roles differently, so MVC should be understood as a family of architectural ideas rather than one universal Java class structure.
+
+[[adv-dependency-injection]]
+Dependency injection::
+Dependency injection is a technique in which an object's required collaborators are supplied from the outside instead of being created internally by that object. Constructor injection is a common Java form because it makes required dependencies explicit and supports testing with alternative implementations.
+
+[[adv-ioc]]
+Inversion of Control::
+Inversion of Control, often abbreviated IoC, is the broader idea that control over object creation, configuration, lifecycle, or execution is transferred from application code to another component or framework. Dependency injection is one common form of IoC, but the terms are not exact synonyms.
+
+== APIs, Libraries, Frameworks, and Persistence
+
+[[adv-api]]
+API::
+API stands for Application Programming Interface and describes the publicly usable contract through which software components interact. In Java, an API can consist of classes, interfaces, methods, constructors, exceptions, annotations, protocols, or other documented behavior and does not necessarily mean a web service.
+
+[[adv-library]]
+Library::
+A library is reusable code that an application calls to perform specific tasks. The application normally remains responsible for the main control flow, while the library provides functions, classes, or APIs that can be invoked when needed.
+
+[[adv-framework]]
+Framework::
+A framework provides a larger application structure and commonly controls important parts of program execution, configuration, lifecycle, or integration. Application code plugs into the framework at defined extension points, which is one reason frameworks are often associated with Inversion of Control.
+
+[[adv-dependency-artifact]]
+Dependency::
+In build-tool terminology, a dependency is an external software artifact that the project requires in order to compile, test, or run. Maven dependencies are declared in `pom.xml`; this use of the word is related to, but distinct from, the object-design concept of one class depending on another.
+
+[[adv-entity]]
+Entity::
+An entity is a domain object whose identity remains meaningful even when some of its attribute values change. In persistence frameworks, an entity often represents data stored in a database and may be mapped to relational tables.
+
+[[adv-repository]]
+Repository::
+A Repository is a design abstraction that provides collection-like access to stored domain objects while hiding persistence details from higher-level code. Repository interfaces can make application logic depend on domain-oriented operations rather than directly on SQL or one particular persistence technology.
+
+[[adv-jpa]]
+Jakarta Persistence / JPA::
+Jakarta Persistence, historically known as JPA, is the standard Java specification for object-relational persistence. It defines concepts and APIs for mapping entities, relationships, queries, and persistence contexts, while an implementation provider performs the actual runtime work.
+
+[[adv-jpa-repository]]
+JPA repository::
+A JPA repository is a repository abstraction whose persistence operations are implemented using Jakarta Persistence. In Spring Data JPA, repository interfaces can inherit generated CRUD and query behavior, but “JPA repository” is not a Java language feature and depends on framework conventions.
+
+[[adv-jakarta-ee]]
+Jakarta EE::
+Jakarta EE is a collection of specifications for enterprise Java applications, including technologies for persistence, dependency injection, REST services, validation, transactions, and more. Implementations are provided by compatible runtimes and frameworks rather than by the Java language itself.
+
+[[adv-spring-boot]]
+Spring Boot::
+Spring Boot is a framework built on the Spring ecosystem that simplifies configuration, dependency integration, and application startup. It is widely used for web services, dependency injection, persistence, and production-oriented Java applications, but it introduces substantial framework concepts beyond plain Java.
+
+== Summary
+
+Advanced vocabulary is most useful when the underlying basic concepts are already clear. Exceptions, tests, generics, design principles, patterns, frameworks, and persistence all build on precise understanding of types, methods, objects, responsibilities, dependencies, and contracts.

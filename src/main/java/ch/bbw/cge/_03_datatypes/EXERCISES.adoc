@@ -1,0 +1,32 @@
+= Data Type Exercises
+
+== Check Your Understanding
+
+. Name all eight primitive types.
+. Is `String` a primitive or a reference type?
+. Why can `(int) 3.9` lose information?
+. What is the wrapper class for `boolean`?
+. Why is capitalization not a reliable definition of primitive versus reference type?
+
+== Predict the Output
+
+[source,java]
+----
+double value = 8.7;
+int whole = (int) value;
+System.out.println(whole);
+----
+
+What is printed and why?
+
+== Choose a Type
+
+Choose an appropriate Java type for each value:
+
+. a person's age;
+. whether a door is open;
+. a product price;
+. one character;
+. a person's full name.
+
+Explain each choice.

@@ -1,0 +1,82 @@
+= Data Types, Casting, and Wrapper Classes
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* distinguish primitive types from reference types;
+* name Java's eight primitive types;
+* explain widening and narrowing primitive conversions;
+* use an explicit cast where appropriate;
+* explain why wrapper classes exist.
+
+== Key Terms
+
+Primitive type::
+One of Java's eight built-in non-reference types: `boolean`, `byte`, `short`, `int`, `long`, `char`, `float`, and `double`.
+
+Reference type::
+A type whose values are object or array references. `String` is a reference type because it is a class.
+
+Casting::
+Explicitly requesting a type conversion by writing the target type in parentheses.
+
+Wrapper class::
+A class corresponding to a primitive type, for example `Integer` for `int` and `Double` for `double`.
+
+== Primitive Types
+
+[cols="1,2"]
+|===
+|Category |Types
+
+|Whole numbers
+|`byte`, `short`, `int`, `long`
+
+|Floating-point numbers
+|`float`, `double`
+
+|Character
+|`char`
+
+|Logical value
+|`boolean`
+|===
+
+== Reference Types
+
+Classes, interfaces, arrays, records, and enum types are reference types.
+A reference variable can refer to an object or contain `null`.
+
+Avoid the informal rule “uppercase means reference type”. Capitalization is a naming convention, not the definition of a reference type.
+
+== Widening and Narrowing
+
+[source,java]
+----
+int count = 10;
+double wide = count;       // widening conversion
+
+double price = 19.95;
+int whole = (int) price;   // narrowing conversion, result: 19
+----
+
+A narrowing conversion can lose information, so it should be intentional.
+
+== Wrapper Classes and Autoboxing
+
+[source,java]
+----
+Integer boxed = 42;  // autoboxing: int -> Integer
+int value = boxed;   // unboxing: Integer -> int
+----
+
+Wrapper classes are especially important when an API requires reference types, for example generic collections such as `List<Integer>`.
+
+== About Memory Explanations
+
+For introductory Java, avoid equating reference variables with raw memory addresses or teaching a strict “primitives are on the stack, objects are on the heap” rule. The Java language specifies values and references; JVM implementations manage the physical memory details.
+
+== Summary
+
+Java has primitive and reference types. Casting converts between compatible types, while wrapper classes let primitive values participate in APIs that work with objects.

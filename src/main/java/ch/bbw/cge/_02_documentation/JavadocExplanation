@@ -1,7 +1,0 @@
-Here are the 3 most important tags for methods in Javadoc:
-
-@param  --> What do the parameters mean?
-@return --> What does the method return regularly?
-@throws --> Under which circumstances do exceptions happen?
-
-The @throws tag is only generated when the method header includes a "throws ...Exception"

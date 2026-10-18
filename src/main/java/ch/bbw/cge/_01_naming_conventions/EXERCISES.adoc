@@ -1,0 +1,38 @@
+= Naming Convention Exercises
+
+== Check Your Understanding
+
+. Which naming style is normally used for Java classes?
+. Which naming style is normally used for local variables?
+. Why does this project use `_01_...` even though that is not the normal package convention?
+. What is the difference between a compiler rule and a convention?
+
+== Improve the Names
+
+Rename the following identifiers so that their purpose becomes clearer:
+
+[source,java]
+----
+int n = 4;
+String s = "Zurich";
+boolean x = true;
+----
+
+== Find the Convention Violations
+
+[source,java]
+----
+class student_account {
+    static final int maxUsers = 20;
+
+    void Print_account_data() {
+        String Customer_Name = "Robin";
+    }
+}
+----
+
+List every naming issue and propose an improved name.
+
+== Apply It
+
+Add one new method to `Main.java`. Choose a method name, parameter names, and a local variable name that make the method understandable without explanatory comments.
