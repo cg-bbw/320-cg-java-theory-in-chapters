@@ -1,0 +1,52 @@
+= Object Relationship Exercises
+
+The exercises in this file use `README.adoc` and the Java files in this package.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. Why is `Car` to `Engine` modeled as composition in this example? +
+Our code doesn't intend on ripping the engine out of the car and using it separately.
+. Why is `Team` to `Player` modeled as aggregation? +
+The composition (ironic word choice) of the team can change.
+. Does Java enforce the difference between aggregation and composition? +
+No, there is no such keyword or other hard line.
+. What does unidirectional mean? +
+Only one object holds the reference to the other (e.g. singly linked list instead of doubly)
+. What does multiplicity describe? +
+How many elements can reference how many, like cardinality in relational database systems.
+
+== Inspect the Code
+
+For each relationship below, identify which class stores the reference:
+
+. `Car` and `Engine`; +
+Car stores engine.
+. `Team` and `Player`. +
+Team stores Player (in List)
+
+Explain why the relationships are unidirectional in the current code. +
+Engine and Player don't have any knowledge of Car and Team respectively.
+
+== Classify the Relationship
+
+For each situation, choose the most suitable modeling term and explain your reasoning:
+
+. A `House` creates and owns its `Room` objects. +
+Composition, the Room can't exist without the House or in a different one too.
+. A `Playlist` stores references to existing `Song` objects. +
+Aggregation, they can exist without a Playlist or in multiple ones.
+("existing" is a good indicator)
+. A `Doctor` treats a `Patient` during an appointment. +
+Aggregation, since the Patient can change their Doctor +
+Assuming Patient or Doctor reference the other (like with a family physician) if not there wouldn't be one since the Patient is passed to a Method and only used there.
+
+== UML Practice
+
+Draw the two relationships from this package and include a suitable multiplicity for the simplified code. +
+
+Here I could argue for different multiplicities based on questions like: Does a Player need a Team? +
+Team 0..1 ────────◇ 0..* Player +
+
+Car does need exactly one Engine and the engine can't be owned by another Car. +
+Car 1..1 ────────◆ 1..1 Engine
