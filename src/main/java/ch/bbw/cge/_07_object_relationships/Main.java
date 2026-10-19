@@ -8,8 +8,12 @@ public class Main {
 
         Player firstPlayer = new Player("Sam");
         Player secondPlayer = new Player("Lee");
-        Team team = new Team("Blue Team", firstPlayer, secondPlayer);
 
-        System.out.println(team.getDescription());
+        Team team = new Team("Blue Team");
+
+        team.addPlayer(firstPlayer);
+        team.addPlayer(secondPlayer);
+
+        System.out.println("Players: " + team.getPlayers());
     }
 }

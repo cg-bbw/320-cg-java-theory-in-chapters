@@ -13,16 +13,16 @@ After this chapter, you should be able to:
 == Key Terms
 
 Association::
-A general relationship in which objects know about or interact with each other.
+Association is the broadest relationship term in this chapter. It describes that objects know about or interact with each other. A has-a relationship is a structural form of association in which one object stores another object as part of its state. Aggregation and composition add more specific whole-part semantics to such a relationship.
+
+Has-a relationship::
+A has-a relationship describes that one object contains or owns another object as part of its structure. In Java, this is commonly represented by a field that refers to another object. Aggregation and composition are more specific forms of has-a relationships that describe different kinds of whole-part relationships.
 
 Aggregation::
 A whole-part relationship in which the part can conceptually exist independently of the whole.
 
 Composition::
 A stronger whole-part relationship in which the whole conceptually owns the part and controls its lifetime in the model.
-
-Has-a relationship::
-A general way to describe that one object contains or uses another object as part of its structure.
 
 Unidirectional relationship::
 Only one side stores or uses a reference to the other side.
@@ -49,42 +49,62 @@ public Car(String model) {
 }
 ----
 
-In this learning example, the engine is modeled as a part owned by the car.
+In this model, the `Engine` is owned by the `Car` and is created as part of it.
+
+Composition is therefore a strong form of has-a relationship in which the whole conceptually controls the lifetime of the part.
 
 Simplified UML:
 
 [source,text]
 ----
-    Car
-     ♦
-     |
-     |
-    Engine
+Car ◆──────── Engine
 ----
+
+The filled diamond is placed at the `Car` side because `Car` represents the whole.
 
 == Aggregation Example
 
-The `Player` objects are created before the `Team` and are passed into its constructor:
+A `Player` can exist independently of a `Team`.
+
+The players are created first:
 
 [source,java]
 ----
 Player firstPlayer = new Player("Sam");
 Player secondPlayer = new Player("Lee");
-Team team = new Team("Blue Team", firstPlayer, secondPlayer);
 ----
 
-The players can conceptually exist without this team.
+A team can then be created and the existing players can be added to it:
+
+[source,java]
+----
+Team team = new Team("Blue Team");
+
+team.addPlayer(firstPlayer);
+team.addPlayer(secondPlayer);
+----
+
+The `Team` stores references to its players, but it does not create or control their lifetime.
+
+This is modeled as an aggregation.
+
+Aggregation is therefore a specific kind of has-a relationship: the whole contains or groups parts, but the parts can conceptually exist independently.
 
 Simplified UML:
 
 [source,text]
 ----
-    Team
-     ◊
-     |
-     |
-    Player
+Team ◇──────── Player
 ----
+
+The hollow diamond is placed at the `Team` side because `Team` represents the whole.
+
+The relationship is unidirectional in this example:
+
+* `Team` knows its `Player` objects;
+* `Player` does not store a reference back to `Team`.
+
+`List<Player>` is used only to store multiple player references. Collections are not the topic of this chapter.
 
 == Association
 
@@ -116,16 +136,20 @@ Bidirectional relationships are possible and are explained in xref:DEEP_DIVE.ado
 
 == Multiplicity
 
-Multiplicity describes how many objects may participate.
+Multiplicity describes how many objects may participate at one end of a relationship.
 
-For the current `Team` example, the class stores exactly two player references.
-A UML model could therefore express a fixed multiplicity of `2` for this simplified design.
+For the `Team` example, one team may contain any number of players:
+
+[source,text]
+----
+Team 1 ◇──────── 0..* Player
+----
 
 Common UML multiplicities include:
 
-* `1` - exactly one;
+* `1..1` - exactly one;
 * `0..1` - zero or one;
-* `*` or `0..*` - any number including zero;
+* `0..*` - any number including zero;
 * `1..*` - one or more.
 
 == Further Reading
