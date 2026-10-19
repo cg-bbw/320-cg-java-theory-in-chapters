@@ -1,4 +1,4 @@
-package ch.bbw.cge._05_final;
+package ch.bbw.cge._05_static_final;
 
 import java.io.Serializable;
 

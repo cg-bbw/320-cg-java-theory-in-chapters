@@ -1,4 +1,4 @@
-package ch.bbw.cge._05_final;
+package ch.bbw.cge._05_static_final;
 
 /**
  * MyCalendar is supposed to inherit from FinalCalendar, but it can't
