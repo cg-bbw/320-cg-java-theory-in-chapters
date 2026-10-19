@@ -1,0 +1,52 @@
+= Classes and Objects Exercises
+
+The exercises in this file use only `README.adoc`, `Car.java`, and `Main.java`.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. What is the difference between a class and an object?
+. What is an instance field?
+. What is the difference between a parameter and an argument?
+. Why does a constructor have no return type?
+. What does `this.model = model;` mean?
+. What is the difference between object state and behavior?
+
+== Mark the Code
+
+In `Car.java`, identify:
+
+* the class declaration;
+* three instance fields;
+* one constructor;
+* two constructor parameters;
+* one method parameter;
+* one local variable;
+* one method returning a value.
+
+== Extend the Example
+
+Add a private field `color` to `Car`.
+Initialize it through the constructor and include it in `getDescription()`.
+
+== Explain the Call
+
+For this statement:
+
+[source,java]
+----
+firstCar.accelerate(50);
+----
+
+Explain:
+
+* the object reference;
+* the method name;
+* the argument;
+* the matching parameter;
+* the effect on the object's state.
+
+== UML Practice
+
+Draw a class diagram for `Car` with its fields, constructor, and public methods.
+Then draw an object diagram for the two objects created in `Main.java` after `firstCar.accelerate(50)` has executed.

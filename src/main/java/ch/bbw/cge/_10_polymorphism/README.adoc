@@ -1,0 +1,86 @@
+= Polymorphism
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain runtime polymorphism using a superclass or interface reference;
+* distinguish the declared variable type from the runtime object type;
+* explain method overriding and dynamic method dispatch;
+* use polymorphism to avoid unnecessary type-specific branching.
+
+== Key Terms
+
+Polymorphism::
+Using objects through a common type while different runtime objects can provide different implementations of the same operation.
+
+Runtime polymorphism::
+Polymorphism in which the actual object type determines at runtime which overridden instance method executes.
+
+Method overriding::
+Providing a new compatible implementation of an inherited instance method.
+
+Dynamic method dispatch::
+The runtime mechanism that selects the overridden method implementation belonging to the actual object.
+
+== The Central Example
+
+[source,java]
+----
+Animal animal = new Dog();
+animal.makeSound();
+----
+
+The declared type of `animal` is `Animal`.
+The runtime object is a `Dog`.
+
+Because `Dog` overrides `makeSound()`, the `Dog` implementation executes.
+The selection happens at runtime through dynamic method dispatch.
+
+== One Common Type, Different Objects
+
+This package uses an array:
+
+[source,java]
+----
+Animal[] animals = {
+    new Dog(),
+    new Cat(),
+    new Cow()
+};
+----
+
+Every element can be treated as an `Animal`, while each object still provides its own `makeSound()` behavior.
+
+== Why This Helps
+
+Without polymorphism, callers often grow into repeated type-specific branches.
+With polymorphism, each class owns its specialized behavior and the caller uses the common abstraction.
+
+Adding another `Animal` subtype does not require changing the loop:
+
+[source,java]
+----
+for (Animal animal : animals) {
+    animal.makeSound();
+}
+----
+
+== Overriding vs Overloading
+
+This chapter focuses on runtime polymorphism and overriding.
+Method overloading is sometimes described as compile-time polymorphism because the compiler selects an overloaded method from the argument types before execution.
+
+The distinction is explained in xref:DEEP_DIVE.adoc#poly-overloading[the deep dive].
+
+== Further Reading
+
+* xref:DEEP_DIVE.adoc#poly-casting[upcasting and downcasting]
+* xref:DEEP_DIVE.adoc#poly-instanceof[`instanceof`]
+* xref:DEEP_DIVE.adoc#poly-overloading[compile-time polymorphism and method overloading]
+
+The exercises below use only the runtime-polymorphism material in this README and the Java example.
+
+== Summary
+
+Runtime polymorphism lets callers use a common type while the runtime object determines which overridden behavior executes.

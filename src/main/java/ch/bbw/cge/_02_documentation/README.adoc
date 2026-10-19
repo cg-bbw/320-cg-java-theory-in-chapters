@@ -74,7 +74,7 @@ Creates an inline link to another documented program element.
 == TODO and FIXME
 
 `TODO` usually marks unfinished work. `FIXME` usually marks a known problem that needs correction.
-IDEs such as IntelliJ IDEA can collect these comments in a dedicated tool window.
+IDEs such as IntelliJ IDEA can collect these comments in a dedicated tool window (see ... menu button on the left side).
 A CI pipeline can also be configured to search for them, but Java itself does not make a build fail because a TODO exists.
 
 == Summary

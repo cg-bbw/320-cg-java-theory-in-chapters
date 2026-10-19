@@ -1,0 +1,119 @@
+= Optional Chapter: Generics
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain why generic types carry type information;
+* recognize a type parameter such as `<T>`;
+* distinguish a type parameter from a type argument;
+* use a generic class with different concrete type arguments;
+* explain why collections such as `List<Tool>` use generics.
+
+== Key Terms
+
+Generic type::
+A class or interface parameterized by one or more types.
+
+Type parameter::
+A placeholder declared by a generic type or method, for example `T` in `Box<T>`.
+
+Type argument::
+The concrete type supplied when using a generic type, for example `Tool` in `Box<Tool>`.
+
+== Generic Class
+
+[source,java]
+----
+public class Box<T> {
+
+    private final T value;
+
+    public Box(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+}
+----
+
+`T` is a type parameter.
+It is a placeholder for a type that is specified when the generic class is used.
+
+The same generic class can therefore be used with different types:
+
+[source,java]
+----
+Box<Tool> toolBox = new Box<>(new Tool("Hammer"));
+Box<String> textBox = new Box<>("Hello");
+----
+
+`Tool` and `String` are type arguments.
+
+For `toolBox`, the type parameter `T` represents `Tool`.
+For `textBox`, the same type parameter represents `String`.
+
+The compiler therefore knows what type is stored inside each box.
+
+For example:
+
+[source,java]
+----
+Tool tool = toolBox.getValue();
+String text = textBox.getValue();
+----
+
+No explicit cast is required because the generic type preserves the type information.
+
+== Generic Collections
+
+Java collection APIs use generics extensively.
+
+[source,java]
+----
+List<Tool> tools = new ArrayList<>();
+----
+
+`List<Tool>` means that the list is intended to contain references to `Tool` objects.
+
+The compiler can therefore reject incompatible values:
+
+[source,java]
+----
+tools.add(new Tool("Screwdriver")); // valid
+// tools.add("Hammer");             // does not compile
+----
+
+Generics provide additional type safety at compile time.
+
+== Why Generics Are Useful
+
+Without generics, code that works with different object types would often have to use the very general type `Object`.
+
+The program would then lose information about the actual type of the stored value and casts could become necessary.
+
+Generics allow reusable code while still preserving type information.
+
+== Why This Is an Optional Later Chapter
+
+Generic syntax is easier to understand after classes, inheritance, interfaces, and polymorphism are familiar.
+
+Learners often use generic library classes such as `List<String>` or `List<Tool>` before they need to create their own generic classes.
+
+== Further Reading
+
+Generic methods are explained separately in xref:DEEP_DIVE.adoc#gen-generic-method[the deep dive].
+
+The exercises use only generic classes and collections introduced in this README and the Java example.
+
+== Summary
+
+Generics allow one reusable implementation to work with different types while preserving compile-time type information.
+
+`Box<T>` declares a type parameter.
+
+`Box<Tool>` and `Box<String>` use concrete type arguments.
+
+Generic collections such as `List<Tool>` use the same principle.

@@ -1,0 +1,39 @@
+= Design Principle Exercises
+
+The exercises in this file use `README.adoc` and the Java classes in this package.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. What question does KISS encourage you to ask?
+. What kind of duplication does DRY try to reduce?
+. What does YAGNI warn against?
+. What does “one reason to change” mean in SRP?
+. Why can applying SRP too aggressively make code harder to understand?
+
+== Inspect the Example
+
+For each class, describe its main responsibility:
+
+* `Invoice`;
+* `InvoiceCalculator`;
+* `InvoicePrinter`.
+
+Then explain why the total calculation belongs in `InvoiceCalculator` rather than being duplicated in `Main.java`.
+
+== Review a Design
+
+Imagine one class named `StudentManager` that:
+
+* stores student data;
+* calculates grades;
+* sends emails;
+* writes PDF reports.
+
+Identify the different responsibilities.
+Propose a simpler decomposition without adding components that are not required.
+
+== Modify the Example
+
+Add a percentage discount to the invoice calculation.
+Keep the pricing rule in `InvoiceCalculator` rather than duplicating it in `Main` or `InvoicePrinter`.

@@ -1,0 +1,112 @@
+= Static and Final
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* distinguish instance members from static members;
+* explain what `final` means for a variable;
+* distinguish a class-level constant from an ordinary final variable;
+* explain why a final reference does not automatically make an object immutable.
+
+== Key Terms
+
+Static member::
+A field or method that belongs to the class rather than to one individual object.
+
+Final variable::
+A variable that can receive a value once and cannot later be reassigned.
+
+Constant::
+A value intended not to change during program execution. Java class-level constants are commonly declared `static final` and named in `UPPER_SNAKE_CASE`.
+
+== Static Fields
+
+[source,java]
+----
+private static int courseCount;
+----
+
+There is one `courseCount` associated with the `Course` class, not a separate counter for every `Course` object.
+
+`Course` increments the counter whenever a new object is constructed.
+
+A static method can be called through the class name:
+
+[source,java]
+----
+Course.getCourseCount();
+----
+
+A static method does not operate on one specific object and therefore has no `this` reference.
+
+== Reassignment and Final Variables
+
+Reassignment means assigning a new value to a variable that already has a value:
+
+[source,java]
+----
+int attempts = 1;
+attempts = 2;
+----
+
+The keyword `final` prevents this kind of reassignment after a variable has received its value.
+
+[source,java]
+----
+private final String code;
+----
+
+Each `Course` object receives one `code`.
+After the field has been initialized, that variable cannot be assigned another value.
+
+A local variable can also be final:
+
+[source,java]
+----
+final Course selectedCourse = javaCourse;
+----
+
+The variable `selectedCourse` cannot later refer to a different `Course`.
+
+== Final Reference vs Mutable Object
+
+`final` applies to the variable, not automatically to the whole object.
+
+[source,java]
+----
+final Course selectedCourse = javaCourse;
+selectedCourse.rename("Java and OOP");
+----
+
+The reference stored in `selectedCourse` is not reassigned.
+The referenced `Course` object can still change because its class provides the mutating method `rename(...)`.
+
+== Constants
+
+[source,java]
+----
+public static final int MAX_STUDENTS = 24;
+----
+
+`MAX_STUDENTS` is shared by the class and cannot be reassigned.
+Because it represents a constant, Java naming conventions use `UPPER_SNAKE_CASE`.
+
+This is the concept that was previewed in xref:../_01_naming_conventions/README.adoc[Naming Conventions].
+
+== Code Example
+
+`Course.java` demonstrates a static counter, a `static final` constant, a final instance field, and an ordinary mutable instance field.
+
+== Further Reading
+
+A few meanings of `final` become useful only after later OOP topics are known:
+
+* xref:DEEP_DIVE.adoc#sf-immutability[immutability]
+* xref:DEEP_DIVE.adoc#sf-final-class-method[final classes and final methods]
+
+The exercises below use only the material in this README and the Java example.
+
+== Summary
+
+`static` decides whether a member belongs to the class or an instance. `final` prevents reassignment of a variable. A Java constant is commonly a `static final` field with a constant-style name.

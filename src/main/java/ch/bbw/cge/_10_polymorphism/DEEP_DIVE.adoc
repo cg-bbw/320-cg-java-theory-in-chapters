@@ -1,0 +1,77 @@
+= Polymorphism - Deep Dive
+
+This file extends xref:README.adoc[Polymorphism].
+
+[[poly-casting]]
+== Upcasting and Downcasting
+
+Upcasting treats an object as one of its supertypes.
+
+[source,java]
+----
+Dog dog = new Dog();
+Animal animal = dog;
+----
+
+This conversion is safe because every `Dog` is an `Animal`.
+
+Downcasting asks Java to treat a reference as a more specific type.
+
+[source,java]
+----
+Animal animal = new Dog();
+Dog dog = (Dog) animal;
+----
+
+A downcast can fail at runtime if the object is not actually compatible with the requested subtype.
+
+[[poly-instanceof]]
+== `instanceof`
+
+The keyword `instanceof` checks whether an object is compatible with a type before type-specific behavior is used.
+
+[source,java]
+----
+if (animal instanceof Dog) {
+    Dog dog = (Dog) animal;
+}
+----
+
+Modern Java can combine the check and variable declaration with pattern matching:
+
+[source,java]
+----
+if (animal instanceof Dog dog) {
+    // dog can be used here
+}
+----
+
+Frequent `instanceof` checks can be a sign that polymorphic behavior would be clearer, but the operator is still useful when genuinely type-specific work is required.
+
+[[poly-overloading]]
+== Compile-Time Polymorphism and Method Overloading
+
+Method overloading means multiple methods share the same name but have different parameter lists.
+
+[source,java]
+----
+public void print(int value) {
+    System.out.println("int: " + value);
+}
+
+public void print(String value) {
+    System.out.println("String: " + value);
+}
+----
+
+For:
+
+[source,java]
+----
+print(42);
+----
+
+the compiler selects `print(int)` from the argument type.
+This is why overloading is commonly described as compile-time polymorphism.
+
+Runtime polymorphism is different: it relies on overriding and the actual runtime object.

@@ -1,4 +1,4 @@
-= Data Types, Casting, and Wrapper Classes
+= Data Types
 
 == Learning Goals
 
@@ -6,77 +6,141 @@ After this chapter, you should be able to:
 
 * distinguish primitive types from reference types;
 * name Java's eight primitive types;
-* explain widening and narrowing primitive conversions;
-* use an explicit cast where appropriate;
-* explain why wrapper classes exist.
+* declare, initialize, assign, and reassign variables;
+* perform a simple widening or narrowing primitive conversion;
+* explain the basic purpose of wrapper classes.
 
 == Key Terms
+
+Data type::
+A classification that determines which kind of value a variable can hold and which operations are available for that value.
 
 Primitive type::
 One of Java's eight built-in non-reference types: `boolean`, `byte`, `short`, `int`, `long`, `char`, `float`, and `double`.
 
 Reference type::
-A type whose values are object or array references. `String` is a reference type because it is a class.
-
-Casting::
-Explicitly requesting a type conversion by writing the target type in parentheses.
+A type whose values are references to objects or arrays. `String` is a reference type because it is a class.
 
 Wrapper class::
 A class corresponding to a primitive type, for example `Integer` for `int` and `Double` for `double`.
 
-== Primitive Types
+Casting::
+Explicitly requesting a compatible type conversion by writing the target type in parentheses.
 
-[cols="1,2"]
+== Java's Primitive Types
+
+[cols="1,2,2"]
 |===
-|Category |Types
+|Category |Types |Example
 
 |Whole numbers
 |`byte`, `short`, `int`, `long`
+|`int age = 18;`
 
 |Floating-point numbers
 |`float`, `double`
+|`double temperature = 21.5;`
 
 |Character
 |`char`
+|`char grade = 'A';`
 
 |Logical value
 |`boolean`
+|`boolean courseFinished = false;`
 |===
 
 == Reference Types
 
 Classes, interfaces, arrays, records, and enum types are reference types.
-A reference variable can refer to an object or contain `null`.
+A variable of a reference type can refer to an object or contain `null`.
 
-Avoid the informal rule “uppercase means reference type”. Capitalization is a naming convention, not the definition of a reference type.
+[source,java]
+----
+String courseName = "Java Fundamentals";
+----
+
+`String` is a class, so `courseName` has a reference type.
+
+Capitalization alone does not define whether a type is primitive or a reference type.
+Uppercase class names are a naming convention.
+
+== Declaration, Initialization, Assignment, and Reassignment
+
+[source,java]
+----
+int age;       // declaration
+age = 18;      // first assignment; the variable is now initialized
+age = 19;      // reassignment
+----
+
+Declaration introduces the variable.
+Initialization gives it its first usable value.
+A later assignment replaces the previous value and is a reassignment.
 
 == Widening and Narrowing
 
 [source,java]
 ----
 int count = 10;
-double wide = count;       // widening conversion
+double widerValue = count;
 
 double price = 19.95;
-int whole = (int) price;   // narrowing conversion, result: 19
+int wholePrice = (int) price;
 ----
 
-A narrowing conversion can lose information, so it should be intentional.
+The first conversion can happen automatically because every `int` value can be represented as a `double` value at this introductory level.
+The explicit cast in the second example is required because converting `double` to `int` can lose information.
 
-== Wrapper Classes and Autoboxing
+== Wrapper Classes
+
+Every primitive type has a corresponding wrapper class.
+
+[cols="1,1"]
+|===
+|Primitive |Wrapper class
+
+|`boolean` |`Boolean`
+|`byte` |`Byte`
+|`short` |`Short`
+|`int` |`Integer`
+|`long` |`Long`
+|`char` |`Character`
+|`float` |`Float`
+|`double` |`Double`
+|===
+
+A wrapper is an object type that represents a primitive value.
+For example:
 
 [source,java]
 ----
-Integer boxed = 42;  // autoboxing: int -> Integer
-int value = boxed;   // unboxing: Integer -> int
+Integer boxedAge = 18;
+int age = boxedAge;
 ----
 
-Wrapper classes are especially important when an API requires reference types, for example generic collections such as `List<Integer>`.
+The automatic conversions between primitives and wrappers are called autoboxing and unboxing.
 
-== About Memory Explanations
+== Values and References
 
-For introductory Java, avoid equating reference variables with raw memory addresses or teaching a strict “primitives are on the stack, objects are on the heap” rule. The Java language specifies values and references; JVM implementations manage the physical memory details.
+At Java source-code level, it is useful to distinguish primitive values from object references.
+A reference should not be treated as if Java exposed a raw pointer that you manually manage.
+Exact stack and heap placement is a runtime implementation detail and is not required to understand the type system in this chapter.
+
+== Code Example
+
+`Main.java` demonstrates primitive values, a `String` reference, widening, narrowing, and wrapper classes.
+
+== Further Reading
+
+Some glossary terms connected to this chapter need a little more detail than the core lesson:
+
+* xref:DEEP_DIVE.adoc#dt-type-inference[`var` and type inference]
+* xref:DEEP_DIVE.adoc#dt-conversions[conversion and casting details]
+* xref:DEEP_DIVE.adoc#dt-boxing[autoboxing and unboxing]
+
+The exercises below do not require the deep-dive material.
 
 == Summary
 
-Java has primitive and reference types. Casting converts between compatible types, while wrapper classes let primitive values participate in APIs that work with objects.
+Java distinguishes primitive types from reference types. Variables are declared and initialized before they are used, compatible values can be converted between types, and wrapper classes represent primitive values as objects.

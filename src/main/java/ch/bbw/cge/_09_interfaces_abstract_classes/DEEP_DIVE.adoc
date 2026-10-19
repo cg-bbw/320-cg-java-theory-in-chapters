@@ -1,0 +1,40 @@
+= Interfaces and Abstract Classes - Deep Dive
+
+This file extends xref:README.adoc[Interfaces and Abstract Classes].
+
+[[ia-default-method]]
+== Default Interface Methods
+
+An interface can provide a method implementation with the keyword `default`.
+
+[source,java]
+----
+public interface Trainable {
+
+    void performTrick();
+
+    default void startTraining() {
+        System.out.println("Training started.");
+    }
+}
+----
+
+Implementing classes inherit the default implementation unless they override it.
+
+Default methods allow interfaces to provide selected reusable behavior without turning the interface into a superclass.
+
+[[ia-program-to-abstraction]]
+== Program to an Abstraction
+
+“Program to an abstraction” means that code depends on a general contract instead of one specific implementation when that generality is useful.
+
+[source,java]
+----
+Trainable participant = new Dog("Rex");
+participant.performTrick();
+----
+
+The variable is declared with the interface type `Trainable`.
+The object can be any concrete implementation that fulfills the contract.
+
+This idea becomes especially important in xref:../_10_polymorphism/README.adoc[Polymorphism] and later design principles.

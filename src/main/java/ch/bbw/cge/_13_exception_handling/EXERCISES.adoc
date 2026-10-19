@@ -1,0 +1,38 @@
+= Exception Handling Exercises
+
+The exercises in this file use `README.adoc` and the Java files in this package.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. What is the difference between `throw` and `throws`?
+. Why must callers catch or declare `InvalidScoreException`?
+. Is `NumberFormatException` checked or unchecked?
+. What is the purpose of a `finally` block?
+. Why can a custom exception be clearer than exposing a low-level parsing exception?
+
+== Predict the Result
+
+Change the argument passed to `parseScore(...)` in `Main.java` and predict the path before running each case:
+
+* `"80"`
+* `"105"`
+* `"abc"`
+
+For each value, state whether a score is printed or the `catch` block executes.
+
+== Inspect the Code
+
+In `ScoreService.java`, identify:
+
+* the `throws` declaration;
+* one `try` block;
+* one `catch` block;
+* two `throw` statements;
+* the checked custom exception type;
+* the unchecked exception type.
+
+== Extend the Example
+
+Add a rule that the score text must not be `null`.
+Represent the invalid input with `InvalidScoreException` and add a clear message.

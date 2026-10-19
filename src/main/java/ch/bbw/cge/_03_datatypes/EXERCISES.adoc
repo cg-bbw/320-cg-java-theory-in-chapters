@@ -1,12 +1,26 @@
 = Data Type Exercises
 
+The exercises in this file use the concepts from `README.adoc` and `Main.java`.
+The optional `DEEP_DIVE.adoc` material is not required.
+
 == Check Your Understanding
 
 . Name all eight primitive types.
-. Is `String` a primitive or a reference type?
+. Is `String` a primitive type or a reference type?
+. What is the difference between declaration and initialization?
+. What is reassignment?
 . Why can `(int) 3.9` lose information?
 . What is the wrapper class for `boolean`?
-. Why is capitalization not a reliable definition of primitive versus reference type?
+
+== Identify the Types
+
+Open `Main.java` and identify:
+
+* four variables with primitive types;
+* one variable with a reference type;
+* one widening conversion;
+* one narrowing conversion;
+* one wrapper-class variable.
 
 == Predict the Output
 

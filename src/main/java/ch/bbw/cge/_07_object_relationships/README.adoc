@@ -1,0 +1,140 @@
+= Object Relationships
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* recognize a has-a relationship in Java code;
+* explain association as a general relationship between objects;
+* distinguish aggregation and composition as modeling concepts;
+* identify relationship direction;
+* read simple UML multiplicities.
+
+== Key Terms
+
+Association::
+A general relationship in which objects know about or interact with each other.
+
+Aggregation::
+A whole-part relationship in which the part can conceptually exist independently of the whole.
+
+Composition::
+A stronger whole-part relationship in which the whole conceptually owns the part and controls its lifetime in the model.
+
+Has-a relationship::
+A general way to describe that one object contains or uses another object as part of its structure.
+
+Unidirectional relationship::
+Only one side stores or uses a reference to the other side.
+
+Multiplicity::
+The number of objects that may participate at one end of a relationship.
+
+== Important: Relationships Describe the Model
+
+Java has no `aggregation` or `composition` keyword.
+The difference is determined by the intended ownership and lifetime of the objects in the model.
+
+A field alone does not prove whether a relationship should be called aggregation or composition.
+
+== Composition Example
+
+`Car` creates its own `Engine`:
+
+[source,java]
+----
+public Car(String model) {
+    this.model = model;
+    this.engine = new Engine();
+}
+----
+
+In this learning example, the engine is modeled as a part owned by the car.
+
+Simplified UML:
+
+[source,text]
+----
+    Car
+     ♦
+     |
+     |
+    Engine
+----
+
+== Aggregation Example
+
+The `Player` objects are created before the `Team` and are passed into its constructor:
+
+[source,java]
+----
+Player firstPlayer = new Player("Sam");
+Player secondPlayer = new Player("Lee");
+Team team = new Team("Blue Team", firstPlayer, secondPlayer);
+----
+
+The players can conceptually exist without this team.
+
+Simplified UML:
+
+[source,text]
+----
+    Team
+     ◊
+     |
+     |
+    Player
+----
+
+== Association
+
+Association is the broadest relationship term in this chapter.
+If one object stores or uses another object, the model can describe that as an association.
+Aggregation and composition add more specific whole-part meaning.
+
+Simplified UML:
+
+[source,text]
+----
+    ClassA
+     |
+     |
+     |
+    ClassB
+----
+
+== Direction
+
+The examples are unidirectional:
+
+* `Car` knows its `Engine`;
+* `Engine` does not store a reference back to `Car`;
+* `Team` knows its `Player` objects;
+* `Player` does not store a reference back to `Team`.
+
+Bidirectional relationships are possible and are explained in xref:DEEP_DIVE.adoc#or-bidirectional[the deep dive].
+
+== Multiplicity
+
+Multiplicity describes how many objects may participate.
+
+For the current `Team` example, the class stores exactly two player references.
+A UML model could therefore express a fixed multiplicity of `2` for this simplified design.
+
+Common UML multiplicities include:
+
+* `1` - exactly one;
+* `0..1` - zero or one;
+* `*` or `0..*` - any number including zero;
+* `1..*` - one or more.
+
+== Further Reading
+
+* xref:DEEP_DIVE.adoc#or-bidirectional[bidirectional relationships and consistency]
+* xref:DEEP_DIVE.adoc#or-lifetime[ownership and lifetime as modeling decisions]
+
+The exercises below use only this README and the Java example.
+
+== Summary
+
+Java code stores references between objects; the model gives those references meaning. Association is general, while aggregation and composition add whole-part semantics.

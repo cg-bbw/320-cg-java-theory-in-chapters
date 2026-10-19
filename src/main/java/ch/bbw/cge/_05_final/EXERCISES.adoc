@@ -1,0 +1,38 @@
+= Static and Final Exercises
+
+The exercises in this file use `README.adoc`, `Course.java`, and `Main.java`.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. How many copies of a static field are associated with one loaded class?
+. How do static fields differ from instance fields?
+. What does `final` prevent for a variable?
+. Why can the state of an object still change through a final reference?
+. Why is `MAX_STUDENTS` written in `UPPER_SNAKE_CASE`?
+
+== Predict the Result
+
+Would the following line compile after `selectedCourse` has already been initialized?
+
+[source,java]
+----
+selectedCourse = databaseCourse;
+----
+
+Explain why.
+
+== Inspect the Code
+
+In `Course.java`, identify:
+
+* one static field;
+* one `static final` constant;
+* one final instance field;
+* one mutable instance field;
+* one static method.
+
+== Modify the Example
+
+Add a static field that counts how many times `rename(...)` has been called across all `Course` objects.
+Print the count from `Main.java`.

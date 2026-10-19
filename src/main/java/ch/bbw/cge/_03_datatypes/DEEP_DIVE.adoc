@@ -1,0 +1,79 @@
+= Data Types - Deep Dive
+
+This file extends the core material from xref:README.adoc[Data Types].
+It is useful when a glossary entry links to this chapter but needs more explanation than the main lesson requires.
+
+[[dt-type-inference]]
+== `var` and Type Inference
+
+The contextual keyword `var` lets the compiler infer the static type of a local variable from its initializer.
+
+[source,java]
+----
+var courseName = "Java Fundamentals";
+var score = 95;
+----
+
+The compiler infers `String` for `courseName` and `int` for `score`.
+`var` does not make Java dynamically typed, and the variable does not change to another type later.
+
+`var` can only be used where Java has enough information to infer a local variable type.
+For example, this is not valid:
+
+[source,java]
+----
+var value;
+----
+
+There is no initializer from which the compiler could infer a type.
+
+[[dt-conversions]]
+== Primitive Conversions and Casting
+
+A widening primitive conversion moves to a type that can represent the original value range more broadly in the intended conversion.
+
+[source,java]
+----
+int count = 10;
+long largerCount = count;
+double measuredCount = count;
+----
+
+A narrowing conversion requires an explicit cast because information may be lost.
+
+[source,java]
+----
+double temperature = 21.9;
+int wholeDegrees = (int) temperature;
+----
+
+`wholeDegrees` becomes `21`; the fractional part is discarded.
+
+Casting does not mean that every pair of types can be converted.
+Only conversions permitted by Java's type system are valid.
+
+[[dt-boxing]]
+== Autoboxing and Unboxing
+
+Java can automatically convert between a primitive and its matching wrapper class.
+
+[source,java]
+----
+Integer boxed = 42; // autoboxing: int -> Integer
+int value = boxed;  // unboxing: Integer -> int
+----
+
+This is convenient, but the two types are still different.
+A wrapper variable can contain `null`, while a primitive variable cannot.
+
+[source,java]
+----
+Integer maybeNumber = null;
+----
+
+Trying to unbox `null` causes a `NullPointerException`, which is one reason to understand the distinction.
+
+== Related Later Topics
+
+Reference behavior becomes more important when objects and method calls are introduced in xref:../_04_classes_objects/README.adoc[Classes and Objects].
+Collections use wrapper classes and generics extensively; generics are covered later in xref:../_90_generics/README.adoc[Generics].

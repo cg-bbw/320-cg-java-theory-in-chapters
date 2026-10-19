@@ -1,0 +1,45 @@
+= Object Relationships - Deep Dive
+
+This file extends xref:README.adoc[Object Relationships].
+
+[[or-bidirectional]]
+== Bidirectional Relationships
+
+A bidirectional relationship lets both objects navigate to each other.
+
+For example, a `Course` could store a `Teacher`, while the `Teacher` also stores the courses they teach.
+
+[source,java]
+----
+course.setTeacher(teacher);
+teacher.addCourse(course);
+----
+
+The important difficulty is consistency.
+If only one side is updated, the two objects disagree about the relationship.
+
+A design can avoid that problem by giving one method responsibility for updating both sides or by choosing a unidirectional relationship when navigation in both directions is unnecessary.
+
+[[or-lifetime]]
+== Ownership and Lifetime
+
+Composition and aggregation are modeling decisions, not automatic consequences of constructor syntax.
+
+Creating a part inside the whole can support a composition interpretation:
+
+[source,java]
+----
+this.engine = new Engine();
+----
+
+However, the domain meaning is still important.
+The same Java syntax can represent different conceptual relationships in different systems.
+
+Ask:
+
+* Can the part meaningfully exist without the whole?
+* Who is responsible for creating and replacing the part?
+* Should the part be shared by multiple objects?
+* What should happen to the part when the whole no longer exists in the model?
+
+These questions help determine whether aggregation, composition, or a plain association is the clearest model.

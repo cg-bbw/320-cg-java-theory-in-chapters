@@ -4,8 +4,8 @@
 
 After this chapter, you should be able to:
 
-* distinguish language rules from naming conventions;
-* apply common Java naming conventions consistently;
+* distinguish Java language rules from naming conventions;
+* apply the most common Java naming styles consistently;
 * choose names that communicate intent;
 * explain the special package naming convention used in this learning project.
 
@@ -23,7 +23,7 @@ A name used for a program element such as a class, method, variable, or package.
 |===
 |Element |Convention |Example
 
-|Class / interface / enum
+|Class / interface / enum / record
 |`PascalCase`
 |`BankAccount`, `PaymentService`
 
@@ -40,9 +40,12 @@ A name used for a program element such as a class, method, variable, or package.
 |`MAX_LOGIN_ATTEMPTS`
 
 |Package
-|normally lowercase, usually without underscores
+|lowercase, normally without underscores
 |`ch.example.shop`
 |===
+
+The table already shows the naming style for constants so that you can recognize it.
+The meaning of a Java constant is introduced later in xref:../_05_static_final/README.adoc[Static and Final].
 
 == Names Should Explain Intent
 
@@ -60,7 +63,7 @@ instead of:
 int x = 7;
 ----
 
-A short name is acceptable when its meaning is obvious in a tiny scope, for example a loop index such as `i`.
+A short name is acceptable when its meaning is obvious in a very small scope, for example a loop index such as `i`.
 
 == The Package Names in This Project
 
@@ -73,11 +76,15 @@ The reasons are:
 . a Java identifier cannot start with a digit, so the number is prefixed with `_`;
 . underscores make multi-word chapter names easier to scan in this deliberately numbered structure.
 
-The package name is technically valid Java, but in a normal production project you would usually prefer a conventional package such as `ch.bbw.cge.namingconventions` or a domain-oriented package structure.
+The package name is technically valid Java. In a normal production project, a conventional package such as `ch.bbw.cge.namingconventions` or a domain-oriented package structure would usually be preferred.
 
 == Clean-Code Guideline
 
 A good name reduces the need for comments. A comment should explain something that the name and structure cannot express clearly on their own.
+
+== Code Example
+
+`Main.java` demonstrates `PascalCase` for the class and `camelCase` for methods, parameters, and local variables.
 
 == Summary
 

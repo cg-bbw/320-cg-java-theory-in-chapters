@@ -1,0 +1,409 @@
+= Group Assignment: Design Patterns
+
+== Goal
+
+Design patterns describe reusable approaches to recurring software-design problems.
+
+In this assignment, each group researches one design pattern, creates its own Java example, explains the pattern to the class, and contributes the finished example to the shared repository.
+
+The goal is not only to make the code work.
+
+You should be able to explain:
+
+* which problem the pattern addresses;
+* how the pattern solves this problem;
+* which classes or interfaces participate in the solution;
+* how the pattern is implemented in Java;
+* what advantages the pattern provides;
+* what disadvantages or limitations it may have;
+* when using the pattern is appropriate.
+
+== Starting Point
+
+The Builder Pattern in the `builder` package serves as a reference example.
+
+Before starting your own pattern, inspect:
+
+* the Java classes in the `builder` package;
+* the explanation in its `README.adoc`;
+* the way `Main.java` demonstrates the pattern.
+
+Your own example should follow the same basic idea:
+
+[source,text]
+----
+Design problem
+      ↓
+Pattern
+      ↓
+Java implementation
+      ↓
+Main.java demonstration
+----
+
+The important question is not only:
+
+> How does the pattern work?
+
+You should also be able to answer:
+
+> Why would we use this pattern?
+
+== Available Design Patterns
+
+Each group receives one design pattern.
+
+[cols="1,3"]
+|===
+|Pattern |Main Idea
+
+|Singleton
+|Ensure that only one instance of a class exists and provide a controlled way to access this instance.
+
+|Observer
+|Allow multiple objects to react automatically when the state of another object changes.
+
+|Adapter
+|Allow classes with incompatible interfaces to work together by translating one interface into another.
+
+|Factory Method
+|Define a method for creating objects while allowing subclasses to decide which concrete object is created.
+
+|Strategy
+|Encapsulate interchangeable algorithms behind a common interface so that behavior can be changed without changing the client.
+
+|Decorator
+|Add behavior to an object by wrapping it instead of modifying or extending the original class.
+|===
+
+Your teacher assigns one pattern to your group.
+
+== Part 1: Research the Pattern
+
+Research your assigned design pattern.
+
+Answer the following questions in your own words:
+
+. What recurring software-design problem does the pattern address?
+. What is the basic idea behind the solution?
+. Which classes or interfaces usually participate?
+. What responsibility does each participant have?
+. What advantages does the pattern provide?
+. What disadvantages or limitations can it have?
+. In which situations would you use the pattern?
+. In which situations would you probably not use it?
+
+Do not begin by copying an implementation from the Internet.
+
+First understand the problem that the pattern is intended to solve.
+
+== Part 2: Plan Your Own Example
+
+Create your own small Java example for the pattern.
+
+The example should be understandable without a GUI and should focus on the design pattern itself.
+
+Possible domains include:
+
+* notifications;
+* payment methods;
+* documents;
+* tools;
+* vehicles;
+* messages;
+* orders;
+* games;
+* file formats;
+* calculations;
+* data export;
+* logging.
+
+You may also choose another domain.
+
+Avoid unnecessary functionality.
+
+Your example should make it possible to answer:
+
+> Why is this pattern useful in this example?
+
+If the same example could be implemented just as clearly without the pattern, reconsider whether the example demonstrates the purpose of the pattern well enough.
+
+== Part 3: Create the Package
+
+Use the prepared package for your pattern inside `_12_design_patterns` and extend your Code in a separate feature branch.
+
+For example:
+
+[source,text]
+----
+_12_design_patterns/
+└── strategy/
+    ├── Main.java
+    ├── PaymentStrategy.java
+    ├── CreditCardPayment.java
+    ├── TwintPayment.java
+    └── README.adoc
+----
+
+The exact classes depend on your pattern.
+
+Your implementation must:
+
+* compile without additional libraries;
+* contain a `Main` class;
+* demonstrate the pattern when `Main.main()` is executed;
+* use meaningful English class, method, and variable names;
+* follow the Java naming conventions used in this project;
+* focus on the design pattern instead of unrelated functionality.
+
+Do not add comments that merely repeat what the code already says.
+
+Comments should explain important design decisions or parts of the pattern that are not immediately obvious from the code.
+
+== Part 4: Implement the Pattern
+
+Implement your planned example.
+
+Your implementation should make the important participants of the pattern visible.
+
+Depending on the pattern, these may include:
+
+* interfaces;
+* abstract classes;
+* concrete implementations;
+* client classes;
+* wrapper classes;
+* observers;
+* subjects;
+* strategies;
+* factories.
+
+Do not add classes only because they appear in a diagram you found during your research.
+
+Every class in your implementation should have a clear purpose.
+
+== Part 5: Document the Pattern
+
+Create a `README.adoc` inside your pattern package.
+
+Use the following structure:
+
+[source,asciidoc]
+----
+= Pattern Name
+
+== Problem
+
+Which recurring software-design problem does the pattern solve?
+
+== Idea
+
+What is the basic idea of the pattern?
+
+== Participants
+
+Which classes or interfaces participate in the pattern?
+
+What responsibility does each participant have?
+
+== Example
+
+How does your implementation demonstrate the pattern?
+
+Include small and relevant code excerpts.
+
+== Advantages
+
+What are the main advantages of the pattern?
+
+== Disadvantages
+
+What disadvantages or limitations can the pattern have?
+
+== When to Use It
+
+In which situations would this pattern be a reasonable choice?
+
+== Summary
+
+Summarize the most important idea of the pattern.
+----
+
+Do not copy complete Java files into the README.
+
+Use only the code excerpts that help explain the important parts of the pattern.
+
+== Part 6: Connect the Pattern to Previous Topics
+
+Use terminology from previous chapters to explain your implementation.
+
+Depending on your pattern, useful concepts may include:
+
+* class;
+* object;
+* interface;
+* inheritance;
+* composition;
+* association;
+* delegation;
+* polymorphism;
+* method overriding;
+* abstraction;
+* dependency;
+* responsibility;
+* coupling;
+* cohesion.
+
+You do not need to use every term.
+
+Select the concepts that are actually relevant to your pattern.
+
+Be prepared to explain where these concepts appear in your implementation.
+
+== Part 7: Prepare a Presentation
+
+Prepare a short presentation for the class.
+
+Your presentation should include:
+
+. the problem the pattern solves;
+. the basic idea of the solution;
+. the most important participants;
+. your Java implementation;
+. a live execution of `Main.java`;
+. one important advantage;
+. one disadvantage or limitation;
+. one realistic situation in which you would use the pattern.
+
+Do not spend most of the presentation reading definitions from slides.
+
+Use your code to explain how the pattern works.
+
+Every group member should understand the complete example.
+
+Another student should be able to ask any group member questions about the implementation.
+
+== Part 8: Review Your Implementation
+
+Before committing your work, review it as a group.
+
+Check the following points:
+
+* Does the project compile?
+* Does `Main.java` clearly demonstrate the pattern?
+* Is the example small enough to understand?
+* Does the example show why the pattern is useful?
+* Are the class and method names meaningful?
+* Does every class have a clear responsibility?
+* Does the implementation actually follow the assigned pattern?
+* Does the README explain the problem before explaining the solution?
+* Are the advantages and disadvantages described realistically?
+* Can every group member explain the important parts of the code?
+
+Reduce unnecessary complexity before submitting your work.
+
+== Part 9: Commit and Push
+
+When your implementation and documentation are complete:
+
+. Review all changed files.
+. Make sure the program compiles.
+. Add the required files to Git.
+. Create a meaningful commit.
+. Push your changes to the repository according to the Git workflow defined by your teacher.
+
+Use a meaningful commit message.
+
+For example:
+
+[source,text]
+----
+Add Strategy pattern example
+----
+
+or:
+
+[source,text]
+----
+Implement Observer pattern example
+----
+
+Avoid unspecific commit messages such as:
+
+[source,text]
+----
+update
+----
+
+or:
+
+[source,text]
+----
+finished
+----
+
+== Part 10: Learn from the Other Groups
+
+During the presentations, create a short overview of the patterns presented by the other groups.
+
+For each pattern, record:
+
+[cols="1,2,2,2"]
+|===
+|Pattern
+|Problem
+|Main Idea
+|One Advantage
+
+|Singleton
+|
+|
+|
+
+|Observer
+|
+|
+|
+
+|Adapter
+|
+|
+|
+
+|Factory Method
+|
+|
+|
+
+|Strategy
+|
+|
+|
+
+|Decorator
+|
+|
+|
+|===
+
+After all presentations, you should be able to describe the basic purpose of every pattern even if your group implemented only one of them.
+
+== Result
+
+After all groups have completed the assignment, the repository should contain several independently executable examples:
+
+[source,text]
+----
+_12_design_patterns/
+├── builder/
+├── singleton/
+├── observer/
+├── adapter/
+├── factory_method/
+├── strategy/
+└── decorator/
+----
+
+The Builder example is provided as a reference.
+
+The remaining examples are created by the class and become part of the shared learning material.

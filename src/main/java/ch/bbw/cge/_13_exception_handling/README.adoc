@@ -1,0 +1,97 @@
+= Exception Handling
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain what an exception represents;
+* use `try`, `catch`, and `finally`;
+* distinguish `throw` from `throws`;
+* distinguish checked and unchecked exceptions at an introductory level;
+* create and use a simple custom exception.
+
+== Key Terms
+
+Exception::
+An object representing an abnormal situation during program execution.
+
+Checked exception::
+An exception type that the compiler requires callers to catch or declare, normally a subclass of `Exception` that is not a subclass of `RuntimeException`.
+
+Unchecked exception::
+A `RuntimeException` or subclass. The compiler does not require callers to catch or declare it.
+
+RuntimeException::
+A Java exception superclass for unchecked exceptions. Subclasses include exceptions such as `NumberFormatException`.
+
+Custom exception::
+An exception class created for a specific application or domain problem.
+
+== `try` and `catch`
+
+[source,java]
+----
+try {
+    int score = scoreService.parseScore("80");
+} catch (InvalidScoreException exception) {
+    System.out.println(exception.getMessage());
+}
+----
+
+Java executes the `try` block normally.
+If a matching exception leaves the protected code, execution continues in the corresponding `catch` block.
+
+== `throw` and `throws`
+
+[source,java]
+----
+public int parseScore(String text) throws InvalidScoreException {
+    ...
+    throw new InvalidScoreException("Invalid score");
+}
+----
+
+`throws` is part of the method declaration and states which checked exception may leave the method.
+
+`throw` is an executable statement that throws one specific exception object.
+
+== `finally`
+
+A `finally` block is used for code that should run after the `try` / `catch` sequence in normal execution and most exceptional cases.
+
+[source,java]
+----
+finally {
+    System.out.println("Validation attempt finished.");
+}
+----
+
+Java also provides try-with-resources for resources such as files or database connections. That form is outside the scope of this chapter.
+
+== Checked and Unchecked Exceptions
+
+`InvalidScoreException` extends `Exception`, so it is checked.
+`NumberFormatException` extends `RuntimeException`, so it is unchecked.
+
+The code in `ScoreService` catches the low-level parsing problem and translates it into the domain-specific checked exception used by this example.
+
+== Custom Exception
+
+`InvalidScoreException` gives the invalid-score problem a meaningful type.
+The caller can handle that domain problem without depending directly on every low-level parsing detail.
+
+== Code Example
+
+* `ScoreService` validates and parses score text.
+* `InvalidScoreException` is the custom checked exception.
+* `Main` handles the checked exception and demonstrates `finally`.
+
+== Further Reading
+
+xref:DEEP_DIVE.adoc#eh-propagation[Exception propagation and stack traces] are explained separately because they require following calls across several methods.
+
+The exercises below use only this README and the Java files.
+
+== Summary
+
+Exceptions separate normal results from abnormal situations. `throw` creates exceptional flow, `throws` declares a checked exception, and `try` / `catch` handles it.

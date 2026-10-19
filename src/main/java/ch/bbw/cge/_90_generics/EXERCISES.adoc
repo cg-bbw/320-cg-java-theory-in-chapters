@@ -1,0 +1,69 @@
+= Generics Exercises
+
+The exercises in this file use `README.adoc` and the Java files in this package.
+
+The optional generic-method material in `DEEP_DIVE.adoc` is not required.
+
+== Check Your Understanding
+
+. What is a generic type?
+. What is the difference between a type parameter and a type argument?
+. In `Box<Tool>`, which part is the type argument?
+. In `class Box<T>`, which part is the type parameter?
+. Why can `toolBox.getValue()` be assigned directly to a variable of type `Tool`?
+. Why does `List<Tool>` prevent a `String` from being added to the list?
+
+== Use Another Type
+
+Create a `Box<Integer>` in `Main.java`.
+
+Store an integer in the box and print the value returned by `getValue()`.
+
+== Compare the Boxes
+
+Look at these two declarations in `Main.java`:
+
+[source,java]
+----
+Box<Tool> toolBox = new Box<>(new Tool("Hammer"));
+Box<String> textBox = new Box<>("Generics keep type information.");
+----
+
+Answer the following questions:
+
+. Which generic class is used in both declarations?
+. Which type argument is used for `toolBox`?
+. Which type argument is used for `textBox`?
+. What type does `toolBox.getValue()` return?
+. What type does `textBox.getValue()` return?
+
+== Inspect the Collection
+
+Find the `List<Tool>` in `Main.java`.
+
+Try to add another `Tool` object to the list.
+
+Then temporarily try to add a `String`:
+
+[source,java]
+----
+tools.add("Hammer");
+----
+
+Observe the compiler error and explain why the value is rejected.
+
+Remove the invalid line afterwards.
+
+== Write a Generic Type
+
+Create a generic class called `Pair<A, B>`.
+
+The class should:
+
+* store two values;
+* allow the two values to have different types;
+* provide a getter for each value.
+
+Demonstrate your `Pair` class in `Main.java`.
+
+For example, create a pair that combines a `Tool` and a `String`.

@@ -1,0 +1,33 @@
+= Object Relationship Exercises
+
+The exercises in this file use `README.adoc` and the Java files in this package.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. Why is `Car` to `Engine` modeled as composition in this example?
+. Why is `Team` to `Player` modeled as aggregation?
+. Does Java enforce the difference between aggregation and composition?
+. What does unidirectional mean?
+. What does multiplicity describe?
+
+== Inspect the Code
+
+For each relationship below, identify which class stores the reference:
+
+. `Car` and `Engine`;
+. `Team` and `Player`.
+
+Explain why the relationships are unidirectional in the current code.
+
+== Classify the Relationship
+
+For each situation, choose the most suitable modeling term and explain your reasoning:
+
+. A `House` creates and owns its `Room` objects.
+. A `Playlist` stores references to existing `Song` objects.
+. A `Doctor` treats a `Patient` during an appointment.
+
+== UML Practice
+
+Draw the two relationships from this package and include a suitable multiplicity for the simplified code.

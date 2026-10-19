@@ -1,0 +1,179 @@
+= Program Flow and Sequence Diagrams
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain sequential execution, conditions, branches, and iteration;
+* use `if` / `else` and `switch`;
+* distinguish `for`, enhanced `for`, `while`, and `do` / `while` loops;
+* explain `break` and `continue`;
+* follow method calls in execution order;
+* read and create a simple sequence diagram.
+
+== Key Terms
+
+Program flow::
+The order in which statements and method calls execute at runtime.
+
+Control structure::
+A language construct that changes normal sequential execution, for example a branch or loop.
+
+Condition::
+A boolean expression that controls whether a branch or loop body executes.
+
+Branch::
+One of several possible paths through a program.
+
+Iteration::
+One repeated execution of a loop body.
+
+Loop::
+A control structure that repeats a block of code.
+
+Sequence diagram::
+A UML interaction diagram showing participants and messages in chronological order.
+
+== Sequential Execution
+
+Without a control structure, statements normally execute from top to bottom:
+
+[source,java]
+----
+System.out.println("First");
+System.out.println("Second");
+System.out.println("Third");
+----
+
+== `if` and `else`
+
+[source,java]
+----
+if (score >= 60) {
+    System.out.println("Passed");
+} else {
+    System.out.println("Not passed");
+}
+----
+
+The condition is evaluated first.
+Exactly one of these two branches executes.
+
+== `switch`, `case`, and `default`
+
+A `switch` selects among several alternatives.
+
+[source,java]
+----
+switch (level) {
+    case 1 -> System.out.println("Beginner");
+    case 2 -> System.out.println("Intermediate");
+    default -> System.out.println("Other level");
+}
+----
+
+`case` defines a matching branch.
+`default` handles values not matched by another case.
+
+== `for` and Enhanced `for`
+
+A traditional `for` loop is useful when a counter matters:
+
+[source,java]
+----
+for (int i = 0; i < 3; i++) {
+    System.out.println(i);
+}
+----
+
+An enhanced `for` loop is useful when processing every element:
+
+[source,java]
+----
+String[] names = {"Alex", "Sam", "Lee"};
+
+for (String name : names) {
+    System.out.println(name);
+}
+----
+
+== `while` and `do` / `while`
+
+A `while` loop checks its condition before each iteration:
+
+[source,java]
+----
+int attempts = 0;
+
+while (attempts < 3) {
+    attempts++;
+}
+----
+
+A `do` / `while` loop executes its body at least once:
+
+[source,java]
+----
+int value = 0;
+
+do {
+    value++;
+} while (value < 3);
+----
+
+== `break` and `continue`
+
+`break` ends the nearest loop early.
+
+[source,java]
+----
+for (int i = 0; i < 10; i++) {
+    if (i == 5) {
+        break;
+    }
+}
+----
+
+`continue` skips the rest of the current loop iteration and proceeds with the next one.
+
+[source,java]
+----
+for (int i = 0; i < 5; i++) {
+    if (i == 2) {
+        continue;
+    }
+
+    System.out.println(i);
+}
+----
+
+== Runtime Flow Across Objects
+
+`LoginService.login(...)` demonstrates that method calls also have an execution order.
+Username validation happens before password validation.
+
+A simplified sequence diagram is:
+
+[source,text]
+----
+Main          LoginService
+ |                 |
+ |--- login() ---->|
+ |                 |-- validateUsername()
+ |                 |-- validatePassword()
+ |<-- boolean -----|
+ |
+----
+
+A class diagram describes static structure.
+A sequence diagram describes one dynamic scenario and the chronological order of messages.
+
+== Code Examples
+
+* `FlowExamples.java` demonstrates the control structures in this chapter.
+* `LoginService.java` provides a small call sequence for the sequence-diagram example.
+* `Main.java` executes both examples.
+
+== Summary
+
+Control structures change the normal top-to-bottom flow of statements. Sequence diagrams show how runtime messages move between participants over time.

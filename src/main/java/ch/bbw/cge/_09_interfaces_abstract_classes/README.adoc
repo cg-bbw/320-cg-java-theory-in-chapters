@@ -1,0 +1,103 @@
+= Interfaces and Abstract Classes
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain why an abstract class cannot be instantiated directly;
+* distinguish abstract methods from concrete methods;
+* explain an interface as a contract for behavior;
+* use `extends`, `implements`, and `@Override` correctly;
+* compare typical use cases for an abstract class and an interface.
+
+== Key Terms
+
+Abstraction::
+Focusing on the essential behavior of a concept while hiding unnecessary implementation details.
+
+Abstract class::
+A class declared with the keyword `abstract`. It can provide shared state and implementation while leaving selected behavior abstract.
+
+Abstract method::
+A method declared without a body that must be implemented by a concrete subclass unless that subclass is also abstract.
+
+Interface::
+A reference type that can describe behavior implementing classes agree to provide.
+
+`implements`::
+The Java keyword a class uses to declare that it fulfills an interface contract.
+
+Contract::
+An agreement about which operations a type provides and how callers can rely on them.
+
+== Abstract Class
+
+[source,java]
+----
+public abstract class Animal {
+    public abstract void makeSound();
+}
+----
+
+`Animal` can contain fields, constructors, and concrete methods such as `printName()`.
+It can also require subclasses to provide specific behavior.
+
+This is not allowed:
+
+[source,java]
+----
+Animal animal = new Animal("Rex");
+----
+
+because an abstract class cannot be instantiated directly.
+
+== Interface
+
+[source,java]
+----
+public interface Trainable {
+    void performTrick();
+}
+----
+
+The keyword `interface` declares the interface.
+A concrete class uses `implements` to accept the contract.
+
+A class can implement multiple interfaces, while it can directly extend only one class.
+
+== Combining Both
+
+[source,java]
+----
+public class Dog extends Animal implements Trainable {
+}
+----
+
+`Dog` inherits shared animal state and behavior and also promises to implement the trainable behavior.
+
+`@Override` tells the compiler and readers that a method is intended to override or implement inherited behavior.
+
+== Abstract Class or Interface?
+
+A useful starting guideline:
+
+* use an abstract class when closely related subclasses need shared state or implementation;
+* use an interface when different classes should promise the same capability without requiring one shared superclass.
+
+These are design guidelines, not mechanical rules.
+
+== Code Example
+
+`Dog` extends `Animal` and implements `Trainable`.
+It therefore combines inherited implementation with an interface contract.
+
+== Further Reading
+
+* xref:DEEP_DIVE.adoc#ia-default-method[default interface methods]
+* xref:DEEP_DIVE.adoc#ia-program-to-abstraction[programming to an abstraction]
+
+The exercises below use only this README and the Java example.
+
+== Summary
+
+Abstract classes can share state and implementation. Interfaces define capabilities and contracts. Concrete classes provide the behavior required by their inherited abstractions.

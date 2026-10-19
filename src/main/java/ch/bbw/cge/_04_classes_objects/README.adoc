@@ -1,0 +1,192 @@
+= Classes and Objects
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain the difference between a class, an object, and an instance;
+* identify fields, local variables, parameters, arguments, constructors, and methods;
+* create an object with `new`;
+* explain the purpose of `this`;
+* describe object state and behavior;
+* read a simple UML class diagram and object diagram.
+
+== Key Terms
+
+Class::
+A definition that describes the fields and methods of objects of that type.
+
+Object / instance::
+A concrete object created from a class.
+
+Instantiation::
+The process of creating a new object from a class, normally by using `new` together with a constructor call.
+
+Field / instance field::
+A variable declared in a class outside methods and constructors. Every object has its own values for its instance fields.
+
+Constructor::
+A special class member that initializes a newly created object. It has the class name and no return type.
+
+Method::
+A named block of behavior that can be invoked.
+
+Parameter::
+A variable declared in a method or constructor header.
+
+Argument::
+A value or expression supplied when a method or constructor is called.
+
+State::
+The current values stored in an object's instance fields.
+
+Behavior::
+What an object can do through its methods.
+
+== Class and Object
+
+`Car.java` defines the type.
+`Main.java` creates two different objects:
+
+[source,java]
+----
+Car firstCar = new Car("Audi A3", 2023);
+Car secondCar = new Car("VW Golf", 2022);
+----
+
+The keyword `new` starts creation of a new object and invokes a constructor.
+`firstCar` and `secondCar` are variables that hold references to two different `Car` objects.
+
+== Instance Fields
+
+[source,java]
+----
+private String model;
+private int year;
+private int speed;
+----
+
+These fields describe the state of each `Car`.
+Changing the `speed` of one car does not automatically change the other car.
+
+== Constructor and `this`
+
+[source,java]
+----
+public Car(String model, int year) {
+    this.model = model;
+    this.year = year;
+}
+----
+
+The parameters `model` and `year` receive arguments from the constructor call.
+`this` refers to the current object.
+`this.model` is the field, while `model` is the constructor parameter.
+
+== Methods, Parameters, and Arguments
+
+[source,java]
+----
+public void accelerate(int targetSpeed) {
+    speed = targetSpeed;
+}
+----
+
+`targetSpeed` is a parameter.
+
+[source,java]
+----
+firstCar.accelerate(50);
+----
+
+`50` is an argument supplied to that parameter.
+
+For the method above, the method signature is `accelerate(int)`.
+The complete header is `public void accelerate(int targetSpeed)`.
+
+== Local Variables and Scope
+
+A local variable is declared inside a method, constructor, or block.
+
+[source,java]
+----
+public String getDescription() {
+    String description = year + " " + model;
+    return description;
+}
+----
+
+`description` is only available inside the method body.
+This area in which a name can be used is its scope.
+
+== Access and Encapsulation
+
+The fields in `Car` are `private`, while the methods that callers should use are `public`.
+This is a first example of encapsulation: an object controls how other code interacts with its internal state.
+
+Access modifiers and Java's package-private default are explained in more detail in xref:DEEP_DIVE.adoc#co-access[the deep dive].
+
+== UML Class Diagram
+
+A small textual class diagram for `Car` could be represented as:
+
+[source,text]
+----
++---------------------------+
+| Car                       |
++---------------------------+
+| - model: String           |
+| - year: int               |
+| - speed: int              |
++---------------------------+
+| + Car(model, year)        |
+| + accelerate(int): void   |
+| + getDescription(): String|
+| + getSpeed(): int         |
++---------------------------+
+----
+
+A class diagram describes the type and its static structure.
+
+== UML Object Diagram
+
+An object diagram shows concrete instances at one moment in time:
+
+[source,text]
+----
+firstCar : Car
+----------------
+model = "Audi A3"
+year = 2023
+speed = 50
+
+secondCar : Car
+----------------
+model = "VW Golf"
+year = 2022
+speed = 0
+----
+
+The class diagram answers “what can objects of this type contain and do?”.
+The object diagram answers “which concrete objects exist now and what state do they have?”.
+
+== About `static` in `main`
+
+Every executable example contains `public static void main(String[] args)`.
+The meaning of `static` is introduced in the next chapter, xref:../_05_static_final/README.adoc[Static and Final].
+You do not need `static` to complete the exercises in this chapter.
+
+== Further Reading
+
+The glossary also links here for a few concepts that need additional detail:
+
+* xref:DEEP_DIVE.adoc#co-access[access modifiers]
+* xref:DEEP_DIVE.adoc#co-references[object references]
+* xref:DEEP_DIVE.adoc#co-pass-by-value[pass-by-value]
+* xref:DEEP_DIVE.adoc#co-identity-equality[identity and equality]
+
+The exercises below use only the core material in this README and the Java example.
+
+== Summary
+
+Classes define object types. Objects have state in instance fields and behavior in methods. Constructors initialize objects, parameters receive arguments, and object diagrams show the state of concrete instances.

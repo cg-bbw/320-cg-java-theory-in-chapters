@@ -1,0 +1,43 @@
+= Unit Testing Exercises
+
+The exercises in this file use `README.adoc`, `Calculator.java`, and `Main.java`.
+The optional JUnit material in `DEEP_DIVE.adoc` is not required.
+
+== Check Your Understanding
+
+. What is a unit test?
+. What is a test case?
+. What does an assertion do?
+. What are the three parts of Arrange-Act-Assert?
+. Why should one test not depend on another test having run first?
+. What is the difference between unit testing as a practice and JUnit as a tool?
+
+== Add Test Cases
+
+Add manual checks for:
+
+* two negative numbers;
+* zero plus zero;
+* one positive and one negative number.
+
+Use the existing `assertEquals(...)` helper.
+
+== Make the Phases Visible
+
+Rewrite one test in `Main.java` so that the Act phase stores the result in a local variable before the assertion.
+
+For example:
+
+[source,java]
+----
+int result = calculator.add(2, 3);
+assertEquals(5, result, "2 + 3 should equal 5");
+----
+
+Identify the Arrange, Act, and Assert parts.
+
+== Find a Bug with a Test
+
+Temporarily change `Calculator.add(...)` so that it subtracts instead of adding.
+Run the tests and read the failure message.
+Then restore the correct implementation.

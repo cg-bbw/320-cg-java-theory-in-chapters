@@ -1,0 +1,115 @@
+= Classes and Objects - Deep Dive
+
+This file extends xref:README.adoc[Classes and Objects] with concepts that are useful for reference but are not required for the chapter exercises.
+
+[[co-access]]
+== Access Modifiers
+
+Access control determines from which parts of a program a declared element can be accessed.
+
+[cols="1,3"]
+|===
+|Access |Meaning
+
+|`public`
+|Accessible wherever the declared element itself is visible.
+
+|`protected`
+|Accessible in the same package and from subclasses under Java's protected-access rules.
+
+|package-private
+|Used when no explicit access modifier is written. Accessible from the same package. `package-private` is not a Java keyword.
+
+|`private`
+|Accessible only inside the declaring top-level class and its nested context according to Java's access rules.
+|===
+
+Scope and access are related but different.
+Scope asks where a name is available in source code.
+Access control asks whether another piece of code is allowed to use a declared element.
+
+[[co-references]]
+== Object References
+
+Consider:
+
+[source,java]
+----
+Car firstCar = new Car("Audi A3", 2023);
+Car sameCar = firstCar;
+----
+
+`firstCar` and `sameCar` now refer to the same object.
+Assigning one reference variable to another does not create a second `Car`.
+
+[source,java]
+----
+sameCar.accelerate(80);
+System.out.println(firstCar.getSpeed());
+----
+
+The printed speed is `80` because both variables refer to the same object.
+
+[[co-pass-by-value]]
+== Java Is Pass-by-Value
+
+Java always passes arguments by value.
+
+For primitive values, the primitive value is copied:
+
+[source,java]
+----
+public static void changeNumber(int number) {
+    number = 99;
+}
+
+int original = 10;
+changeNumber(original);
+// original is still 10
+----
+
+For reference types, the value being copied is the reference:
+
+[source,java]
+----
+public static void accelerateCar(Car car) {
+    car.accelerate(80);
+}
+----
+
+The parameter `car` receives a copy of the reference.
+Both references can therefore reach the same `Car` object, and changing that object's state is visible through the original reference.
+
+Reassigning the parameter itself does not replace the caller's variable:
+
+[source,java]
+----
+public static void replaceCar(Car car) {
+    car = new Car("Other", 2020);
+}
+----
+
+[[co-identity-equality]]
+== Identity and Equality
+
+Object identity asks whether two references refer to the exact same object.
+For reference values, `==` compares reference identity.
+
+[source,java]
+----
+Car first = new Car("A", 2023);
+Car second = new Car("A", 2023);
+
+System.out.println(first == second); // false
+----
+
+The two objects may contain similar field values, but they are different objects.
+Logical equality is usually represented through an `equals(...)` implementation when a class defines such semantics.
+
+== Encapsulation and Information Hiding
+
+Encapsulation groups state and behavior inside an object and controls interaction through its public API.
+Information hiding means callers do not need to know every internal implementation detail.
+
+For example, `Car` keeps `speed` private and changes it through `accelerate(...)`.
+The caller uses the behavior without directly manipulating the field.

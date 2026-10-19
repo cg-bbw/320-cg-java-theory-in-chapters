@@ -1,20 +1,23 @@
 = Documentation Exercises
 
+The exercises in this file use only the concepts explained in `README.adoc` and the Java files in this package.
+
 == Check Your Understanding
 
+. What is the difference between a line comment and a block comment?
+. What is the purpose of Javadoc?
 . What is the difference between a Javadoc tag and a Java annotation?
 . When should a method have an `@return` tag?
-. Why can an `@throws` tag be useful even for an unchecked exception?
-. Give one example of a bad comment that only repeats the code.
+. Give one example of a comment that would only repeat obvious code.
 
 == Improve the Comment
 
-Rewrite this comment so that either the comment becomes useful or the variable name makes it unnecessary:
+Rewrite this code so that either the comment becomes useful or the variable name makes the comment unnecessary:
 
 [source,java]
 ----
-// Increase x by one.
-x++;
+// Number of completed exercises
+int n = 7;
 ----
 
 == Write Javadoc
@@ -23,16 +26,26 @@ Write Javadoc for this method:
 
 [source,java]
 ----
-public int divide(int dividend, int divisor) {
-    if (divisor == 0) {
-        throw new IllegalArgumentException("Divisor must not be zero.");
-    }
-    return dividend / divisor;
+public String formatGreeting(String name) {
+    return "Hello " + name;
 }
 ----
 
-Include `@param`, `@return`, and `@throws`.
+Include an explanation, `@param`, and `@return`.
+
+== Inspect the Example
+
+Open `DocumentationExamples.java` and identify:
+
+* one line comment;
+* one block comment;
+* one Javadoc comment;
+* one `@param` tag;
+* one `@return` tag;
+* one `TODO`.
+
+Then open `DocumentationLinkedClass.java` and find the `@see` tag.
 
 == Explore the IDE
 
-Add a custom TODO pattern in IntelliJ IDEA and verify that it appears in the TODO tool window.
+Open the TODO tool window in IntelliJ IDEA and verify that the TODO in `DocumentationExamples.java` is detected.

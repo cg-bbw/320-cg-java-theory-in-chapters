@@ -1,0 +1,49 @@
+= Generics - Deep Dive
+
+This file extends xref:README.adoc[Generics].
+
+[[gen-generic-method]]
+== Generic Methods
+
+A method can declare its own type parameter even when the surrounding class is not generic.
+
+[source,java]
+----
+public static <T> T first(T firstValue, T secondValue) {
+    return firstValue;
+}
+----
+
+`<T>` before the return type declares the method's type parameter.
+
+The method can then be used with different type arguments:
+
+[source,java]
+----
+String text = first("A", "B");
+Integer number = first(10, 20);
+----
+
+The compiler infers the type argument from the call in these examples.
+
+== Generic Type vs Generic Method
+
+A generic class makes a type parameter available to its instance structure:
+
+[source,java]
+----
+class Box<T> {
+    private T value;
+}
+----
+
+A generic method declares a type parameter only for that method:
+
+[source,java]
+----
+public static <T> void print(T value) {
+    System.out.println(value);
+}
+----
+
+Both mechanisms preserve compile-time type information without requiring one implementation per concrete type.

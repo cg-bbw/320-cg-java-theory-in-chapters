@@ -1,0 +1,52 @@
+= Unit Testing - Deep Dive
+
+This file extends xref:README.adoc[Unit Testing Fundamentals].
+
+[[ut-junit]]
+== JUnit as the Next Step
+
+With JUnit added as a Maven test dependency, production and test code are normally separated:
+
+[source,text]
+----
+src/
+├── main/java/.../Calculator.java
+└── test/java/.../CalculatorTest.java
+----
+
+A JUnit test could then look like this:
+
+[source,java]
+----
+@Test
+void addsTwoNumbers() {
+    Calculator calculator = new Calculator();
+
+    int result = calculator.add(2, 3);
+
+    assertEquals(5, result);
+}
+----
+
+`@Test` marks the test method.
+`assertEquals(...)` is provided by JUnit rather than by a custom helper in `Main`.
+
+JUnit discovers and executes test methods through the build or IDE test runner.
+
+== Why Keep the Manual Example First?
+
+The manual harness makes the core mechanism visible:
+
+. call production code;
+. capture the result;
+. compare expected and actual values;
+. report a failure.
+
+JUnit removes the repetitive infrastructure and adds many testing features, but it does not change the basic purpose of a test.
+
+== Mockito
+
+Mockito is a separate external library used to create test doubles such as mocks.
+It becomes useful when a unit depends on collaborators that should not perform their real external behavior during a unit test.
+
+Mockito is not needed for the `Calculator` example because `Calculator` has no collaborator.

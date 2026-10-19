@@ -1,0 +1,27 @@
+= Polymorphism Exercises
+
+The exercises in this file use `README.adoc` and the Java files in this package.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. In `Animal animal = new Dog();`, what is the declared type?
+. What is the runtime type?
+. What is method overriding?
+. Which `makeSound()` implementation executes and why?
+. What does dynamic method dispatch mean?
+. Why can polymorphism reduce type-specific branching?
+
+== Predict the Output
+
+Write down the exact output of `Main.java` before running it.
+Then run the program and compare.
+
+== Extend the Example
+
+Add a `Duck` subclass that overrides `makeSound()`.
+Add a `Duck` object to the `animals` array without changing the loop.
+
+== Explain the Design
+
+Explain why the loop can call `makeSound()` without checking whether the current object is a `Dog`, `Cat`, `Cow`, or `Duck`.

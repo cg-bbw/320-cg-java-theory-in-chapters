@@ -1,0 +1,86 @@
+= Unit Testing Fundamentals
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain what a unit test checks;
+* distinguish production code from test code;
+* describe Arrange, Act, and Assert;
+* write small repeatable checks for one unit of behavior;
+* explain the role JUnit will play when a testing dependency is added later.
+
+== Key Terms
+
+Unit test::
+A small automated test that verifies one unit of behavior.
+
+Test case::
+One defined scenario with input, action, and expected result.
+
+Assertion::
+A check that compares the observed result with the expected result.
+
+Arrange-Act-Assert (AAA)::
+A common test structure: prepare data, execute the behavior, then verify the result.
+
+== Production Code and Test Code
+
+`Calculator.java` contains the production behavior:
+
+[source,java]
+----
+public int add(int firstNumber, int secondNumber) {
+    return firstNumber + secondNumber;
+}
+----
+
+`Main.java` currently contains a tiny manual test harness because this project does not yet add an external testing library.
+
+== Arrange, Act, Assert
+
+A test becomes easier to read when the three phases are visible:
+
+[source,text]
+----
+Arrange: create the Calculator and input data
+Act:     call add(2, 3)
+Assert:  verify that the result is 5
+----
+
+In the small example, some phases are compressed into one line, but the mental model remains useful.
+
+== Assertions
+
+The manual `assertEquals(...)` method compares an expected value with the actual result.
+
+If they differ, it throws an `AssertionError`.
+If all checks pass, `Main` prints the success message.
+
+== Good Unit-Test Properties
+
+Useful unit tests are usually:
+
+* deterministic;
+* fast;
+* independent from other tests;
+* focused on one behavior;
+* clear about the expected result.
+
+== JUnit
+
+JUnit is a Java testing framework that provides standard test annotations, assertions, and test execution.
+It normally becomes a Maven test dependency and allows tests to live under `src/test/java`.
+
+Because the current project intentionally uses no additional library, the executable example stays dependency-free.
+
+A first JUnit example and the later folder structure are shown in xref:DEEP_DIVE.adoc#ut-junit[the deep dive].
+
+== Code Example
+
+* `Calculator.java` is the unit being tested.
+* `Main.java` contains the temporary manual tests.
+
+== Summary
+
+Unit testing is the practice; JUnit is a tool that supports the practice. The essential idea is to execute behavior with known inputs and compare the result with an expected outcome.

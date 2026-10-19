@@ -11,57 +11,57 @@ Some entries belong directly to later chapters of this learning project, while o
 [[adv-exception]]
 Exception::
 An exception is an object that represents an abnormal condition or failure during program execution. Java exceptions form a class hierarchy rooted in `Throwable`; code can throw an exception, allow it to propagate, or handle it where a meaningful recovery or translation is possible.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-try]]
 Try::
 The Java keyword `try` starts a block whose execution is associated with one or more exception-handling mechanisms. A `try` block can be followed by `catch` blocks, a `finally` block, or can use try-with-resources syntax for resources that should be closed automatically.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-catch]]
 Catch::
 The Java keyword `catch` introduces an exception handler for a compatible exception type thrown while executing the associated `try` block. A catch block should handle an exception only when it can respond meaningfully, add useful context, translate the problem, or restore a valid program state.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-finally]]
 Finally::
 The Java keyword `finally` introduces a block that is normally executed after the associated `try` and `catch` processing, whether or not an exception was handled. It has historically been used for cleanup work, although try-with-resources is usually preferable for resources that implement `AutoCloseable`.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-throw]]
 Throw::
 The Java keyword `throw` immediately throws one exception object, for example `throw new IllegalArgumentException("Invalid age")`. Throwing an exception interrupts the normal control flow until a matching handler is found or the exception leaves the current call stack.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-throws]]
 Throws::
 The Java keyword `throws` introduces a clause in a method or constructor declaration that lists exception types the operation may allow to propagate to its caller. A `throws` clause does not itself throw an exception; it documents and, for checked exceptions, participates in the compiler's handling requirements.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-checked-exception]]
 Checked exception::
 A checked exception is an exception type, other than subclasses of `RuntimeException`, that the Java compiler requires callers to catch or declare when it can be thrown by an operation. Checked exceptions are often used for recoverable conditions that form part of an API's explicit contract.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-unchecked-exception]]
 Unchecked exception::
 An unchecked exception is an exception whose handling is not enforced by Java's compile-time catch-or-declare rule, most commonly a subclass of `RuntimeException`. Unchecked exceptions often represent programming errors, violated preconditions, or invalid runtime states, although their exact use depends on API design.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-runtime-exception]]
 RuntimeException::
 `RuntimeException` is a Java standard-library superclass for many unchecked exceptions. Examples include `IllegalArgumentException`, `NullPointerException`, `IndexOutOfBoundsException`, and `ClassCastException`.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-custom-exception]]
 Custom exception::
 A custom exception is an application-specific exception class created by the developer, usually by extending an appropriate existing exception type. A custom exception can give a domain problem a meaningful name and can carry context that is more useful than a generic exception.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-propagation]]
 Exception propagation::
 Exception propagation describes how an exception moves up the chain of method calls when the current method does not handle it. Understanding propagation is important because the code that detects a problem is not always the best place to decide how the application should respond.
-See also: xref:../_13_exception_handling/README.adoc[Exception Handling].
+See also: xref:../../_13_exception_handling/README.adoc[Exception Handling].
 
 [[adv-try-with-resources]]
 Try-with-resources::
@@ -72,27 +72,27 @@ The Java keyword `try` can be used with a resource declaration in parentheses so
 [[adv-unit-test]]
 Unit test::
 A unit test is a small automated test that checks one unit of behavior, usually a method or class behavior, under controlled conditions. Good unit tests are repeatable, focused, fast enough to run frequently, and describe expected behavior clearly.
-See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+See also: xref:../../_14_unit_testing/README.adoc[Unit Testing].
 
 [[adv-test-case]]
 Test case::
 A test case is one concrete test scenario with a defined setup, action, and expected result. Several test cases are often needed for normal behavior, boundary values, invalid input, and important alternative branches.
-See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+See also: xref:../../_14_unit_testing/README.adoc[Unit Testing].
 
 [[adv-assertion]]
 Assertion::
 An assertion in testing compares the observed behavior with an expected result and causes the test to fail when the expectation is not satisfied. Testing frameworks provide assertion methods such as equality, truth, nullability, and exception assertions.
-See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+See also: xref:../../_14_unit_testing/README.adoc[Unit Testing].
 
 [[adv-arrange-act-assert]]
 Arrange-Act-Assert::
 Arrange-Act-Assert is a common structure for organizing a test: Arrange prepares the required objects and inputs, Act performs the behavior being tested, and Assert checks the result. The structure helps keep tests readable and makes the purpose of each part explicit.
-See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+See also: xref:../../_14_unit_testing/README.adoc[Unit Testing].
 
 [[adv-junit]]
 JUnit::
 JUnit is a widely used testing framework for Java. It provides annotations such as `@Test`, lifecycle annotations, parameterized testing support, and assertion APIs; unlike the dependency-free examples in the early learning project, a real JUnit setup requires a test dependency in Maven or another build system.
-See also: xref:../_14_unit_testing/README.adoc[Unit Testing].
+See also: xref:../../_14_unit_testing/README.adoc[Unit Testing].
 
 [[adv-test-double]]
 Test double::
@@ -115,22 +115,22 @@ Test-Driven Development, often abbreviated TDD, is a development approach in whi
 [[adv-generic]]
 Generic::
 A generic type or method is written with type parameters so that the same implementation can work safely with different reference types. Generics provide compile-time type checking and reduce the need for manual casts, for example `List<String>` or `Box<Integer>`.
-See also: xref:../_90_generics/README.adoc[Generics].
+See also: xref:../../_90_generics/README.adoc[Generics].
 
 [[adv-type-parameter]]
 Type parameter::
 A type parameter is a placeholder type declared by a generic class, interface, record, or method, commonly written as `T`, `E`, `K`, or `V`. The type parameter can then be used inside the generic declaration as if it were a type within the allowed bounds.
-See also: xref:../_90_generics/README.adoc[Generics].
+See also: xref:../../_90_generics/README.adoc[Generics].
 
 [[adv-type-argument]]
 Type argument::
 A type argument is the concrete type supplied when a generic type or method is used, for example `String` in `List<String>`. The relationship is similar to parameter and argument terminology for methods: the generic declaration defines a type parameter, while its use supplies a type argument.
-See also: xref:../_90_generics/README.adoc[Generics].
+See also: xref:../../_90_generics/README.adoc[Generics].
 
 [[adv-generic-method]]
 Generic method::
 A generic method declares its own type parameter list before the return type, for example `<T> T first(List<T> values)`. Its type parameters belong to the method rather than necessarily to the surrounding class.
-See also: xref:../_90_generics/README.adoc[Generics].
+See also: xref:../../_90_generics/README.adoc[Generics].
 
 [[adv-bounded-type-parameter]]
 Bounded type parameter::
@@ -207,67 +207,67 @@ The Java Stream API provides a declarative way to process sequences of elements 
 [[adv-design-principle]]
 Design principle::
 A design principle is a guideline that helps developers make software easier to understand, change, test, and extend. Principles are not compiler rules and sometimes compete with each other, so they should be applied according to the actual design problem rather than as automatic recipes.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-kiss]]
 KISS::
 KISS stands for “Keep It Simple, Stupid” or more neutrally “Keep It Simple”. The principle encourages choosing the simplest design that solves the real problem clearly instead of adding complexity for hypothetical future needs.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-dry]]
 DRY::
 DRY stands for “Don't Repeat Yourself”. The principle aims to avoid duplicated knowledge or rules that would otherwise have to be changed in several places, but superficially similar code should not be forced together when it represents different responsibilities.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-yagni]]
 YAGNI::
 YAGNI stands for “You Aren't Gonna Need It”. The principle recommends avoiding speculative functionality and abstractions until there is a real requirement, which helps keep early designs smaller and easier to understand.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-solid]]
 SOLID::
 SOLID is a mnemonic for five object-oriented design principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion. The principles provide vocabulary for discussing maintainability and dependencies rather than a mechanical checklist that guarantees good design.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-srp]]
 Single Responsibility Principle::
 The Single Responsibility Principle, or SRP, says that a module or class should have one focused reason to change. The idea is closely related to clear responsibilities and high cohesion rather than to the literal rule that a class may contain only one method.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-ocp]]
 Open/Closed Principle::
 The Open/Closed Principle, or OCP, says that software entities should be open for extension but closed for modification. In practice, stable abstractions can allow new behavior to be added without repeatedly editing already trusted decision logic, although unnecessary abstraction should still be avoided.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-lsp]]
 Liskov Substitution Principle::
 The Liskov Substitution Principle, or LSP, says that objects of a subtype should be usable wherever the supertype is expected without breaking the behavioral expectations of the program. It therefore concerns behavioral compatibility, not merely whether Java's type system accepts an inheritance relationship.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-isp]]
 Interface Segregation Principle::
 The Interface Segregation Principle, or ISP, says that clients should not be forced to depend on operations they do not need. Several focused interfaces can therefore be preferable to one large interface that mixes unrelated responsibilities.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-dip]]
 Dependency Inversion Principle::
 The Dependency Inversion Principle, or DIP, recommends that high-level policy should not depend directly on low-level implementation details and that both should depend on suitable abstractions. The principle is about the direction and quality of dependencies; dependency injection is one technique that can help implement such a design.
-See also: xref:../_11_design_principles/README.adoc[Design Principles].
+See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 
 [[adv-design-pattern]]
 Design pattern::
 A design pattern is a named, reusable design idea for a recurring software-design problem. A pattern describes roles, relationships, and consequences rather than providing one fixed code template that should be copied unchanged into every project.
-See also: xref:../_12_builder_pattern/README.adoc[Builder Pattern].
+See also: xref:../../_12_builder_pattern/README.adoc[Builder Pattern].
 
 [[adv-builder]]
 Builder pattern::
 The Builder pattern separates the step-by-step construction of a complex object from the final object itself. It is especially useful when an object has many optional configuration choices or when readable chained construction is preferable to a constructor with many parameters.
-See also: xref:../_12_builder_pattern/README.adoc[Builder Pattern].
+See also: xref:../../_12_builder_pattern/README.adoc[Builder Pattern].
 
 [[adv-director]]
 Director::
 A Director is an optional participant in some Builder pattern descriptions that coordinates a predefined sequence of builder steps. It can be useful when the application repeatedly constructs standard configurations, but a Builder does not require a Director in every implementation.
-See also: xref:../_12_builder_pattern/README.adoc[Builder Pattern].
+See also: xref:../../_12_builder_pattern/README.adoc[Builder Pattern].
 
 [[adv-mvc]]
 MVC::

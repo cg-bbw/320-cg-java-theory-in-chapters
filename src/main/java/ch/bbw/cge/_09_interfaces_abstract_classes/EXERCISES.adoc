@@ -1,0 +1,37 @@
+= Interfaces and Abstract Classes Exercises
+
+The exercises in this file use `README.adoc` and the Java files in this package.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. Can an abstract class be instantiated directly?
+. Can an abstract class have a constructor?
+. Can an abstract class contain concrete methods?
+. What does an interface contract require from an implementing class?
+. Can a class implement more than one interface?
+. Why is `@Override` useful?
+. When might an interface be preferable to an abstract class?
+
+== Mark the Code
+
+In the Java files, identify:
+
+* one abstract class;
+* one abstract method;
+* one concrete method in the abstract class;
+* one interface;
+* one `extends` relationship;
+* one `implements` relationship;
+* two methods annotated with `@Override`.
+
+== Extend the Example
+
+Create a `Horse` class that extends `Animal` and implements `Trainable`.
+Give it different implementations of `makeSound()` and `performTrick()`.
+
+== Design Question
+
+You are modeling `Printable`, `Invoice`, and `Photo`.
+Would `Printable` be more naturally represented as a superclass or an interface?
+Explain your choice using the idea of a behavioral contract.

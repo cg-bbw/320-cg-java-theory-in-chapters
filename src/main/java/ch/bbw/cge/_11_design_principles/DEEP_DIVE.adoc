@@ -1,0 +1,170 @@
+= Design Principles - Deep Dive
+
+This file extends xref:README.adoc[Design Principles].
+The concepts here explain glossary terms that are useful for later design discussions but are not required for the core chapter exercises.
+
+[[dp-cohesion]]
+== Cohesion
+
+Cohesion describes how closely the responsibilities inside one class belong together.
+
+`InvoiceCalculator` has high cohesion in the current example because its main responsibility is calculation:
+
+[source,java]
+----
+public double calculateTotal(Invoice invoice) {
+    return invoice.getQuantity() * invoice.getUnitPrice();
+}
+----
+
+A class that calculates prices, sends emails, renders user interfaces, and manages database connections would contain unrelated responsibilities and therefore have lower cohesion.
+
+High cohesion usually makes a class easier to understand because its methods contribute to one focused purpose.
+
+[[dp-coupling]]
+== Coupling
+
+Coupling describes how strongly one part of the program depends on another.
+
+`InvoicePrinter` receives both the `Invoice` and the calculated total:
+
+[source,java]
+----
+public void print(Invoice invoice, double total) {
+    ...
+}
+----
+
+It depends on the public API of `Invoice`, but it does not need to know how `InvoiceCalculator` performs its calculation.
+
+Lower coupling is often helpful because one class can change without forcing unrelated classes to change.
+The goal is not “zero coupling”; collaborating objects necessarily depend on something.
+
+[[dp-solid]]
+== SOLID
+
+SOLID is a group of five object-oriented design principles:
+
+* Single Responsibility Principle (SRP);
+* Open/Closed Principle (OCP);
+* Liskov Substitution Principle (LSP);
+* Interface Segregation Principle (ISP);
+* Dependency Inversion Principle (DIP).
+
+SRP is introduced in the core README.
+The remaining principles are summarized below.
+
+[[dp-ocp]]
+== Open/Closed Principle
+
+The Open/Closed Principle encourages designs that can be extended for new behavior without repeatedly modifying stable code.
+
+A simple example is to represent a variable rule behind an interface:
+
+[source,java]
+----
+public interface DiscountPolicy {
+    double apply(double total);
+}
+----
+
+A calculator can use the abstraction:
+
+[source,java]
+----
+public double calculateTotal(Invoice invoice, DiscountPolicy policy) {
+    double total = invoice.getQuantity() * invoice.getUnitPrice();
+    return policy.apply(total);
+}
+----
+
+A new discount can then be added as another implementation instead of adding another branch to the calculator for every new discount type.
+
+Do not introduce this abstraction unless variation is actually needed; YAGNI still applies.
+
+[[dp-lsp]]
+== Liskov Substitution Principle
+
+LSP says that code using a base type should continue to work correctly when a valid subtype is supplied.
+
+If callers rely on an `Animal` contract such as:
+
+[source,java]
+----
+animal.makeSound();
+----
+
+then every concrete `Animal` subtype should honor the expectations of that contract rather than surprising callers with incompatible behavior.
+
+LSP is therefore about behavioral substitutability, not only about whether Java allows `extends`.
+
+[[dp-isp]]
+== Interface Segregation Principle
+
+ISP encourages small, focused interfaces so that implementing classes are not forced to depend on operations they do not need.
+
+Instead of one broad interface:
+
+[source,java]
+----
+public interface Machine {
+    void print();
+    void scan();
+    void fax();
+}
+----
+
+separate capabilities can be modeled:
+
+[source,java]
+----
+public interface Printable {
+    void print();
+}
+
+public interface Scannable {
+    void scan();
+}
+----
+
+A simple printer can implement only `Printable`.
+
+[[dp-dip]]
+== Dependency Inversion Principle
+
+DIP encourages high-level code to depend on abstractions rather than directly on replaceable low-level implementations.
+
+Instead of fixing a service to one concrete sender:
+
+[source,java]
+----
+private final EmailSender sender;
+----
+
+a design can depend on a general contract:
+
+[source,java]
+----
+private final MessageSender sender;
+----
+
+Different implementations can then fulfill the contract:
+
+[source,java]
+----
+public interface MessageSender {
+    void send(String message);
+}
+----
+
+This principle becomes the conceptual basis for dependency injection frameworks, but no framework is required to apply the idea.
+
+== Responsibility and the Principles
+
+Responsibility, cohesion, and coupling help explain why SRP and the other SOLID principles matter:
+
+* focused responsibilities tend to improve cohesion;
+* clear boundaries can reduce unnecessary coupling;
+* abstractions can make selected dependencies easier to replace.
+
+These are design trade-offs, not automatic formulas.

@@ -1,0 +1,42 @@
+= Program Flow Exercises
+
+The exercises in this file use `README.adoc` and the Java files in this package.
+
+== Check Your Understanding
+
+. What is a condition?
+. What is the difference between a branch and an iteration?
+. When is an enhanced `for` loop useful?
+. What is the difference between `while` and `do` / `while`?
+. What does `break` do?
+. What does `continue` do?
+. What is the main difference between a class diagram and a sequence diagram?
+
+== Trace the Code
+
+Before running the program, inspect `FlowExamples.java` and predict:
+
+. which text `describeLevel(2)` returns;
+. which numbers `printSelectedNumbers()` prints;
+. how many times `countWithWhile()` executes its loop body.
+
+Run `Main.java` and compare your predictions with the output.
+
+== Change a Branch
+
+Extend `describeLevel(...)` with a new `case` for level `3`.
+Return `"Advanced"` for that value.
+
+== Change a Loop
+
+Modify `printSelectedNumbers()` so that:
+
+* the value `1` is skipped with `continue`;
+* the loop stops when `i` reaches `6`.
+
+Predict the output before running it.
+
+== Draw the Sequence
+
+Create a simple sequence diagram for the call to `LoginService.login(...)` in `Main.java`.
+Include `Main`, `LoginService`, `login`, `validateUsername`, `validatePassword`, and the returned boolean result.

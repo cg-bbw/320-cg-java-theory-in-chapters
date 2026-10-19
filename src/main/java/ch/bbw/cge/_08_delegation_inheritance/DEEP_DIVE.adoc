@@ -1,0 +1,49 @@
+= Delegation and Inheritance - Deep Dive
+
+This file extends xref:README.adoc[Delegation and Inheritance].
+
+[[di-dependency]]
+== Dependency
+
+A dependency exists when one class needs another class or object to complete its work.
+
+`NotificationService` depends on `EmailSender`:
+
+[source,java]
+----
+public NotificationService(EmailSender emailSender) {
+    this.emailSender = emailSender;
+}
+----
+
+The dependency is supplied through the constructor and stored in a field.
+The service can then delegate email-related behavior to it.
+
+Dependencies can also appear only as method parameters or local variables; a dependency does not always need to be stored as a field.
+
+[[di-composition-over-inheritance]]
+== Favor Composition over Inheritance
+
+“Favor composition over inheritance” is a design guideline, not a rule that inheritance is bad.
+
+Inheritance creates a strong type relationship:
+
+[source,java]
+----
+public class ElectricCar extends Vehicle {
+}
+----
+
+That relationship should remain logically true everywhere an `ElectricCar` is used.
+
+Delegation is often more flexible when one object merely needs another object's service:
+
+[source,java]
+----
+public class NotificationService {
+    private final EmailSender emailSender;
+}
+----
+
+Use inheritance when the subtype relationship is meaningful.
+Prefer composition or delegation when the relationship is mainly “has-a” or “uses-a”.

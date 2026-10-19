@@ -1,0 +1,112 @@
+= Delegation and Inheritance
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain inheritance as an is-a relationship;
+* use `extends`, `super`, and `super(...)`;
+* identify superclass and subclass roles;
+* explain delegation as giving a task to another object;
+* choose between inheritance and delegation based on the meaning of a relationship.
+
+== Key Terms
+
+Superclass::
+The class being extended.
+
+Subclass::
+The class that extends another class.
+
+Inheritance::
+An is-a relationship in which a subclass is a more specific type of its superclass.
+
+Is-a relationship::
+A type relationship in which one type is a specialized form of another type, such as `ElectricCar` being a `Vehicle`.
+
+`extends`::
+The Java keyword used in a class declaration to extend a superclass.
+
+`super`::
+The Java keyword used to refer to superclass behavior; `super(...)` invokes a superclass constructor.
+
+Delegation::
+Passing responsibility for a task to another object.
+
+Dependency::
+A relationship in which one part of the program needs another part to perform its work.
+
+== Inheritance
+
+[source,java]
+----
+public class ElectricCar extends Vehicle {
+}
+----
+
+`ElectricCar` is a more specific `Vehicle`.
+The keyword `extends` creates the inheritance relationship.
+
+`Vehicle` is the superclass.
+`ElectricCar` is the subclass.
+
+== Superclass Constructor
+
+The subclass constructor contains:
+
+[source,java]
+----
+super(model);
+----
+
+`super(...)` invokes a constructor of the direct superclass.
+Constructors are not inherited.
+
+The keyword `super` can also be used to access accessible superclass behavior.
+
+== Private Members
+
+A subclass does not directly access private fields of its superclass.
+The superclass can provide constructors or methods that control access to its own state.
+
+This preserves encapsulation across the inheritance hierarchy.
+
+== Delegation
+
+`NotificationService` stores an `EmailSender`.
+
+[source,java]
+----
+public void sendWelcomeMessage(String address) {
+    emailSender.send(address, "Welcome to the course!");
+}
+----
+
+The service delegates the sending task to another object.
+`NotificationService` is not a kind of `EmailSender`, so inheritance would describe the domain poorly.
+
+== Inheritance or Delegation?
+
+Ask what the relationship means:
+
+* “ElectricCar is a Vehicle” -> inheritance can fit.
+* “NotificationService uses an EmailSender” -> delegation fits.
+
+Do not choose inheritance only to reuse a few lines of code.
+
+== Code Examples
+
+* `Vehicle` and `ElectricCar` demonstrate inheritance, `extends`, and `super(...)`.
+* `NotificationService` and `EmailSender` demonstrate delegation.
+
+== Further Reading
+
+* xref:DEEP_DIVE.adoc#di-dependency[dependencies]
+* xref:DEEP_DIVE.adoc#di-composition-over-inheritance[favoring composition/delegation over inheritance]
+* xref:../_05_static_final/DEEP_DIVE.adoc#sf-final-class-method[`final` classes and methods]
+
+The exercises below use only the core material in this README and the Java files.
+
+== Summary
+
+Inheritance models a meaningful is-a relationship. Delegation gives work to another object. Choose the relationship that communicates the domain meaning most clearly.

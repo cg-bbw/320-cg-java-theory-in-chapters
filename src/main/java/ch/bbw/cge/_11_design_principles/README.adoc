@@ -1,0 +1,96 @@
+= Design Principles
+
+== Learning Goals
+
+After this chapter, you should be able to:
+
+* explain why design principles are guidelines rather than compiler rules;
+* use KISS, DRY, and YAGNI as review questions;
+* explain the Single Responsibility Principle at an introductory level;
+* identify a focused responsibility in a small class design.
+
+== Key Terms
+
+Design principle::
+A guideline that helps developers make design decisions.
+
+KISS::
+“Keep It Simple.” Prefer the simplest design that clearly solves the current problem.
+
+DRY::
+“Don't Repeat Yourself.” Avoid duplicating the same knowledge or rule in several places when one authoritative implementation would be clearer.
+
+YAGNI::
+“You Aren't Gonna Need It.” Avoid adding functionality or abstraction only because it might be useful in the future.
+
+Responsibility::
+A focused piece of knowledge or behavior that a class or component is expected to handle.
+
+Single Responsibility Principle (SRP)::
+A class or module should have one focused responsibility and therefore one main kind of reason to change.
+
+== Principles Are Questions, Not Compiler Rules
+
+A design principle helps you review a decision.
+It should not be applied mechanically if the result becomes harder to understand.
+
+Useful questions include:
+
+* KISS: Is this solution more complicated than the problem requires?
+* DRY: Is the same business rule implemented in several places?
+* YAGNI: Am I building something only because I might need it later?
+* SRP: Does this class contain unrelated responsibilities?
+
+== Example: Separate Responsibilities
+
+This package separates three concerns:
+
+* `Invoice` stores invoice data;
+* `InvoiceCalculator` calculates the total;
+* `InvoicePrinter` presents the result.
+
+A single class that stores invoice data, calculates prices, writes files, sends email, and prints output would have many unrelated responsibilities.
+
+The current example is deliberately small so the separation remains visible.
+
+== KISS and Overengineering
+
+Splitting every few lines into another class is not automatically better design.
+KISS and SRP must be balanced.
+
+A separation is useful when it makes the code easier to understand, change, test, or reuse for a real reason.
+
+== DRY
+
+If a pricing rule exists, it should normally have one clear authoritative implementation.
+
+For example, `Main` should not calculate the invoice total separately from `InvoiceCalculator`.
+Otherwise the two calculations could later drift apart.
+
+== YAGNI
+
+Do not add features that the current requirements do not need.
+
+For example, this package does not create a database layer, export format, plugin system, or network API just because an invoice application might need those features someday.
+
+== Code Example
+
+The `Invoice`, `InvoiceCalculator`, and `InvoicePrinter` classes make responsibility boundaries visible without adding a framework or external library.
+
+== Further Reading
+
+The glossary contains several design terms that need more detail than this first design-principles lesson:
+
+* xref:DEEP_DIVE.adoc#dp-cohesion[cohesion]
+* xref:DEEP_DIVE.adoc#dp-coupling[coupling]
+* xref:DEEP_DIVE.adoc#dp-solid[SOLID overview]
+* xref:DEEP_DIVE.adoc#dp-ocp[Open/Closed Principle]
+* xref:DEEP_DIVE.adoc#dp-lsp[Liskov Substitution Principle]
+* xref:DEEP_DIVE.adoc#dp-isp[Interface Segregation Principle]
+* xref:DEEP_DIVE.adoc#dp-dip[Dependency Inversion Principle]
+
+The exercises below use only KISS, DRY, YAGNI, SRP, and the Java example.
+
+== Summary
+
+Design principles provide vocabulary and questions for evaluating a design. Use them to make code clearer and easier to change, not to add complexity for its own sake.

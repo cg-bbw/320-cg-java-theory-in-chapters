@@ -1,12 +1,16 @@
 package ch.bbw.cge._02_documentation;
 
+/**
+ * A second class used to demonstrate links between Javadoc comments.
+ */
 public class DocumentationLinkedClass {
 
     /**
-     * This method is different but we link it just to show how it works.
-     * See also {@link ch.bbw.cge._02_documentation.DocumentationTypes#explainJavadocReturn()}
+     * Points readers to another documented method.
+     *
+     * @see DocumentationExamples#createSummary()
      */
-    private String explainJavadocSee() {
-        return "";
+    public void showLinkedDocumentation() {
+        // The method body is intentionally small because the Javadoc link is the topic.
     }
 }

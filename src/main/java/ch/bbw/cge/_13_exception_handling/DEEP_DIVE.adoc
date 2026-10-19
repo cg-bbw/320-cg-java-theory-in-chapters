@@ -1,0 +1,48 @@
+= Exception Handling - Deep Dive
+
+This file extends xref:README.adoc[Exception Handling].
+
+[[eh-propagation]]
+== Exception Propagation
+
+If a method does not catch an exception, the exception can leave that method and continue to its caller.
+
+[source,java]
+----
+public void loadScore() throws InvalidScoreException {
+    int score = scoreService.parseScore("105");
+}
+----
+
+If `parseScore(...)` throws `InvalidScoreException`, `loadScore()` does not continue normally.
+Because `loadScore()` also declares the exception instead of catching it, the exception propagates to the next caller.
+
+This continues until a matching `catch` handles the exception or the exception reaches the top of the thread.
+
+== Stack Trace
+
+An uncaught exception normally produces a stack trace.
+The stack trace shows the exception type, message, and the chain of method calls involved in the failure.
+
+For learners, the most useful reading strategy is:
+
+. start with the exception type and message;
+. find the first line that points to your own project code;
+. follow the call chain to understand how execution reached the failing operation.
+
+A stack trace is diagnostic information, not a replacement for understanding the program's control flow.
+
+== Exception Translation
+
+`ScoreService` catches `NumberFormatException` and throws `InvalidScoreException` instead.
+
+[source,java]
+----
+try {
+    score = Integer.parseInt(text);
+} catch (NumberFormatException exception) {
+    throw new InvalidScoreException("Score must be a whole number.");
+}
+----
+
+This is an example of translating a low-level technical exception into a domain-specific exception that is more meaningful to the caller.

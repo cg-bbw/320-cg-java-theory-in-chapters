@@ -1,0 +1,58 @@
+= Static and Final - Deep Dive
+
+This file extends xref:README.adoc[Static and Final].
+The topics here are useful glossary references but are not required for the chapter exercises.
+
+[[sf-immutability]]
+== Immutability
+
+An immutable object does not expose operations that change its observable state after construction.
+
+`final` fields are often part of an immutable design, but `final` alone is not sufficient.
+
+[source,java]
+----
+public final class CourseCode {
+    private final String value;
+
+    public CourseCode(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+}
+----
+
+The field cannot be reassigned, and the class exposes no method that changes `value`.
+
+If a final field refers to a mutable object, that referenced object may still change unless the class prevents such changes from being observable.
+
+[[sf-final-class-method]]
+== Final Classes and Final Methods
+
+These uses make more sense after inheritance is introduced in xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance].
+
+A final class cannot be extended:
+
+[source,java]
+----
+public final class CourseCode {
+}
+----
+
+A final instance method can be inherited but cannot be overridden in a subclass:
+
+[source,java]
+----
+public final String getCode() {
+    return code;
+}
+----
+
+The three common uses of `final` therefore affect different things:
+
+* final variable -> cannot be reassigned;
+* final method -> cannot be overridden;
+* final class -> cannot be extended.
