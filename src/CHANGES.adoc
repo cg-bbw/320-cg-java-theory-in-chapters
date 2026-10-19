@@ -1,0 +1,38 @@
+= Revision Notes
+
+== Current Revision
+
+This revision focuses on consistency between the glossary, chapter theory, Java examples, and exercises.
+
+The main rules are now:
+
+* glossary links must lead to a chapter that either explains the concept directly or clearly forwards to a `DEEP_DIVE.adoc` explanation;
+* `README.adoc` contains the required theory for the chapter;
+* `DEEP_DIVE.adoc` contains connected material that would otherwise overload the core chapter;
+* `EXERCISES.adoc` relies only on the same chapter's README and Java example, not on concepts introduced only in later chapters;
+* learner-facing documentation does not contain notes written primarily for the teacher;
+* code comments introduce new theory once and are not repeated unnecessarily later.
+
+== Important Progression Changes
+
+* `_00_glossary` is now a pure reference area without `Main.java` or exercises.
+* `_01_naming_conventions` no longer requires learners to understand constants; constants are only previewed as a naming style and linked to `_05_static_final`.
+* `_02_documentation` no longer requires exception-handling knowledge in its exercises or executable example. `@throws` is identified as a documentation tag and linked to the later exception chapter.
+* `_03_datatypes` contains learner-facing explanations instead of teacher-facing memory-model advice. `var` and type inference are explained in a deep dive.
+* `_04_classes_objects` no longer introduces static fields before the static chapter.
+* `_06_program_flow` now actually explains and demonstrates the control structures referenced by the glossary.
+* `_11_design_principles` keeps the core lesson focused while a deep dive explains cohesion, coupling, and the remaining SOLID principles with code examples.
+* JUnit remains an explained next step, but executable unit-testing examples stay dependency-free.
+
+== Terminology Principles
+
+The project continues to use these corrected Java concepts consistently:
+
+* Java is pass-by-value, including object-reference values.
+* A Java reference is not taught as a manually managed raw pointer.
+* “Primitive type” and “reference type” are the primary Java terms.
+* A constructor is not a method.
+* A method signature is based on method name and parameter types/order, not return type.
+* Javadoc tags such as `@param` are not Java annotations.
+* Aggregation and composition are modeling concepts rather than Java keywords.
+* `final` prevents reassignment of a variable; it does not automatically make an object immutable.

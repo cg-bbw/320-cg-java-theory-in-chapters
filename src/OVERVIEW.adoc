@@ -1,0 +1,100 @@
+= Java Learning Project - Chapter Overview
+
+== Structure
+
+The project is organized as a sequence of small learning packages.
+
+For regular learning chapters:
+
+* `Main.java` provides an executable entry point;
+* `README.adoc` contains the core theory required for that chapter;
+* `EXERCISES.adoc` uses only the core README and the Java examples from the same chapter;
+* additional Java files provide focused examples;
+* some chapters contain `DEEP_DIVE.adoc` for connected concepts that need more detail but are not required for the chapter exercises.
+
+`_00_glossary` is intentionally different.
+It is a reference and entry area, so it contains no executable `Main.java` and no exercises.
+Its cheat sheet links to glossary definitions, and glossary definitions link to the chapter in which a concept is explained or demonstrated.
+
+The numbered package names such as `_01_...` are a deliberate teaching convention that keeps the lesson order visible in the IDE.
+They are not presented as a normal production-package naming style.
+
+== Core vs Deep Dive
+
+The documentation has two levels when a chapter needs them:
+
+README.adoc::
+The required chapter material. Exercises may assume this content.
+
+DEEP_DIVE.adoc::
+Additional or more complex explanations connected to glossary terms. Exercises in that chapter do not require this material unless the course is deliberately extended.
+
+This structure keeps chapter READMEs readable while still giving glossary links a meaningful path to a detailed explanation and code example.
+
+== Teaching Order
+
+[cols="1,3"]
+|===
+|Package |Topic
+
+|`_00_glossary`
+|Reference vocabulary and cheat sheets
+
+|`_01_naming_conventions`
+|Naming conventions and meaningful names
+
+|`_02_documentation`
+|Comments, Javadoc, TODO/FIXME, and documentation choices
+
+|`_03_datatypes`
+|Primitive/reference types, variables, conversions, and wrapper classes
+
+|`_04_classes_objects`
+|Classes, objects, fields, constructors, methods, state, behavior, and UML basics
+
+|`_05_static_final`
+|Static members, final variables, constants, and final references
+
+|`_06_program_flow`
+|Control structures, loops, runtime flow, and sequence diagrams
+
+|`_07_object_relationships`
+|Association, aggregation, composition, direction, and multiplicity
+
+|`_08_delegation_inheritance`
+|Delegation, inheritance, is-a relationships, `extends`, and `super`
+
+|`_09_interfaces_abstract_classes`
+|Interfaces, abstract classes, contracts, `implements`, and `@Override`
+
+|`_10_polymorphism`
+|Runtime polymorphism, overriding, and dynamic dispatch
+
+|`_11_design_principles`
+|KISS, DRY, YAGNI, SRP, and optional deeper design principles
+
+|`_12_builder_pattern`
+|Builder pattern as a concrete design-pattern example
+
+|`_13_exception_handling`
+|Exceptions, `try`/`catch`/`finally`, `throw`, `throws`, and custom exceptions
+
+|`_14_unit_testing`
+|Testing fundamentals without external libraries, with JUnit as a later extension
+
+|`_90_generics`
+|Optional later chapter on generic types, collections, and generic methods
+|===
+
+== Commenting Principle
+
+A concept is explained in code comments when it is first introduced.
+Later chapters assume that concept is known.
+
+Other comments are used only when they answer one of these questions:
+
+* Why is this done?
+* What does this example demonstrate?
+* What should a learner pay attention to?
+
+The goal is for later code to look increasingly like normal production code while the theory builds progressively.
