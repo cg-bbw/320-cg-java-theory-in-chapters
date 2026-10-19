@@ -257,12 +257,12 @@ See also: xref:../../_11_design_principles/README.adoc[Design Principles].
 [[adv-design-pattern]]
 Design pattern::
 A design pattern is a named, reusable design idea for a recurring software-design problem. A pattern describes roles, relationships, and consequences rather than providing one fixed code template that should be copied unchanged into every project.
-See also: xref:../../_12_builder_pattern/README.adoc[Builder Pattern].
+See also: xref:../../_12_design_pattern/README.adoc[Design Pattern].
 
 [[adv-builder]]
 Builder pattern::
 The Builder pattern separates the step-by-step construction of a complex object from the final object itself. It is especially useful when an object has many optional configuration choices or when readable chained construction is preferable to a constructor with many parameters.
-See also: xref:../../_12_builder_pattern/README.adoc[Builder Pattern].
+See also: xref:../../_12_design_pattern/builder/README.adoc[Builder Pattern].
 
 [[adv-director]]
 Director::

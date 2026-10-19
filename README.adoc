@@ -1,0 +1,144 @@
+= M320 – Java Learning Project
+
+This repository contains the Java examples, explanations, and exercises used throughout the course.
+
+The project is organized in the same order as the lessons.
+Each numbered package represents one chapter or topic.
+
+== Start Here
+
+. Start with `_01_naming_conventions`.
+. Work through the numbered packages in order.
+.
+
+
+If this is your first time using the project, start with:
+
+. Open the xref:src/main/java/.../_00_glossary/english/00_CHEATSHEET.adoc[Java Cheat Sheet] for an overview of the terminology.
+. Check out the other Asciidoc files like: xref:src/main/java/.../_00_glossary/english/01_JAVA_BASICS.adoc[Java Basics Glossary].
+. Recommended: Start with chapter `_01_naming_conventions`.
+. In every chapter, read `README.adoc` before working on `EXERCISES.adoc`.
+. Some have a DEEP_DIVE.adoc for more complex content.
+. If you feel comfortable with a chapter's content, feel free to continue with the numbered chapters in ascending order. The package numbers represent the recommended learning order.
+
+[source,text]
+----
+_00_glossary
+_01_naming_conventions
+_02_documentation
+_03_datatypes
+_04_classes_objects
+...
+----
+
+Do not worry if later chapters contain concepts that are unfamiliar to you.
+They will be introduced when you reach the corresponding chapter.
+
+== Structure of a Chapter
+
+Most chapters contain the following files:
+
+[source,text]
+----
+chapter/
+├── Main.java
+├── ...
+├── README.adoc
+├── EXERCISES.adoc
+└── DEEP_DIVE.adoc    // only in some chapters
+----
+
+`README.adoc`::
+Contains the theory required for the chapter and explains the accompanying Java examples.
+
+`Main.java`::
+Contains an executable example. Run this class to observe the concepts from the chapter in practice.
+
+`EXERCISES.adoc`::
+Contains exercises based on the theory and Java code from the current chapter.
+
+`DEEP_DIVE.adoc`::
+Contains optional or more advanced information. You do not need this content to complete the regular exercises unless your teacher tells you otherwise.
+
+== Recommended Workflow
+
+For each chapter:
+
+. Read `README.adoc`.
+. Open the Java classes mentioned in the README.
+. Run `Main.java`.
+. Change small parts of the example and observe what happens.
+. Complete `EXERCISES.adoc`.
+. Use the glossary whenever you encounter an unfamiliar term.
+. Read `DEEP_DIVE.adoc` if you want to explore the topic in more detail.
+
+== Glossary
+
+The `_00_glossary` package is different from the other chapters.
+
+It is a reference section and does not contain exercises or an executable `Main` class.
+
+Use it whenever you want to look up terminology.
+
+It contains:
+
+* a compact cheat sheet;
+* Java basics;
+* object-oriented programming terminology;
+* advanced Java concepts.
+
+The glossary is available in English and German.
+
+When working with Java, you should become familiar with the English terminology because Java documentation, APIs, compiler messages, and most technical resources use English terms.
+
+== Running an Example
+
+Each regular chapter contains its own `Main` class.
+
+You can run a chapter independently from IntelliJ IDEA by opening its `Main.java` file and running:
+
+[source,java]
+----
+public static void main(String[] args)
+----
+
+You normally do not need to execute examples from later chapters while working on the current chapter.
+
+== Learning Progression
+
+The examples intentionally become more complex over time.
+
+Concepts introduced in earlier chapters may appear again later without being explained repeatedly.
+
+If something looks unfamiliar:
+
+. check the current `README.adoc`;
+. search the glossary;
+. review the earlier chapter in which the concept was introduced.
+
+== Code and Language
+
+Java code, identifiers, comments, and documentation in this repository are primarily written in English.
+
+The examples follow common Java naming conventions.
+
+Comments are used mainly when:
+
+* a new concept is introduced;
+* a design decision needs explanation;
+* something important is not obvious from the code itself.
+
+Code that has already been explained in earlier chapters is normally not commented again.
+
+== Build
+
+This project uses Maven.
+
+No additional libraries are required for the basic chapters unless explicitly stated in a later chapter.
+
+The Maven configuration can be found in:
+
+[source,text]
+----
+pom.xml
+----
