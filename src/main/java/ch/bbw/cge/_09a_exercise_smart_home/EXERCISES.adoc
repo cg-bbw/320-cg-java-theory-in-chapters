@@ -1,0 +1,270 @@
+= Smart Home Exercise
+
+== Goal
+
+In this exercise, you combine the concepts from Chapters 07 to 09 in one larger Java example.
+
+You will work with:
+
+* object relationships;
+* aggregation and composition;
+* relationship direction and multiplicity;
+* delegation;
+* inheritance;
+* abstract classes;
+* interfaces;
+* method overriding.
+
+The Java files are already prepared. Some parts are complete and other parts contain `TODO` comments.
+
+== Previous Chapters
+
+Use these chapters as references:
+
+* xref:../_07_object_relationships/README.adoc[Object Relationships]
+* xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance]
+* xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes]
+
+You are not expected to use concepts from later chapters.
+
+== Scenario
+
+A Smart Home contains rooms. A room can contain several devices such as lamps and thermostats. Different device types share common information but provide their own behavior. Some devices can be switched on and off. A controller delegates switching operations to such devices.
+
+The finished model should approximately represent:
+
+[source,text]
+----
+My Smart Home
+├── Living Room
+│   ├── Ceiling Lamp
+│   └── Living Room Thermostat
+└── Office
+    ├── Desk Lamp
+    └── Office Thermostat
+----
+
+== Part 1: Inspect the Existing Code
+
+Before changing anything, inspect all Java files.
+
+Answer:
+
+. Which class is abstract?
+. Which classes inherit from another class?
+. Which class implements `Switchable`?
+. Which class stores several `Device` references?
+. Which class stores several `Room` references?
+. Where can you identify composition?
+. Where can you identify aggregation?
+. Which relationships are unidirectional?
+
+The intended simplified UML relationships are:
+
+[source,text]
+----
+SmartHome ◆──────── 1..* Room
+
+Room ◇──────── 0..* Device
+----
+
+== Part 2: Complete `Room`
+
+Complete `addDevice(Device device)`.
+
+A device is created independently and then added to a room:
+
+[source,java]
+----
+Lamp deskLamp = new Lamp("Desk Lamp");
+
+Room office = new Room("Office");
+office.addDevice(deskLamp);
+----
+
+Why does this support modeling the relationship as aggregation?
+
+NOTE: `List<Device>` is used only to store multiple device references. Collections are not the topic of this exercise.
+
+== Part 3: Complete `SmartHome`
+
+Complete `addRoom(String name)`.
+
+The method should:
+
+. create a new `Room`;
+. add it to the list of rooms;
+. return the created room.
+
+The following code should work:
+
+[source,java]
+----
+SmartHome home = new SmartHome("My Smart Home");
+
+Room livingRoom = home.addRoom("Living Room");
+Room office = home.addRoom("Office");
+----
+
+Why does creating the room through `SmartHome` support modeling this relationship as composition?
+
+== Part 4: Complete the Device Classes
+
+Inspect `Device.java`.
+
+Identify:
+
+* the common field;
+* the constructor;
+* the concrete method;
+* the abstract method.
+
+Then complete the missing methods in `Lamp` and `Thermostat`.
+
+=== Lamp
+
+Complete:
+
+* `turnOn()`;
+* `turnOff()`;
+* `getStatus()`.
+
+Possible output:
+
+[source,text]
+----
+Desk Lamp: ON
+----
+
+=== Thermostat
+
+Complete `getStatus()`.
+
+Possible output:
+
+[source,text]
+----
+Living Room Thermostat: 21.5 °C
+----
+
+Answer:
+
+. Why does `name` belong in `Device`?
+. Why is `getStatus()` abstract?
+. Why does `Lamp` implement `Switchable`, while `Thermostat` does not?
+
+== Part 5: Complete the Controller
+
+Complete:
+
+* `switchOn(Switchable device)`;
+* `switchOff(Switchable device)`.
+
+The controller must delegate the operation to the supplied object.
+
+[source,text]
+----
+SmartHomeController
+        |
+        | delegates
+        v
+   Switchable object
+        |
+        v
+   turnOn() / turnOff()
+----
+
+Which object actually changes its own state?
+
+Why is this delegation?
+
+== Part 6: Complete `Main`
+
+Complete `Main.java`.
+
+Your program should:
+
+. create `Living Room` and `Office` through `SmartHome`;
+. create all four devices;
+. add the devices to the correct rooms;
+. switch on the Ceiling Lamp through `SmartHomeController`;
+. leave the Desk Lamp switched off;
+. print every room and every device status.
+
+A possible output is:
+
+[source,text]
+----
+My Smart Home
+
+Living Room
+------------
+Ceiling Lamp: ON
+Living Room Thermostat: 21.5 °C
+
+Office
+------
+Desk Lamp: OFF
+Office Thermostat: 20.0 °C
+----
+
+== Part 7: Review the Relationships
+
+Complete the table.
+
+[cols="2,2,2,2"]
+|===
+|Relationship |Type |Direction |Multiplicity
+
+|`SmartHome` - `Room`
+|
+|
+|
+
+|`Room` - `Device`
+|
+|
+|
+
+|`Lamp` - `Device`
+|
+|
+|
+
+|`Lamp` - `Switchable`
+|
+|
+|
+
+|`SmartHomeController` - `Switchable`
+|
+|
+|
+|===
+
+Not every relationship is an aggregation or composition.
+
+== Optional Extension: `SmartPlug`
+
+Create a `SmartPlug`.
+
+A Smart Plug:
+
+* is a `Device`;
+* can be switched on and off;
+* implements `Switchable`;
+* reports its state through `getStatus()`.
+
+The existing `SmartHomeController` should be able to switch it on without being modified.
+
+== Final Check
+
+Make sure that:
+
+* the project compiles;
+* all required `TODO` sections are completed;
+* rooms are created through `SmartHome`;
+* devices are added to rooms;
+* lamps can be controlled through `SmartHomeController`;
+* all device statuses can be printed;
+* you can explain aggregation, composition, inheritance, interfaces, overriding, and delegation using your code.
