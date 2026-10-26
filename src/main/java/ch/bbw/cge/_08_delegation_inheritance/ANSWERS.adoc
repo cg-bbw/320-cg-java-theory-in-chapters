@@ -1,0 +1,39 @@
+= Delegation and Inheritance Exercises
+
+The exercises in this file use `README.adoc` and the Java classes in this package.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. What relationship does `extends` express? +
+Is a / Inheritance
+. Which class is the superclass in the vehicle example? +
+Vehicle
+. Which class is the subclass? +
+ElectricCar
+. Why are constructors not inherited? +
+It is useful to change the logic of a constructor or add parameters, the superclass constructor can still be called with super() and some things changed if necessary.
+. What is the purpose of `super(model)`? +
+To call the constructor of the parent/superclass
+. What does delegation mean? +
+Give the responsibility to a different class/object, and we only call their method. We have the behavior in another class and want to use it without inheriting from that class.
+. Why would `NotificationService extends EmailSender` be a poor model? +
+It is more flexible, we can change the type of notification (e.g. email to sms).
+
+== Choose the Design
+
+Choose inheritance or delegation and justify your answer:
+
+. `Dog` and `Animal` +
+Inheritance: Dog is an Animal
+. `Car` and `NavigationSystem` +
+Delegation: Car uses NavigationSystem
+. `SavingsAccount` and `BankAccount` +
+Inheritance: SavingsAccount is a BankAccount
+. `ReportService` and `PdfFormatter` +
+Delegation: ReportService uses PdfFormatter
+
+== Extend the Code
+
+Create a `Truck` subclass of `Vehicle` with an additional field `maximumLoadKg`.
+Instantiate it in `Main.java` and call the inherited `printDescription()` behavior.
