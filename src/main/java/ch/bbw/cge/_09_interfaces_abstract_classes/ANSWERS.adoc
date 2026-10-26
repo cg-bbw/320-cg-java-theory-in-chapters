@@ -1,0 +1,52 @@
+= Interfaces and Abstract Classes Exercises
+
+The exercises in this file use `README.adoc` and the Java files in this package.
+The optional `DEEP_DIVE.adoc` material is not required.
+
+== Check Your Understanding
+
+. Can an abstract class be instantiated directly? +
+No, only subclasses of an abstract class can be instantiated (if they're not abstract too)
+. Can an abstract class have a constructor? +
+Yes, but it can't be instantiated, it's only to provide it to the subclasses.
+. Can an abstract class contain concrete methods? +
+Yes
+. What does an interface contract require from an implementing class? +
+Implementing all the methods (attributes not supported)
+. Can a class implement more than one interface? +
+Yes, but not inherit more than one class (at least in Java, see diamond pattern)
+. Why is `@Override` useful? +
+The tooling checks that the attribute/method actually exists in the parent class and isn't sealed. It guards against typos and non-existent ad-doc-header-with-attributes/methods.
+. When might an interface be preferable to an abstract class? +
+If it models better as behavior than object. Creating it as class would often cause problems, since you'd want to inherit a different class.
+
+== Mark the Code
+
+In the Java files, identify:
+
+* one abstract class; +
+Animal
+* one abstract method; +
+makeSound()
+* one concrete method in the abstract class; +
+printName()
+* one interface; +
+Trainable
+* one `extends` relationship; +
+Dog extends Animal
+* one `implements` relationship; +
+Dog implements Trainable
+* two methods annotated with `@Override`. +
+In Dog makeSound() and performTrick()
+
+== Extend the Example
+
+Create a `Horse` class that extends `Animal` and implements `Trainable`.
+Give it different implementations of `makeSound()` and `performTrick()`.
+
+== Design Question
+
+You are modeling `Printable`, `Invoice`, and `Photo`.
+Would `Printable` be more naturally represented as a superclass or an interface?
+Explain your choice using the idea of a behavioral contract. +
+Printable should be an interface. Invoice and Photo shouldn't have to inherit Printable, which is a behavior.
