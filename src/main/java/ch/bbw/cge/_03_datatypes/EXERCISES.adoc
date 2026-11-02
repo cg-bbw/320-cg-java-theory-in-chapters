@@ -1,3 +1,4 @@
+
 = Data Type Exercises
 
 The exercises in this file use the concepts from `README.adoc` and `Main.java`.
@@ -6,21 +7,37 @@ The optional `DEEP_DIVE.adoc` material is not required.
 == Check Your Understanding
 
 . Name all eight primitive types.
+  byte, short, int, long, float, double, char, boolean
 . Is `String` a primitive type or a reference type?
+  String is a reference type because it is a class in Java.
 . What is the difference between declaration and initialization?
+  Declaration creates a variable. Initialization gives the variable its first value.
 . What is reassignment?
+  Reassignment means giving a variable a new value after it has already been initialized.
 . Why can `(int) 3.9` lose information?
+  Because converting a double to an int removes the decimal part. The result is 3.
 . What is the wrapper class for `boolean`?
+  Boolean.
 
 == Identify the Types
 
 Open `Main.java` and identify:
-
-* four variables with primitive types;
-* one variable with a reference type;
-* one widening conversion;
-* one narrowing conversion;
-* one wrapper-class variable.
+* Four variables with primitive types:
+- `int age`
+- `double temperature`
+- `boolean courseFinished`
+- `char grade`
+* One variable with a reference type:
+- `String courseName`
+* One widening conversion:
+- `double ageAsDouble = age;`
+- An int is automatically converted to a double.
+* One narrowing conversion:
+- `int wholeTemperature = (int) temperature;`
+- A double is explicitly converted to an int.
+* One wrapper-class variable:
+- `Integer boxedAge`
+- Integer is the wrapper class for int.
 
 == Predict the Output
 
@@ -31,16 +48,47 @@ int whole = (int) value;
 System.out.println(whole);
 ----
 
-What is printed and why?
+The output is:
+
+[source,text]
+----
+8
+----
+
+Explanation:
+
+The double value 8.7 is converted to an int.
+The decimal part is removed during the conversion.
+Therefore, the result is 8.
 
 == Choose a Type
 
 Choose an appropriate Java type for each value:
 
-. a person's age;
-. whether a door is open;
-. a product price;
-. one character;
-. a person's full name.
+. A person's age:
++
+`int age = 18;`
++
+An int is suitable because age is normally represented as a whole number.
 
-Explain each choice.
+. Whether a door is open:
++
+`boolean doorOpen = true;`
++
+A boolean is suitable because it can represent true or false.
+
+. A product price:
++
+`double productPrice = 19.95;`
++
+A double can represent decimal numbers.
+. One character:
++
+`char firstLetter = 'D';`
++
+A char stores a single character.
+. A person's full name:
++
+`String fullName = "Alex Morgan";`
++
+A String is suitable for storing text.
