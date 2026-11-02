@@ -1,5 +1,6 @@
 package ch.bbw.cge._02_documentation;
 
+//Javadoc
 /**
  * Demonstrates the most important documentation forms used in this chapter.
  *
@@ -7,17 +8,21 @@ package ch.bbw.cge._02_documentation;
  */
 public class DocumentationExamples {
 
+    //Line comment
     // This text is intentionally temporary so the TODO example has a visible target.
     private String temporaryText = "Training value";
 
+    //block comment
     /*
      * A block comment can explain a larger section.
      * It is not automatically part of generated API documentation.
      */
     private String documentationTopic = "Useful documentation";
-
+    //Todo
     // TODO Replace this training text when the exercise is complete.
 
+    //@param
+    //@return
     /**
      * Combines a learner name with a short progress message.
      *

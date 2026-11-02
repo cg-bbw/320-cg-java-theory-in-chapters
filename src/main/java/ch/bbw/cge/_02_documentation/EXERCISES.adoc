@@ -16,8 +16,7 @@ Rewrite this code so that either the comment becomes useful or the variable name
 
 [source,java]
 ----
-// Number of completed exercises
-int n = 7;
+int completedExercises = 7;
 ----
 
 == Write Javadoc
@@ -26,6 +25,12 @@ Write Javadoc for this method:
 
 [source,java]
 ----
+/**
+ * Creates a greeting message for the given person.
+ *
+ * @param name the name of the person
+ * @return a greeting message
+ */
 public String formatGreeting(String name) {
     return "Hello " + name;
 }
