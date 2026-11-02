@@ -50,14 +50,22 @@ Before changing anything, inspect all Java files.
 
 Answer:
 
-. Which class is abstract?
-. Which classes inherit from another class?
-. Which class implements `Switchable`?
-. Which class stores several `Device` references?
-. Which class stores several `Room` references?
-. Where can you identify composition?
-. Where can you identify aggregation?
-. Which relationships are unidirectional?
+. Which class is abstract? +
+Device
+. Which classes inherit from another class? +
+Lamp & Thermostat
+. Which class implements `Switchable`? +
+Lamp
+. Which class stores several `Device` references? +
+Room
+. Which class stores several `Room` references? +
+SmartHome
+. Where can you identify composition? +
+SmartHome -> it creates Room itself in addRoom(String name)
+. Where can you identify aggregation? +
+Room -> the Devices get passed into it
+. Which relationships are unidirectional? +
+SmartHome+Room & Room+Device
 
 The intended simplified UML relationships are:
 
@@ -82,7 +90,8 @@ Room office = new Room("Office");
 office.addDevice(deskLamp);
 ----
 
-Why does this support modeling the relationship as aggregation?
+Why does this support modeling the relationship as aggregation? +
+The device gets passed into Room.
 
 NOTE: `List<Device>` is used only to store multiple device references. Collections are not the topic of this exercise.
 
@@ -106,7 +115,8 @@ Room livingRoom = home.addRoom("Living Room");
 Room office = home.addRoom("Office");
 ----
 
-Why does creating the room through `SmartHome` support modeling this relationship as composition?
+Why does creating the room through `SmartHome` support modeling this relationship as composition? +
+The Room is created by SmartHome, but it can leave the SmartHome instance so it can theoretically exist when SmartHome gets garbage collected.
 
 == Part 4: Complete the Device Classes
 
@@ -114,10 +124,14 @@ Inspect `Device.java`.
 
 Identify:
 
-* the common field;
-* the constructor;
-* the concrete method;
+* the common field; +
+public final String name
+* the constructor; +
+public Device(String name)
+* the concrete method; +
+public String getName()
 * the abstract method.
+public abstract string getStatus()
 
 Then complete the missing methods in `Lamp` and `Thermostat`.
 
@@ -174,9 +188,11 @@ SmartHomeController
    turnOn() / turnOff()
 ----
 
-Which object actually changes its own state?
+Which object actually changes its own state? +
+The object who's class implements Switchable
 
-Why is this delegation?
+Why is this delegation? +
+The operation doesn't get applied on itself, but gets told to another.
 
 == Part 6: Complete `Main`
 

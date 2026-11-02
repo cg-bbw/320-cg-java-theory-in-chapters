@@ -19,7 +19,6 @@ public class Thermostat extends Device {
 
     @Override
     public String getStatus() {
-        // TODO: Return a text such as "Living Room Thermostat: 21.5 °C".
-        return "";
+        return String.format("%s: %.1f °C", getName(), temperature);
     }
 }

@@ -7,6 +7,25 @@ public class Main {
         SmartHome home = new SmartHome("My Smart Home");
         SmartHomeController controller = new SmartHomeController();
 
+        var livingRoom = home.addRoom("Living Room");
+        var ceilingLamp = new Lamp("Ceiling Lamp");
+        var livingRoomThermostat = new Thermostat("Living Room Thermostat", 21.5);
+        livingRoom.addDevice(ceilingLamp);
+        livingRoom.addDevice(livingRoomThermostat);
+
+        var office = home.addRoom("Office");
+        var deskLamp = new Lamp("Desk Lamp");
+        var officeThermostat = new Thermostat("Office Thermostat", 20.0);
+        office.addDevice(deskLamp);
+        office.addDevice(officeThermostat);
+
+        controller.switchOn(ceilingLamp);
+
+        System.out.println(livingRoom.getName());
+        livingRoom.getDevices().forEach(device -> System.out.println(device.getStatus()));
+
+        System.out.println(office.getName());
+        office.getDevices().forEach(device -> System.out.println(device.getStatus()));
         /*
          * TODO:
          * 1. Create "Living Room" and "Office" through home.addRoom(...).
