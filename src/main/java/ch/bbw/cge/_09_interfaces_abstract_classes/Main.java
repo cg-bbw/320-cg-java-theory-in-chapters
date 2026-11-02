@@ -8,5 +8,10 @@ public class Main {
         dog.printName();
         dog.makeSound();
         dog.performTrick();
+
+        Horse horse = new Horse("Spirit");
+        horse.printName();
+        horse.makeSound();
+        horse.performTrick();
     }
 }

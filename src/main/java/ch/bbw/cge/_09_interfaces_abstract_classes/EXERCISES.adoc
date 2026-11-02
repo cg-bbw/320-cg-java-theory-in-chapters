@@ -6,12 +6,32 @@ The optional `DEEP_DIVE.adoc` material is not required.
 == Check Your Understanding
 
 . Can an abstract class be instantiated directly?
+
+    Nein, eine abstrakte Klasse kann nicht direkt instanziiert werden.
+
 . Can an abstract class have a constructor?
+
+    Ja, ein Konstruktor initialisiert den gemeinsamen Zustand, wenn eine Unterklasse erstellt wird.
+
 . Can an abstract class contain concrete methods?
+
+    Ja, sie kann konkrete Methoden mit gemeinsamer Implementierung enthalten.
+
 . What does an interface contract require from an implementing class?
+
+    Die Klasse muss die abstrakten Methoden des Interfaces implementieren, sofern sie nicht selbst abstrakt ist.
+
 . Can a class implement more than one interface?
+
+    Ja, eine Klasse kann mehrere Interfaces implementieren.
+
 . Why is `@Override` useful?
+
+    Die Annotation macht die Absicht deutlich und der Compiler erkennt, wenn keine passende Methode überschrieben oder implementiert wird.
+
 . When might an interface be preferable to an abstract class?
+
+    Wenn verschiedene Klassen dieselbe Fähigkeit anbieten sollen, ohne eine gemeinsame Oberklasse zu benötigen.
 
 == Mark the Code
 
@@ -25,13 +45,21 @@ In the Java files, identify:
 * one `implements` relationship;
 * two methods annotated with `@Override`.
 
+    `Animal` ist die abstrakte Klasse. `makeSound()` ist ihre abstrakte Methode und `printName()` eine konkrete Methode.
+    `Trainable` ist das Interface. `Dog extends Animal` ist die `extends`-Beziehung; `Dog implements Trainable` ist die `implements`-Beziehung.
+    `Dog.makeSound()` und `Dog.performTrick()` sind beide mit `@Override` annotiert.
+
 == Extend the Example
 
 Create a `Horse` class that extends `Animal` and implements `Trainable`.
 Give it different implementations of `makeSound()` and `performTrick()`.
+
+    Siehe `Horse.java`.
 
 == Design Question
 
 You are modeling `Printable`, `Invoice`, and `Photo`.
 Would `Printable` be more naturally represented as a superclass or an interface?
 Explain your choice using the idea of a behavioral contract.
+
+    `Printable` ist natürlicher als Interface. Sowohl `Invoice` als auch `Photo` können dann den Vertrag erfüllen, eine Druckfunktion bereitzustellen, ohne eine gemeinsame Oberklasse teilen zu müssen.

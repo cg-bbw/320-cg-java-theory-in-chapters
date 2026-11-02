@@ -6,10 +6,32 @@ The optional `DEEP_DIVE.adoc` material is not required.
 == Check Your Understanding
 
 . Why is `Car` to `Engine` modeled as composition in this example?
+
+    Das Auto erstellt den Motor selbst.
+    Der Motor ist unabhängig vom Auto.
+    Es wird als Teil des Autos engelegt.
+
 . Why is `Team` to `Player` modeled as aggregation?
+
+    Player wird unabhänhig vom Team erstellt und nacher einem Team zugeordnet.
+    Spieler können auch ohne Team existieren.
+    Team speichert Verweise.
+
 . Does Java enforce the difference between aggregation and composition?
+
+    Nein, Java erzwingt das nicht.
+    Das ganze hängt komplett von den Objekten wie sie im Modell dargestellt werden.
+
+
 . What does unidirectional mean?
+
+    Bedeutet, dass die Beziehung nur in eine Richtung geht.
+    Somit kann man nur in eine Richtung verweisen und in die andere nicht.
+
 . What does multiplicity describe?
+
+    Beschreibt wie viele Objekte an einer Beziehung teilnehmen können.
+    z.b 1..1, 0..1, 0..*, 1..*.
 
 == Inspect the Code
 
@@ -20,14 +42,37 @@ For each relationship below, identify which class stores the reference:
 
 Explain why the relationships are unidirectional in the current code.
 
+    Car speichert Engine, aber umgekehrt exestiert nichts.
+    Car kennt seine Engine, aber die Engine kennt sein Car nicht.
+    Ist undirektional, weil es nur in einer Richtung geht.
+
+
+    Bei Player und Team genau das gleiche.
+    Das Team weiss welche Player es hat,
+    aber die Player wissen nichts über das Team.
+    Desswegen ist es auch undirektional.
+
+
+
 == Classify the Relationship
 
 For each situation, choose the most suitable modeling term and explain your reasoning:
 
 . A `House` creates and owns its `Room` objects.
+
+    Komposition, weil das Haus die Räume erstellt und sie auch besitzt.
+
 . A `Playlist` stores references to existing `Song` objects.
+
+    Aggregation, weil ein Song kann unabhängig vom Playlist existieren.
+
 . A `Doctor` treats a `Patient` during an appointment.
+
+    Assoziation, Weil der Arzt den Patienten jetzt behnadelt, aber keiner hängt von dem anderen ab.
 
 == UML Practice
 
 Draw the two relationships from this package and include a suitable multiplicity for the simplified code.
+
+    Car 1 ◇──────── 1 Engine
+    Team 1 ◇──────── 0..* Player

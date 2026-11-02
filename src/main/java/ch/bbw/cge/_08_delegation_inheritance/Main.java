@@ -9,5 +9,8 @@ public class Main {
 
         NotificationService notificationService = new NotificationService(new EmailSender());
         notificationService.sendWelcomeMessage("learner@example.com");
+
+        Truck truck = new Truck("Cargo Truck", 12000);
+        truck.printDescription();
     }
 }

@@ -6,21 +6,53 @@ The optional `DEEP_DIVE.adoc` material is not required.
 == Check Your Understanding
 
 . What relationship does `extends` express?
+
+    Wird verwendet, um Vererbung darzustellen.
+    Die Unterklasse erbt von der Oberklasse.
+
 . Which class is the superclass in the vehicle example?
+
+    ElectricCar erbt von Vehicle, somit ist Vehicle die Oberklasse.
+
 . Which class is the subclass?
+
+    ElectricCar ist die Unterklasse von Vehicle.
+
 . Why are constructors not inherited?
+
+    Konstruktoren werden nicht verebt, weil Unterklassen ihre eigenen Konstruktoren haben können.
+
 . What is the purpose of `super(model)`?
+
+    Ruft den Konstruktor der Oberklasse auf und übergibt ihm den Modellnamen.
+
 . What does delegation mean?
+
+    Delegation bedeutet, dass ein Objekt seine Aufgabe einem anderen Objekt übergibt und dieses Objekt die Aufgabe übernimmt.
+
 . Why would `NotificationService extends EmailSender` be a poor model?
+
+    Weil NotificationService kein EmailSender ist, sondern nur die Funktionalität von EmailSender nutzt. Somit wäre Vererbung hier nicht passend.
 
 == Choose the Design
 
 Choose inheritance or delegation and justify your answer:
 
 . `Dog` and `Animal`
+
+    Vererbung
+
 . `Car` and `NavigationSystem`
+
+    Delegation
+
 . `SavingsAccount` and `BankAccount`
+
+    Vererbung
+
 . `ReportService` and `PdfFormatter`
+
+    Delegation
 
 == Extend the Code
 
