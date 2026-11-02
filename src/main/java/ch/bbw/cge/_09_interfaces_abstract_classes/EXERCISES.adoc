@@ -7,54 +7,76 @@ The optional `DEEP_DIVE.adoc` material is not required.
 
 . Can an abstract class be instantiated directly?
 
-    Nein, eine abstrakte Klasse kann nicht direkt instanziiert werden.
+    nein,weil eine abstrakte Klasse unvollständig ist.
+    Eine Unterklasse kann aber davon erben.
 
 . Can an abstract class have a constructor?
 
-    Ja, ein Konstruktor initialisiert den gemeinsamen Zustand, wenn eine Unterklasse erstellt wird.
+    Ja, eine abstrakte Klasse kann einen Konstruktor haben, der von Unterklassen aufgerufen werden kann.
 
 . Can an abstract class contain concrete methods?
 
-    Ja, sie kann konkrete Methoden mit gemeinsamer Implementierung enthalten.
+    ja, eine abstrakte Klasse kann konkrete Methoden mit Implementierung und abstrakte Methoden ohne Implementierung enthalten.
 
 . What does an interface contract require from an implementing class?
 
-    Die Klasse muss die abstrakten Methoden des Interfaces implementieren, sofern sie nicht selbst abstrakt ist.
+    Eine Schnittstelle legt fest, welche Methoden eine implementierende Klasse bereitstellen muss.
 
 . Can a class implement more than one interface?
 
-    Ja, eine Klasse kann mehrere Interfaces implementieren.
+    ja, eine klasse kann mehrer Interfaces implementieren, sie kann nur eine klasse mit extends erben.
 
 . Why is `@Override` useful?
 
-    Die Annotation macht die Absicht deutlich und der Compiler erkennt, wenn keine passende Methode überschrieben oder implementiert wird.
+    Es zeigt an, dass die Methode überschrieben oder implementiert wird.
+    Der Compiler kann dadurch Fehler erkennen.
 
 . When might an interface be preferable to an abstract class?
 
-    Wenn verschiedene Klassen dieselbe Fähigkeit anbieten sollen, ohne eine gemeinsame Oberklasse zu benötigen.
+    Ein Interface nutzt man, wenn man verschiedene Klassen hat mit dem gleichen Verhalten.
+    Eine abstrakte Klasse nutzt man, wenn man gemeinsame Zustände hat oder den gleichen Code teilt.
 
 == Mark the Code
 
 In the Java files, identify:
 
 * one abstract class;
+
+    abstract class Animal
+
 * one abstract method;
+
+    abstract void makeSound()
+
 * one concrete method in the abstract class;
+
+    void printName() {
+        System.out.println();
+    }
+
 * one interface;
+
+    interface Trainable
+
 * one `extends` relationship;
+
+    class Dog extends Animal
+
 * one `implements` relationship;
+
+    class Dog .... implements Trainable
+
 * two methods annotated with `@Override`.
 
-    `Animal` ist die abstrakte Klasse. `makeSound()` ist ihre abstrakte Methode und `printName()` eine konkrete Methode.
-    `Trainable` ist das Interface. `Dog extends Animal` ist die `extends`-Beziehung; `Dog implements Trainable` ist die `implements`-Beziehung.
-    `Dog.makeSound()` und `Dog.performTrick()` sind beide mit `@Override` annotiert.
+     @Override
+    public void makeSound(){}
+    @Override
+    public void performTrick(){}
 
 == Extend the Example
 
 Create a `Horse` class that extends `Animal` and implements `Trainable`.
 Give it different implementations of `makeSound()` and `performTrick()`.
-
-    Siehe `Horse.java`.
 
 == Design Question
 
@@ -62,4 +84,5 @@ You are modeling `Printable`, `Invoice`, and `Photo`.
 Would `Printable` be more naturally represented as a superclass or an interface?
 Explain your choice using the idea of a behavioral contract.
 
-    `Printable` ist natürlicher als Interface. Sowohl `Invoice` als auch `Photo` können dann den Vertrag erfüllen, eine Druckfunktion bereitzustellen, ohne eine gemeinsame Oberklasse teilen zu müssen.
+    Printable ist ein Interface. Es beschreibt einen Verhaltensvertrag, den unterschiedliche Klassen erfüllen.
+    Diese Klassen müssen keine gemeinsame Oberklasse haben.

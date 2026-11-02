@@ -4,12 +4,11 @@ public class Main {
 
     public static void main(String[] args) {
         Dog dog = new Dog("Rex");
+        Horse horse = new Horse("Spirit");
 
         dog.printName();
         dog.makeSound();
         dog.performTrick();
-
-        Horse horse = new Horse("Spirit");
         horse.printName();
         horse.makeSound();
         horse.performTrick();
