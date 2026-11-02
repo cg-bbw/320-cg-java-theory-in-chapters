@@ -1,0 +1,67 @@
+= Antworten Klassen und Objekte
+
+== Check Your Understanding
+
+. Die Klasse ist der Bauplan, das Objekt ist eine konkrete Instanz davon, die mit `new` erstellt wird.
+. Ein Feld, das jedes Objekt selber hat, z.B. `model` in `Car`. Jedes Auto hat seinen eigenen Wert.
+. Der Parameter steht in der Methode (`int targetSpeed`), das Argument ist der Wert beim Aufruf (`50`).
+. Der Konstruktor gibt nichts zurück, er initialisiert nur das neue Objekt. `new` gibt das Objekt zurück.
+. Das Feld `model` vom Objekt bekommt den Wert vom Parameter `model`. Mit `this` unterscheidet man die beiden.
+. State sind die Werte der Felder (z.B. `speed`), Behavior sind die Methoden (z.B. `accelerate()`).
+
+== Mark the Code
+
+* Klassendeklaration: `public class Car`
+* Instanzfelder: `model`, `year`, `speed`
+* Konstruktor: `public Car(String model, int year)`
+* Konstruktorparameter: `model`, `year`
+* Methodenparameter: `targetSpeed` in `accelerate()`
+* Lokale Variable: `description` in `getDescription()`
+* Methode mit Rückgabewert: `getDescription()` (oder `getSpeed()`)
+
+== Extend the Example
+
+Siehe `Car.java` und `Main.java`, Feld `color` wurde hinzugefügt.
+
+== Explain the Call
+
+`firstCar.accelerate(50);`
+
+* Objektreferenz: `firstCar`
+* Methodenname: `accelerate`
+* Argument: `50`
+* Parameter: `targetSpeed`
+* Effekt: `speed` von `firstCar` ist danach 50. `secondCar` bleibt bei 0.
+
+== UML Practice
+
+Klassendiagramm:
+
+----
++------------------------------------+
+| Car                                |
++------------------------------------+
+| - model : String                   |
+| - year : int                       |
+| - speed : int                      |
+| - color : String                   |
++------------------------------------+
+| + Car(model, year, color)          |
+| + accelerate(targetSpeed : int)    |
+| + getDescription() : String        |
+| + getSpeed() : int                 |
++------------------------------------+
+----
+
+Objektdiagramm nach `firstCar.accelerate(50)`:
+
+----
++----------------------+    +----------------------+
+| firstCar : Car       |    | secondCar : Car      |
++----------------------+    +----------------------+
+| model = "Audi A3"    |    | model = "VW Golf"    |
+| year = 2023          |    | year = 2022          |
+| speed = 50           |    | speed = 0            |
+| color = "schwarz"    |    | color = "blau"       |
++----------------------+    +----------------------+
+----
