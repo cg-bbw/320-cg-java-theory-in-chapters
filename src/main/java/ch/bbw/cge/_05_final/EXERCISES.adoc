@@ -1,38 +1,161 @@
-= Static and Final Exercises
+= Static and Final Exercises – Lösungen
 
-The exercises in this file use `README.adoc`, `Course.java`, and `Main.java`.
-The optional `DEEP_DIVE.adoc` material is not required.
+Die folgenden Antworten beziehen sich auf die ergänzte Klasse `Course`
+und die angepasste `Main.java`.
 
 == Check Your Understanding
 
-. How many copies of a static field are associated with one loaded class?
-. How do static fields differ from instance fields?
-. What does `final` prevent for a variable?
-. Why can the state of an object still change through a final reference?
-. Why is `MAX_STUDENTS` written in `UPPER_SNAKE_CASE`?
+. Wie viele Kopien eines statischen Feldes gehören zu einer geladenen Klasse?
++
+Genau eine. Alle Objekte dieser Klasse teilen sich dieses statische Feld.
+
+. Was ist der Unterschied zwischen statischen Feldern und Instanzfeldern?
++
+Statische Felder gehören zur Klasse und werden von deren Objekten geteilt.
+Instanzfelder gehören zu den einzelnen Objekten.
+Jedes Objekt besitzt eigene Werte für seine Instanzfelder.
++
+Beispiel: Alle Course-Objekte teilen sich `renameCount`,
+aber jedes Course-Objekt hat seinen eigenen Namen.
+
+. Was verhindert final bei einer Variable?
++
+`final` verhindert eine erneute Zuweisung nach der Initialisierung.
+Bei einem primitiven Typ bleibt der gespeicherte Wert unverändert.
+Bei einem Referenztyp bleibt die Referenz unverändert.
+
+. Warum kann sich der Zustand eines Objekts trotz einer final-Referenz ändern?
++
+`final` schützt die Variable vor einer neuen Zuweisung.
+Es macht das referenzierte Objekt nicht automatisch unveränderlich.
+Seine veränderbaren Felder können weiterhin durch Methoden geändert werden.
++
+[source,text]
+----
+final Course selectedCourse = javaCourse;
+selectedCourse.rename("Java Fundamentals");
+----
++
+Die Variable verweist weiterhin auf dasselbe Objekt.
+Nur der Name dieses Objekts wird geändert.
+
+. Warum wird MAX_STUDENTS in UPPER_SNAKE_CASE geschrieben?
++
+`MAX_STUDENTS` ist eine mit `static final` deklarierte Konstante.
+Für solche Konstanten verwendet man nach Java-Namenskonvention
+Grossbuchstaben und Unterstriche zwischen den Wörtern.
 
 == Predict the Result
 
-Would the following line compile after `selectedCourse` has already been initialized?
-
-[source,java]
+[source,text]
 ----
 selectedCourse = databaseCourse;
 ----
 
-Explain why.
+Diese Anweisung kompiliert nicht, wenn `selectedCourse` wie im Beispiel
+als `final` deklariert und bereits initialisiert wurde.
+
+Die Anweisung würde der Variable eine andere Referenz zuweisen.
+Das wird durch `final` verhindert.
+
+Ohne `final` wäre diese Zuweisung bei den gezeigten Typen erlaubt.
 
 == Inspect the Code
 
-In `Course.java`, identify:
+=== Ein statisches Feld
 
-* one static field;
-* one `static final` constant;
-* one final instance field;
-* one mutable instance field;
-* one static method.
+[source,text]
+----
+private static int renameCount = 0;
+----
+
+Dieses Feld wird von allen Course-Objekten geteilt
+und zählt die Aufrufe von `rename(...)`.
+
+=== Eine static-final-Konstante
+
+[source,text]
+----
+public static final int MAX_STUDENTS = 30;
+----
+
+Die Konstante gehört zur Klasse und kann nicht neu zugewiesen werden.
+
+=== Ein finales Instanzfeld
+
+[source,text]
+----
+private final String courseCode;
+----
+
+Jedes Course-Objekt erhält seinen eigenen Kurscode.
+Er wird im Konstruktor initialisiert und kann danach nicht neu zugewiesen werden.
+
+=== Ein veränderbares Instanzfeld
+
+[source,text]
+----
+private String name;
+----
+
+Der Name gehört zum jeweiligen Objekt und kann durch `rename(...)`
+geändert werden.
+
+=== Eine statische Methode
+
+[source,text]
+----
+public static int getRenameCount() {
+    return renameCount;
+}
+----
+
+Sie kann über den Klassennamen aufgerufen werden:
+
+[source,text]
+----
+Course.getRenameCount();
+----
 
 == Modify the Example
 
-Add a static field that counts how many times `rename(...)` has been called across all `Course` objects.
-Print the count from `Main.java`.
+Das statische Feld `renameCount` zählt die Aufrufe von `rename(...)`
+über alle Course-Objekte hinweg.
+
+[source,text]
+----
+private static int renameCount = 0;
+
+public void rename(String newName) {
+    name = newName;
+    renameCount++;
+}
+----
+
+Bei jedem Aufruf wird der gemeinsame Zähler um eins erhöht.
+Auch ein Aufruf mit dem bereits vorhandenen Namen würde gezählt.
+
+In `Main.java` wird `rename(...)` dreimal aufgerufen:
+
+. Über `selectedCourse` auf dem Java-Kurs.
+. Über `databaseCourse` auf dem Datenbank-Kurs.
+. Über `javaCourse` erneut auf dem Java-Kurs.
+
+`selectedCourse` und `javaCourse` verweisen auf dasselbe Objekt.
+
+Der Zähler wird über die statische Methode ausgegeben:
+
+[source,text]
+----
+System.out.println("Rename calls: " + Course.getRenameCount());
+----
+
+== Erwartete Ausgabe
+
+[source,text]
+----
+Selected course: Advanced Java
+Database course: SQL Fundamentals
+Maximum students: 30
+Rename calls: 3
+----

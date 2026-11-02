@@ -1,28 +1,134 @@
-= Delegation and Inheritance Exercises
-
-The exercises in this file use `README.adoc` and the Java classes in this package.
-The optional `DEEP_DIVE.adoc` material is not required.
+= Delegation and Inheritance Exercises – Lösungen
 
 == Check Your Understanding
 
-. What relationship does `extends` express?
-. Which class is the superclass in the vehicle example?
-. Which class is the subclass?
-. Why are constructors not inherited?
-. What is the purpose of `super(model)`?
-. What does delegation mean?
-. Why would `NotificationService extends EmailSender` be a poor model?
+. Welche Beziehung drückt extends aus?
++
+`extends` beschreibt bei Klassen eine Vererbungsbeziehung.
+Die Unterklasse ist eine spezialisierte Form der Oberklasse.
+Dies wird als „ist-ein“-Beziehung bezeichnet.
+Ein ElectricCar ist beispielsweise ein Vehicle.
+
+. Welche Klasse ist im Fahrzeugbeispiel die Oberklasse?
++
+`Vehicle` ist die Oberklasse.
+
+. Welche Klasse ist die Unterklasse?
++
+`ElectricCar` ist die Unterklasse.
+Sie erbt mit `extends Vehicle` von `Vehicle`.
+
+. Warum werden Konstruktoren nicht vererbt?
++
+Konstruktoren dienen der Initialisierung von Objekten der jeweiligen Klasse.
+Sie werden in Java nicht wie Methoden vererbt.
+Eine Unterklasse besitzt eigene Konstruktoren, die einen Konstruktor
+der Oberklasse aufrufen.
++
+Wenn keine Konstruktoren deklariert werden, kann Java einen
+Standardkonstruktor erzeugen. Dieser wird nicht geerbt.
+
+. Welchen Zweck hat super(model)?
++
+`super(model)` ruft den Konstruktor der direkten Oberklasse auf
+und übergibt ihm den Wert von `model`.
+Im Beispiel initialisiert der Vehicle-Konstruktor damit sein privates
+Feld `model` für das neue Objekt.
+
+. Was bedeutet Delegation?
++
+Ein Objekt übergibt eine Teilaufgabe an ein anderes Objekt,
+indem es dessen Methode aufruft.
+Im Beispiel delegiert `NotificationService` das Versenden einer
+Nachricht an `EmailSender`.
+
+. Warum wäre NotificationService extends EmailSender ein schlechtes Modell?
++
+Ein NotificationService ist kein spezialisierter EmailSender.
+Er verwendet einen EmailSender, um Nachrichten zu versenden.
+Deshalb passt Delegation besser als eine „ist-ein“-Beziehung.
+So bleiben das Erstellen der Begrüssung und das Versenden getrennte Aufgaben.
 
 == Choose the Design
 
-Choose inheritance or delegation and justify your answer:
+. Dog und Animal
++
+Vererbung: Ein Hund ist ein Tier.
+`Dog` kann allgemeines Verhalten von `Animal` erben
+und um hundespezifisches Verhalten ergänzen.
 
-. `Dog` and `Animal`
-. `Car` and `NavigationSystem`
-. `SavingsAccount` and `BankAccount`
-. `ReportService` and `PdfFormatter`
+. Car und NavigationSystem
++
+Delegation: Ein Auto ist kein Navigationssystem.
+Das Auto verwendet ein NavigationSystem und übergibt ihm
+beispielsweise die Berechnung einer Route.
+
+. SavingsAccount und BankAccount
++
+Vererbung: Ein Sparkonto ist eine spezielle Form eines Bankkontos.
+`SavingsAccount` kann gemeinsame Kontofunktionen von `BankAccount` erben.
+Voraussetzung ist, dass es die Regeln der Oberklasse einhält.
+
+. ReportService und PdfFormatter
++
+Delegation: Ein ReportService ist kein PDF-Formatierer.
+Er übergibt die Formatierung eines Berichts an einen PdfFormatter.
 
 == Extend the Code
 
-Create a `Truck` subclass of `Vehicle` with an additional field `maximumLoadKg`.
-Instantiate it in `Main.java` and call the inherited `printDescription()` behavior.
+Die neue Klasse `Truck` erbt mit `extends Vehicle` von `Vehicle`.
+
+Sie besitzt das zusätzliche private Instanzfeld `maximumLoadKg`.
+Dieses speichert die maximale Zuladung in Kilogramm
+und wird im Konstruktor initialisiert.
+
+[source,text]
+----
+public class Truck extends Vehicle {
+
+    private final int maximumLoadKg;
+
+    public Truck(String model, int maximumLoadKg) {
+        super(model);
+        this.maximumLoadKg = maximumLoadKg;
+    }
+
+    public int getMaximumLoadKg() {
+        return maximumLoadKg;
+    }
+}
+----
+
+`super(model)` ruft den Vehicle-Konstruktor auf.
+`this.maximumLoadKg = maximumLoadKg;` speichert die Zuladung.
+
+In Main.java wird ein Truck erstellt:
+
+[source,text]
+----
+Truck truck = new Truck("Volvo FH", 18000);
+truck.printDescription();
+----
+
+`printDescription()` ist in `Vehicle` definiert und wird von `Truck` geerbt.
+Die Methode muss deshalb nicht erneut in Truck geschrieben werden.
+
+Zusätzlich wird die maximale Zuladung ausgegeben:
+
+[source,text]
+----
+System.out.println(
+        "Maximum load: " + truck.getMaximumLoadKg() + " kg"
+);
+----
+
+== Erwartete Gesamtausgabe
+
+[source,text]
+----
+Vehicle: City EV
+Charging 58 kWh battery.
+Email to learner@example.com: Welcome to the course!
+Vehicle: Volvo FH
+Maximum load: 18000 kg
+----

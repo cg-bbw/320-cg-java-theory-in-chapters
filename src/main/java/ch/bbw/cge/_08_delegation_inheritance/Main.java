@@ -7,7 +7,16 @@ public class Main {
         electricCar.printDescription();
         electricCar.charge();
 
-        NotificationService notificationService = new NotificationService(new EmailSender());
+        NotificationService notificationService =
+                new NotificationService(new EmailSender());
+
         notificationService.sendWelcomeMessage("learner@example.com");
+
+        Truck truck = new Truck("Volvo FH", 18000);
+        truck.printDescription();
+
+        System.out.println(
+                "Maximum load: " + truck.getMaximumLoadKg() + " kg"
+        );
     }
 }

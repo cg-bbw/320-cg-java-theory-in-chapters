@@ -1,41 +1,150 @@
-= Naming Convention Exercises
-
-The exercises in this file use only the conventions explained in `README.adoc` and the code in `Main.java`.
+= Naming Convention Exercises – Lösungen
 
 == Check Your Understanding
 
-. Which naming style is normally used for Java classes?
-. Which naming style is normally used for methods?
-. Which naming style is normally used for local variables and parameters?
-. Why does this project use `_01_...` even though that is not the normal package convention?
-. What is the difference between a compiler rule and a convention?
+. Welche Schreibweise wird für Java-Klassen verwendet?
++
+PascalCase: Jedes Wort beginnt mit einem Grossbuchstaben.
+Beispiele: `StudentAccount`, `ExerciseProgress`.
+
+. Welche Schreibweise wird für Methoden verwendet?
++
+camelCase: Das erste Wort beginnt klein, weitere Wörter beginnen gross.
+Methodennamen beginnen normalerweise mit einem Verb.
+Beispiel: `createProgressMessage()`.
+
+. Welche Schreibweise wird für lokale Variablen und Parameter verwendet?
++
+camelCase, beispielsweise `learnerName` oder `finishedExerciseCount`.
+
+. Warum verwendet dieses Projekt Paketnamen wie `_01_naming_conventions`?
++
+Die Nummer macht die Reihenfolge der Kapitel in der IDE sichtbar.
+Da Java-Bezeichner nicht mit einer Ziffer beginnen dürfen, steht davor ein Unterstrich.
+Die weiteren Unterstriche machen die mehrteiligen Kapitelnamen leichter lesbar.
+Das ist eine spezielle Konvention dieses Lernprojekts.
+Normalerweise sind Paketnamen kleingeschrieben und enthalten keine Unterstriche,
+zum Beispiel `ch.bbw.cge.namingconventions`.
+
+. Was ist der Unterschied zwischen einer Compilerregel und einer Konvention?
++
+Eine Compilerregel muss eingehalten werden, sonst kann der Code nicht kompiliert werden.
+Eine Konvention ist eine Empfehlung, die den Code lesbarer und einheitlicher macht.
++
+Beispiel einer Compilerregel: Ein Bezeichner darf nicht mit einer Ziffer beginnen.
+`int 1number = 4;` ist deshalb ungültig.
++
+Beispiel einer Konvention: Variablen verwenden camelCase.
+`int Number = 4;` ist gültig, üblich ist aber `int number = 4;`.
 
 == Improve the Names
 
-Rename the following identifiers so that their purpose becomes clearer:
+Die ursprünglichen Namen sagen wenig über den Zweck aus.
+Unter der Annahme, dass es um eine Anzahl Studierender, einen Stadtnamen
+und einen Aktivstatus geht, sind folgende Namen sinnvoll:
 
 [source,java]
 ----
-int n = 4;
-String s = "Zurich";
-boolean x = true;
+int studentCount = 4;
+String cityName = "Zurich";
+boolean isActive = true;
 ----
+
+* `studentCount` beschreibt die Anzahl Studierender.
+* `cityName` beschreibt den Namen einer Stadt.
+* `isActive` beschreibt, ob etwas aktiv ist.
+
+Die genaue Bedeutung von `n` und `x` ist ohne weiteren Kontext nicht eindeutig.
+Der Name sollte immer zum tatsächlichen Zweck passen.
 
 == Find the Convention Violations
 
+* `student_account`: Klassen verwenden PascalCase ohne Unterstriche.
+Verbesserung: `StudentAccount`.
+* `Print_account_data`: Methoden verwenden camelCase und beginnen klein.
+Verbesserung: `printAccountData`.
+* `Customer_Name`: Lokale Variablen verwenden camelCase ohne Unterstriche.
+Verbesserung: `customerName`.
+
+Korrigierter Code:
+
 [source,java]
 ----
-class student_account {
+class StudentAccount {
 
-    void Print_account_data() {
-        String Customer_Name = "Robin";
+    void printAccountData() {
+        String customerName = "Robin";
     }
 }
 ----
 
-List every naming issue that is covered by this chapter and propose an improved name.
-
 == Apply It
 
-Create a copy of `Main.java` and rename the class, method, parameters, and local variables with different but still meaningful names.
-Keep the naming styles from this chapter and make sure the new names still communicate their purpose.
+Die Kopie von `Main.java` heisst `ExerciseProgress.java`
+und liegt im gleichen Package.
+
+Folgende Namen wurden geändert:
+
+[cols="1,1", options="header"]
+|===
+|Ursprünglicher Name |Neuer Name
+
+|Main
+|ExerciseProgress
+
+|formatProgressMessage
+|createProgressMessage
+
+|args
+|programArguments
+
+|studentName (lokale Variable)
+|learnerName
+
+|completedExercises (lokale Variable)
+|finishedExerciseCount
+
+|studentName (Methodenparameter)
+|participantName
+
+|completedExercises (Methodenparameter)
+|solvedExerciseCount
+|===
+
+Die Klasse verwendet PascalCase.
+Methoden, Parameter und lokale Variablen verwenden camelCase.
+Die Einstiegsmethode behält den Namen `main`.
+
+Code der separaten Datei `ExerciseProgress.java`:
+
+[source,java]
+----
+package ch.bbw.cge._01_naming_conventions;
+
+public class ExerciseProgress {
+
+    public static void main(String[] programArguments) {
+        String learnerName = "Alex Morgan";
+        int finishedExerciseCount = 7;
+
+        System.out.println(
+                createProgressMessage(learnerName, finishedExerciseCount)
+        );
+    }
+
+    private static String createProgressMessage(
+            String participantName,
+            int solvedExerciseCount) {
+
+        return participantName + " completed "
+                + solvedExerciseCount + " exercises.";
+    }
+}
+----
+
+Die Ausgabe bleibt unverändert:
+
+[source,text]
+----
+Alex Morgan completed 7 exercises.
+----

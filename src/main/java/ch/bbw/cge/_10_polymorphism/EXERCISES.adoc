@@ -1,3 +1,4 @@
+
 = Polymorphism Exercises
 
 The exercises in this file use `README.adoc` and the Java files in this package.
@@ -6,22 +7,115 @@ The optional `DEEP_DIVE.adoc` material is not required.
 == Check Your Understanding
 
 . In `Animal animal = new Dog();`, what is the declared type?
++
+Answer: The declared type is `Animal`.
+
 . What is the runtime type?
++
+Answer: The runtime type is `Dog`.
+
 . What is method overriding?
++
+Answer: Method overriding means that a subclass provides its own implementation of a method from the parent class.
+
 . Which `makeSound()` implementation executes and why?
++
+Answer: The `Dog` implementation executes because the actual object is a `Dog`.
+
 . What does dynamic method dispatch mean?
++
+Answer: Java decides at runtime which overridden method to execute based on the actual object type.
+
 . Why can polymorphism reduce type-specific branching?
++
+Answer: Each subclass has its own method implementation, so we don't need `if` or `switch` statements to check the object type.
 
 == Predict the Output
 
 Write down the exact output of `Main.java` before running it.
 Then run the program and compare.
 
+Expected output before adding Duck:
+
+[source,text]
+----
+Dog: woof
+Cat: meow
+Cow: moo
+----
+
+The actual output matches the expected output.
+
+After adding Duck, the output is:
+
+[source,text]
+----
+Dog: woof
+Cat: meow
+Cow: moo
+Duck: quack
+----
+
 == Extend the Example
 
 Add a `Duck` subclass that overrides `makeSound()`.
 Add a `Duck` object to the `animals` array without changing the loop.
 
+Solution:
+
+I created a new class called `Duck` that extends `Animal` and overrides the `makeSound()` method.
+
+Duck.java:
+
+[source,java]
+----
+package ch.bbw.cge._10_polymorphism;
+
+public class Duck extends Animal {
+
+    @Override
+    public void makeSound() {
+        System.out.println("Duck: quack");
+    }
+}
+----
+
+I added a new `Duck` object to the animals array in `Main.java`.
+
+Main.java:
+
+[source,java]
+----
+package ch.bbw.cge._10_polymorphism;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Animal[] animals = {
+                new Dog(),
+                new Cat(),
+                new Cow(),
+                new Duck()
+        };
+
+        for (Animal animal : animals) {
+            animal.makeSound();
+        }
+    }
+}
+----
+
+The loop did not need to be changed because all animals extend the `Animal` class.
+
 == Explain the Design
 
 Explain why the loop can call `makeSound()` without checking whether the current object is a `Dog`, `Cat`, `Cow`, or `Duck`.
+
+Answer:
+
+All animals extend the `Animal` class and override the `makeSound()` method.
+
+Because of polymorphism, Java automatically calls the correct method depending on the actual object type.
+
+This means we can use the same loop for all animals without checking their types with `if` or `switch` statements.

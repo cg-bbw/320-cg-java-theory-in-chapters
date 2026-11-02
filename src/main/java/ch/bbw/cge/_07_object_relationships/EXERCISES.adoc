@@ -1,33 +1,151 @@
-= Object Relationship Exercises
-
-The exercises in this file use `README.adoc` and the Java files in this package.
-The optional `DEEP_DIVE.adoc` material is not required.
+= Object Relationship Exercises – Lösungen
 
 == Check Your Understanding
 
-. Why is `Car` to `Engine` modeled as composition in this example?
-. Why is `Team` to `Player` modeled as aggregation?
-. Does Java enforce the difference between aggregation and composition?
-. What does unidirectional mean?
-. What does multiplicity describe?
+. Warum wird Car zu Engine als Komposition modelliert?
++
+`Car` erstellt seinen Motor selbst mit `new Engine()` im Konstruktor
+und speichert ihn im privaten Feld `engine`.
+Der Motor gehört in diesem Modell fest zum Auto und wird nicht
+mit anderen Autos geteilt.
+
+. Warum wird Team zu Player als Aggregation modelliert?
++
+Die Player-Objekte werden ausserhalb des Teams erstellt.
+Das Team erhält über `addPlayer(...)` Referenzen auf diese Objekte.
+Spieler können unabhängig vom Team existieren.
+
+. Erzwingt Java den Unterschied zwischen Aggregation und Komposition?
++
+Nein. Java besitzt dafür keine speziellen Schlüsselwörter.
+Beide Beziehungen werden durch Objektreferenzen umgesetzt.
+Der Unterschied ergibt sich aus dem Modell und der Implementierung.
+Auch `final` allein erzwingt keine Komposition.
+
+. Was bedeutet unidirektional?
++
+Die Beziehung ist nur in eine Richtung navigierbar.
+Ein Objekt kennt das andere über eine Referenz,
+aber das andere besitzt keine Rückreferenz.
+
+. Was beschreibt die Multiplizität?
++
+Sie beschreibt, wie viele Objekte an einer Beziehung beteiligt sein können.
+Beispiele: `1` bedeutet genau eines und `0..*` bedeutet beliebig viele,
+einschliesslich keines.
 
 == Inspect the Code
 
-For each relationship below, identify which class stores the reference:
+=== Car und Engine
 
-. `Car` and `Engine`;
-. `Team` and `Player`.
+`Car` speichert die Referenz auf `Engine`:
 
-Explain why the relationships are unidirectional in the current code.
+[source,text]
+----
+private final Engine engine;
+----
+
+Die Referenz wird im Konstruktor gesetzt:
+
+[source,text]
+----
+this.engine = new Engine();
+----
+
+Die Beziehung ist unidirektional:
+`Car` kennt seinen Motor, aber `Engine` besitzt keine Referenz auf `Car`.
+
+=== Team und Player
+
+`Team` speichert die Referenzen auf die Spieler in einer Liste:
+
+[source,text]
+----
+private final List<Player> players = new ArrayList<>();
+----
+
+Spieler werden über diese Methode hinzugefügt:
+
+[source,text]
+----
+public void addPlayer(Player player) {
+    players.add(player);
+}
+----
+
+Die Beziehung ist unidirektional:
+`Team` kennt seine Spieler, aber `Player` besitzt keine Referenz auf `Team`.
 
 == Classify the Relationship
 
-For each situation, choose the most suitable modeling term and explain your reasoning:
+. House erstellt und besitzt seine Room-Objekte.
++
+Komposition: Die Räume sind im beschriebenen Modell feste Bestandteile
+des Hauses und werden vom Haus selbst erstellt.
 
-. A `House` creates and owns its `Room` objects.
-. A `Playlist` stores references to existing `Song` objects.
-. A `Doctor` treats a `Patient` during an appointment.
+. Playlist speichert Referenzen auf bereits existierende Song-Objekte.
++
+Aggregation: Die Songs existieren unabhängig von der Playlist.
+Derselbe Song kann in mehreren Playlists vorkommen.
+
+. Doctor behandelt Patient während eines Termins.
++
+Assoziation: Arzt und Patient stehen in einer Beziehung,
+ohne dass einer ein Bestandteil des anderen ist.
 
 == UML Practice
 
-Draw the two relationships from this package and include a suitable multiplicity for the simplified code.
+Das folgende Klassendiagramm entspricht den vorhandenen Java-Dateien.
+
+[plantuml, object-relationships, svg]
+----
+@startuml
+
+class Car {
+    - model: String
+    - engine: Engine
+    + Car(model: String)
+    + start(): void
+}
+
+class Engine {
+    + start(): void
+}
+
+class Team {
+    - name: String
+    - players: List<Player>
+    + Team(name: String)
+    + addPlayer(player: Player): void
+    + getName(): String
+    + getPlayers(): List<Player>
+}
+
+class Player {
+    - name: String
+    + Player(name: String)
+    + getName(): String
+}
+
+Car "0..1" *--> "1" Engine : owns
+Team "0..*" o--> "0..*" Player : has
+
+@enduml
+----
+
+=== Erklärung der Beziehungen
+
+* Die ausgefüllte Raute bei `Car` bedeutet Komposition.
+* Jedes Car-Objekt besitzt genau einen Motor.
+* Ein Motor gehört höchstens zu einem Auto.
+`0..1` berücksichtigt, dass im gezeigten Java-Code auch ein
+eigenständiger Motor mit `new Engine()` erstellt werden kann.
+* Die leere Raute bei `Team` bedeutet Aggregation.
+* Ein Team kann keinen, einen oder mehrere Spieler enthalten.
+* Ein Spieler kann keinem, einem oder mehreren Teams zugeordnet sein,
+weil der Code das Hinzufügen desselben Spielers zu mehreren Teams erlaubt.
+* Die Pfeile zeigen die Navigationsrichtung:
+von Car zu Engine und von Team zu Player.
+
+Wenn ausschliesslich die durch Car erzeugten Motoren modelliert werden,
+kann an der Car-Seite auch `1` statt `0..1` verwendet werden.

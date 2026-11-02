@@ -1,42 +1,193 @@
-= Program Flow Exercises
-
-The exercises in this file use `README.adoc` and the Java files in this package.
+= Program Flow Exercises – Lösungen
 
 == Check Your Understanding
 
-. What is a condition?
-. What is the difference between a branch and an iteration?
-. When is an enhanced `for` loop useful?
-. What is the difference between `while` and `do` / `while`?
-. What does `break` do?
-. What does `continue` do?
-. What is the main difference between a class diagram and a sequence diagram?
+. Was ist eine Bedingung?
++
+Eine Bedingung ist ein Ausdruck, der `true` oder `false` ergibt.
+Beispiel: `score >= 60`.
+
+. Was ist der Unterschied zwischen einer Verzweigung und einer Iteration?
++
+Eine Verzweigung wählt abhängig von einer Bedingung einen Ausführungspfad.
+Eine Iteration ist ein einzelner Durchlauf einer Schleife.
+
+. Wann ist eine erweiterte for-Schleife sinnvoll?
++
+Wenn alle Elemente eines Arrays oder einer Sammlung verarbeitet werden
+sollen und kein Index benötigt wird.
++
+[source,text]
+----
+for (String name : names) {
+    System.out.println(name);
+}
+----
+
+. Was ist der Unterschied zwischen while und do/while?
++
+`while` prüft die Bedingung vor dem Schleifenrumpf.
+Der Rumpf kann deshalb auch nullmal ausgeführt werden.
++
+`do/while` prüft die Bedingung nach dem Schleifenrumpf.
+Der Rumpf wird deshalb mindestens einmal ausgeführt.
+
+. Was bewirkt break?
++
+Ein einfaches `break` beendet die innerste umgebende Schleife
+oder switch-Anweisung sofort.
+Danach wird mit dem Code dahinter fortgefahren.
+
+. Was bewirkt continue?
++
+Ein einfaches `continue` überspringt den Rest des aktuellen
+Durchlaufs der innersten umgebenden Schleife.
+Bei einer normalen for-Schleife wird danach der Aktualisierungsschritt
+ausgeführt, hier `i++`, und anschliessend die Bedingung erneut geprüft.
+
+. Was ist der Hauptunterschied zwischen Klassen- und Sequenzdiagramm?
++
+Ein Klassendiagramm zeigt die statische Struktur, beispielsweise
+Klassen, Felder, Methoden und Beziehungen.
+Ein Sequenzdiagramm zeigt die zeitliche Reihenfolge von Aufrufen
+und Rückgaben zwischen Beteiligten.
 
 == Trace the Code
 
-Before running the program, inspect `FlowExamples.java` and predict:
+Diese Vorhersagen beziehen sich auf den ursprünglichen Code
+vor den Änderungen.
 
-. which text `describeLevel(2)` returns;
-. which numbers `printSelectedNumbers()` prints;
-. how many times `countWithWhile()` executes its loop body.
+. Welchen Text liefert describeLevel(2)?
++
+`"Intermediate"`, weil der Wert `2` zum zweiten case passt.
 
-Run `Main.java` and compare your predictions with the output.
+. Welche Zahlen gibt printSelectedNumbers() aus?
++
+[source,text]
+----
+for: 0
+for: 1
+for: 3
+for: 4
+----
++
+Bei `2` überspringt `continue` die Ausgabe.
+Bei `5` beendet `break` die Schleife vor der Ausgabe.
+
+. Wie oft wird der Schleifenrumpf von countWithWhile() ausgeführt?
++
+Dreimal, mit den Werten `0`, `1` und `2`.
+Bei `3` ist die Bedingung `counter < 3` falsch.
++
+[source,text]
+----
+while: 0
+while: 1
+while: 2
+----
+
+Zum praktischen Vergleich wird die ursprüngliche Main.java
+vor der Änderung von FlowExamples.java gestartet.
 
 == Change a Branch
 
-Extend `describeLevel(...)` with a new `case` for level `3`.
-Return `"Advanced"` for that value.
+Die Methode `describeLevel(...)` wurde um den Fall `3` erweitert:
+
+[source,text]
+----
+public String describeLevel(int level) {
+    return switch (level) {
+        case 1 -> "Beginner";
+        case 2 -> "Intermediate";
+        case 3 -> "Advanced";
+        default -> "Other level";
+    };
+}
+----
+
+`describeLevel(3)` liefert jetzt `"Advanced"`.
+`describeLevel(2)` liefert weiterhin `"Intermediate"`.
 
 == Change a Loop
 
-Modify `printSelectedNumbers()` so that:
+Die bisherigen Bedingungen `i == 2` und `i == 5`
+wurden durch `i == 1` und `i == 6` ersetzt.
 
-* the value `1` is skipped with `continue`;
-* the loop stops when `i` reaches `6`.
+[source,text]
+----
+public void printSelectedNumbers() {
+    for (int i = 0; i < 10; i++) {
+        if (i == 1) {
+            continue;
+        }
 
-Predict the output before running it.
+        if (i == 6) {
+            break;
+        }
+
+        System.out.println("for: " + i);
+    }
+}
+----
+
+Vorhergesagte Ausgabe nach der Änderung:
+
+[source,text]
+----
+for: 0
+for: 2
+for: 3
+for: 4
+for: 5
+----
+
+Die Zahl `1` wird übersprungen.
+Bei `6` endet die Schleife, bevor die Zahl ausgegeben wird.
 
 == Draw the Sequence
 
-Create a simple sequence diagram for the call to `LoginService.login(...)` in `Main.java`.
-Include `Main`, `LoginService`, `login`, `validateUsername`, `validatePassword`, and the returned boolean result.
+Der Aufruf in Main.java lautet:
+
+[source,text]
+----
+loginService.login("learner", "java320!");
+----
+
+Ablauf:
+
+. `Main` ruft `login(...)` am LoginService-Objekt auf.
+. `login(...)` ruft intern `validateUsername("learner")` auf.
+. Die Prüfung liefert `true`, weil der Name weder null noch leer
+oder ausschliesslich aus Leerraum besteht.
+. Danach ruft `login(...)` intern `validatePassword("java320!")` auf.
+. Diese Prüfung liefert `true`, weil das Passwort nicht null ist
+und acht Zeichen enthält.
+. `login(...)` berechnet `true && true` und gibt `true` an Main zurück.
+
+Beide Prüfmethoden werden aufgerufen, weil ihre Aufrufe
+in zwei getrennten Anweisungen stehen.
+
+Das Sequenzdiagramm gehört zu dieser Lösung und zeigt
+die Aufrufe und Rückgaben in genau dieser Reihenfolge.
+
+== Erwartete Gesamtausgabe nach den Änderungen
+
+[source,text]
+----
+Passed
+Intermediate
+for: 0
+for: 2
+for: 3
+for: 4
+for: 5
+name: Alex
+name: Sam
+name: Lee
+while: 0
+while: 1
+while: 2
+do/while: 0
+do/while: 1
+Login successful: true
+----

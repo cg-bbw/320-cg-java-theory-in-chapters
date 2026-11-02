@@ -1,37 +1,214 @@
-= Interfaces and Abstract Classes Exercises
-
-The exercises in this file use `README.adoc` and the Java files in this package.
-The optional `DEEP_DIVE.adoc` material is not required.
+= Interfaces and Abstract Classes Exercises – Lösungen
 
 == Check Your Understanding
 
-. Can an abstract class be instantiated directly?
-. Can an abstract class have a constructor?
-. Can an abstract class contain concrete methods?
-. What does an interface contract require from an implementing class?
-. Can a class implement more than one interface?
-. Why is `@Override` useful?
-. When might an interface be preferable to an abstract class?
+. Kann eine abstrakte Klasse direkt instanziiert werden?
++
+Nein. `new Animal("Rex")` ist nicht erlaubt, weil Animal abstrakt ist.
+Eine konkrete Unterklasse wie Dog oder Horse kann instanziiert werden.
+
+. Kann eine abstrakte Klasse einen Konstruktor haben?
++
+Ja. Der Konstruktor initialisiert den gemeinsamen Zustand,
+wenn ein Objekt einer Unterklasse erstellt wird.
+Im Beispiel ruft `super(name)` den Konstruktor von Animal auf.
+
+. Kann eine abstrakte Klasse konkrete Methoden enthalten?
++
+Ja. Sie kann Methoden mit einer Implementierung enthalten.
+Im Beispiel ist `printName()` eine konkrete Methode.
+
+. Was verlangt der Vertrag eines Interfaces von einer implementierenden Klasse?
++
+Eine konkrete Klasse muss die geforderten abstrakten Methoden
+bereitstellen, entweder durch eigene Implementierungen oder durch Vererbung.
+Die Implementierungen müssen die vorgeschriebenen Signaturen einhalten
+und das vereinbarte Verhalten erfüllen.
++
+Im Beispiel verlangt Trainable die öffentliche Methode `performTrick()`.
+
+. Kann eine Klasse mehrere Interfaces implementieren?
++
+Ja. Eine Klasse kann mehrere Interfaces implementieren.
+Sie kann jedoch nur eine direkte Oberklasse erweitern.
+
+. Warum ist @Override nützlich?
++
+Die Annotation zeigt, dass eine Methode eine geerbte Methode überschreibt
+oder eine Interface-Methode implementiert.
+Der Compiler prüft, ob eine passende Methode vorhanden ist.
+Dadurch können beispielsweise Tippfehler im Methodennamen erkannt werden.
+
+. Wann ist ein Interface einer abstrakten Klasse vorzuziehen?
++
+Wenn unterschiedliche Klassen dieselbe Fähigkeit anbieten sollen,
+ohne gemeinsamen Instanzzustand oder eine gemeinsame Basisimplementierung
+zu benötigen.
++
+Ein Interface beschreibt einen Verhaltensvertrag.
+Es kann auch von Klassen implementiert werden,
+die bereits eine andere Oberklasse besitzen.
 
 == Mark the Code
 
-In the Java files, identify:
+=== Eine abstrakte Klasse
 
-* one abstract class;
-* one abstract method;
-* one concrete method in the abstract class;
-* one interface;
-* one `extends` relationship;
-* one `implements` relationship;
-* two methods annotated with `@Override`.
+[source,text]
+----
+public abstract class Animal {
+----
+
+Animal kann nicht direkt instanziiert werden.
+
+=== Eine abstrakte Methode
+
+In Animal.java:
+
+[source,text]
+----
+public abstract void makeSound();
+----
+
+Diese Methode besitzt hier keinen Methodenrumpf.
+Konkrete Unterklassen müssen eine Implementierung bereitstellen.
+
+=== Eine konkrete Methode in der abstrakten Klasse
+
+In Animal.java:
+
+[source,text]
+----
+public void printName() {
+    System.out.println("Animal: " + name);
+}
+----
+
+Die Methode enthält bereits eine Implementierung
+und wird von Dog und Horse geerbt.
+
+=== Ein Interface
+
+In Trainable.java:
+
+[source,text]
+----
+public interface Trainable {
+
+    void performTrick();
+}
+----
+
+Die Methode ist hier implizit `public abstract`.
+
+=== Eine extends-Beziehung
+
+[source,text]
+----
+public class Dog extends Animal implements Trainable {
+----
+
+`Dog extends Animal` bedeutet, dass Dog von Animal erbt.
+
+=== Eine implements-Beziehung
+
+`Dog implements Trainable` bedeutet, dass Dog den Vertrag
+des Interfaces Trainable erfüllt.
+
+=== Zwei Methoden mit @Override
+
+In Dog.java:
+
+[source,text]
+----
+@Override
+public void makeSound() {
+    System.out.println("Woof!");
+}
+
+@Override
+public void performTrick() {
+    System.out.println("The dog sits down.");
+}
+----
+
+`makeSound()` implementiert die abstrakte Methode von Animal.
+`performTrick()` implementiert die Methode aus Trainable.
 
 == Extend the Example
 
-Create a `Horse` class that extends `Animal` and implements `Trainable`.
-Give it different implementations of `makeSound()` and `performTrick()`.
+Die neue Klasse Horse erweitert Animal und implementiert Trainable.
+
+[source,text]
+----
+public class Horse extends Animal implements Trainable {
+
+    public Horse(String name) {
+        super(name);
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println("Neigh!");
+    }
+
+    @Override
+    public void performTrick() {
+        System.out.println("The horse bows.");
+    }
+}
+----
+
+* `super(name)` initialisiert den Namen über den Animal-Konstruktor.
+* `printName()` wird von Animal geerbt.
+* `makeSound()` gibt einen Pferdelaut aus.
+* `performTrick()` beschreibt einen anderen Trick als bei Dog.
+
+In Main.java wird das Pferd erstellt und verwendet:
+
+[source,text]
+----
+Horse horse = new Horse("Spirit");
+
+horse.printName();
+horse.makeSound();
+horse.performTrick();
+----
 
 == Design Question
 
-You are modeling `Printable`, `Invoice`, and `Photo`.
-Would `Printable` be more naturally represented as a superclass or an interface?
-Explain your choice using the idea of a behavioral contract.
+`Printable` eignet sich besser als Interface.
+
+Eine Rechnung und ein Foto sind unterschiedliche Arten von Objekten.
+Beide können jedoch die Fähigkeit „druckbar“ anbieten.
+
+Das Interface legt dafür einen gemeinsamen Verhaltensvertrag fest:
+
+[source,text]
+----
+public interface Printable {
+
+    void print();
+}
+----
+
+`Invoice` und `Photo` implementieren jeweils `Printable`
+und stellen eine öffentliche Methode `print()` bereit.
+
+Die Rechnung kann ihre Rechnungsdaten ausgeben,
+während das Foto seine Bildinhalte ausgibt.
+Die konkrete Umsetzung darf unterschiedlich sein.
+
+Code, der mit Printable arbeitet, kann bei beiden Objekten `print()`
+aufrufen, ohne deren genaue Klasse kennen zu müssen.
+
+== Erwartete Gesamtausgabe
+
+[source,text]
+----
+Animal: Rex
+Woof!
+The dog sits down.
+Animal: Spirit
+Neigh!
+The horse bows.
+----

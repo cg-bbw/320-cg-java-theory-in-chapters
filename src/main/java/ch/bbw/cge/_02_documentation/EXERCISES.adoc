@@ -1,51 +1,155 @@
-= Documentation Exercises
-
-The exercises in this file use only the concepts explained in `README.adoc` and the Java files in this package.
+= Documentation Exercises – Lösungen
 
 == Check Your Understanding
 
-. What is the difference between a line comment and a block comment?
-. What is the purpose of Javadoc?
-. What is the difference between a Javadoc tag and a Java annotation?
-. When should a method have an `@return` tag?
-. Give one example of a comment that would only repeat obvious code.
+. Was ist der Unterschied zwischen einem Zeilenkommentar und einem Blockkommentar?
++
+Ein Zeilenkommentar beginnt mit `//` und endet am Zeilenende.
+Ein Blockkommentar beginnt mit `/*` und endet mit `*/`.
+Er kann mehrere Zeilen umfassen.
+
+. Welchen Zweck hat Javadoc?
++
+Javadoc dokumentiert Klassen und Methoden mit Kommentaren der Form
+`/** ... */`. Daraus kann das Javadoc-Werkzeug HTML-Dokumentation erzeugen.
+
+. Was ist der Unterschied zwischen einem Javadoc-Tag und einer Java-Annotation?
++
+Ein Javadoc-Tag steht in einem Dokumentationskommentar.
+Beispiele sind `@param` und `@return`.
+Eine Annotation ist Teil des Java-Codes und liefert Metadaten.
+Ein Beispiel ist `@Override`.
+
+. Wann sollte eine Methode einen @return-Tag haben?
++
+Wenn die Methode einen Wert zurückgibt, also nicht den Rückgabetyp `void` hat.
+Der Tag erklärt, was der zurückgegebene Wert bedeutet.
+
+. Nenne einen Kommentar, der nur offensichtlichen Code wiederholt.
++
+[source,text]
+----
+// Sets the age to 18
+int age = 18;
+----
++
+Der Kommentar wiederholt nur die bereits verständliche Zuweisung.
 
 == Improve the Comment
 
-Rewrite this code so that either the comment becomes useful or the variable name makes the comment unnecessary:
+Der Name `completedExercises` erklärt den Zweck.
+Ein zusätzlicher Kommentar ist deshalb nicht nötig.
 
-[source,java]
+[source,text]
 ----
-// Number of completed exercises
-int n = 7;
+int completedExercises = 7;
 ----
 
 == Write Javadoc
 
-Write Javadoc for this method:
-
-[source,java]
+[source,text]
 ----
+/**
+ * Creates a greeting for the given person.
+ *
+ * @param name the name of the person to greet
+ * @return "Hello " followed by the given name
+ */
 public String formatGreeting(String name) {
     return "Hello " + name;
 }
 ----
 
-Include an explanation, `@param`, and `@return`.
-
 == Inspect the Example
 
-Open `DocumentationExamples.java` and identify:
+=== Ein Zeilenkommentar
 
-* one line comment;
-* one block comment;
-* one Javadoc comment;
-* one `@param` tag;
-* one `@return` tag;
-* one `TODO`.
+In `DocumentationExamples.java` vor dem Feld `temporaryText`:
 
-Then open `DocumentationLinkedClass.java` and find the `@see` tag.
+[source,text]
+----
+// This text is intentionally temporary so the TODO example has a visible target.
+----
+
+=== Ein Blockkommentar
+
+In `DocumentationExamples.java` vor dem Feld `documentationTopic`:
+
+[source,text]
+----
+/*
+ * A block comment can explain a larger section.
+ * It is not automatically part of generated API documentation.
+ */
+----
+
+=== Ein Javadoc-Kommentar
+
+In `DocumentationExamples.java` vor der Methode `createProgressMessage`:
+
+[source,text]
+----
+/**
+ * Combines a learner name with a short progress message.
+ *
+ * @param learnerName the name shown in the message
+ * @param completedExercises the number of completed exercises
+ * @return a readable progress message
+ */
+----
+
+=== Ein @param-Tag
+
+[source,text]
+----
+@param learnerName the name shown in the message
+----
+
+Er beschreibt den Parameter `learnerName`.
+
+=== Ein @return-Tag
+
+[source,text]
+----
+@return a readable progress message
+----
+
+Er beschreibt den Rückgabewert der Methode `createProgressMessage`.
+
+=== Ein TODO-Kommentar
+
+In `DocumentationExamples.java`:
+
+[source,text]
+----
+// TODO Replace this training text when the exercise is complete.
+----
+
+Er markiert eine noch offene Aufgabe.
+
+=== Der @see-Tag
+
+In `DocumentationLinkedClass.java` im Javadoc
+der Methode `showLinkedDocumentation`:
+
+[source,text]
+----
+@see DocumentationExamples#createSummary()
+----
+
+Er verweist auf die Methode `createSummary()` der Klasse
+`DocumentationExamples`.
 
 == Explore the IDE
 
-Open the TODO tool window in IntelliJ IDEA and verify that the TODO in `DocumentationExamples.java` is detected.
+. Das TODO-Fenster über `View > Tool Windows > TODO` öffnen.
+. Den Bereich für das aktuelle Projekt auswählen.
+. Den folgenden Eintrag in `DocumentationExamples.java` suchen:
++
+[source,text]
+----
+TODO Replace this training text when the exercise is complete.
+----
+. Den Eintrag doppelt anklicken. IntelliJ springt zur entsprechenden Stelle.
+
+Wenn dieser Eintrag angezeigt wird, wurde der TODO-Kommentar erkannt.

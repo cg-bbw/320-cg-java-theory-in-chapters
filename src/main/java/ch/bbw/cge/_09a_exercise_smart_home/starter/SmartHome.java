@@ -17,11 +17,9 @@ public class SmartHome {
     }
 
     public Room addRoom(String name) {
-        // TODO:
-        // 1. Create a new Room.
-        // 2. Store it in rooms.
-        // 3. Return the created Room.
-        return null;
+        Room room = new Room(name);
+        rooms.add(room);
+        return room;
     }
 
     public List<Room> getRooms() {

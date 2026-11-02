@@ -1,197 +1,224 @@
-= Smart Home Exercise
-
-== Goal
-
-In this exercise, you combine the concepts from Chapters 07 to 09 in one larger Java example.
-
-You will work with:
-
-* object relationships;
-* aggregation and composition;
-* relationship direction and multiplicity;
-* delegation;
-* inheritance;
-* abstract classes;
-* interfaces;
-* method overriding.
-
-The Java files are already prepared. Some parts are complete and other parts contain `TODO` comments.
-
-== Previous Chapters
-
-Use these chapters as references:
-
-* xref:../_07_object_relationships/README.adoc[Object Relationships]
-* xref:../_08_delegation_inheritance/README.adoc[Delegation and Inheritance]
-* xref:../_09_interfaces_abstract_classes/README.adoc[Interfaces and Abstract Classes]
-
-You are not expected to use concepts from later chapters.
-
-== Scenario
-
-A Smart Home contains rooms. A room can contain several devices such as lamps and thermostats. Different device types share common information but provide their own behavior. Some devices can be switched on and off. A controller delegates switching operations to such devices.
-
-The finished model should approximately represent:
-
-[source,text]
-----
-My Smart Home
-├── Living Room
-│   ├── Ceiling Lamp
-│   └── Living Room Thermostat
-└── Office
-    ├── Desk Lamp
-    └── Office Thermostat
-----
+= Smart Home Exercise – Lösungen
 
 == Part 1: Inspect the Existing Code
 
-Before changing anything, inspect all Java files.
+. Welche Klasse ist abstrakt?
++
+`Device` ist abstrakt und kann nicht direkt instanziiert werden.
 
-Answer:
+. Welche Klassen erben von einer anderen Klasse?
++
+`Lamp` und `Thermostat` erben von `Device`.
+In der optionalen Erweiterung erbt auch `SmartPlug` von `Device`.
 
-. Which class is abstract?
-. Which classes inherit from another class?
-. Which class implements `Switchable`?
-. Which class stores several `Device` references?
-. Which class stores several `Room` references?
-. Where can you identify composition?
-. Where can you identify aggregation?
-. Which relationships are unidirectional?
+. Welche Klasse implementiert Switchable?
++
+`Lamp` implementiert `Switchable`.
+In der optionalen Erweiterung implementiert auch `SmartPlug` dieses Interface.
 
-The intended simplified UML relationships are:
+. Welche Klasse speichert mehrere Device-Referenzen?
++
+`Room` speichert sie in `List<Device> devices`.
+
+. Welche Klasse speichert mehrere Room-Referenzen?
++
+`SmartHome` speichert sie in `List<Room> rooms`.
+
+. Wo erkennt man Komposition?
++
+Zwischen `SmartHome` und `Room`.
+Das SmartHome erstellt seine Räume selbst in `addRoom(...)`
+und verwaltet sie als eigene Bestandteile.
+
+. Wo erkennt man Aggregation?
++
+Zwischen `Room` und `Device`.
+Die Geräte werden unabhängig erstellt und anschliessend einem Raum hinzugefügt.
+
+. Welche Beziehungen sind unidirektional?
++
+`SmartHome` kennt seine Räume, aber Room besitzt keine Rückreferenz
+auf SmartHome.
++
+`Room` kennt seine Geräte, aber Device besitzt keine Rückreferenz auf Room.
++
+Auch die Nutzung von Switchable durch den Controller erfolgt nur
+in eine Richtung. Die Geräte kennen den Controller nicht.
+
+== Part 2: Complete Room
+
+Die Methode speichert die übergebene Gerätereferenz:
 
 [source,text]
 ----
-SmartHome ◆──────── 1..* Room
-
-Room ◇──────── 0..* Device
+public void addDevice(Device device) {
+    devices.add(device);
+}
 ----
 
-== Part 2: Complete `Room`
+Dies unterstützt Aggregation, weil das Gerät bereits unabhängig
+vom Raum existiert. Der Raum erstellt das Gerät nicht selbst.
 
-Complete `addDevice(Device device)`.
+== Part 3: Complete SmartHome
 
-A device is created independently and then added to a room:
-
-[source,java]
+[source,text]
 ----
-Lamp deskLamp = new Lamp("Desk Lamp");
-
-Room office = new Room("Office");
-office.addDevice(deskLamp);
-----
-
-Why does this support modeling the relationship as aggregation?
-
-NOTE: `List<Device>` is used only to store multiple device references. Collections are not the topic of this exercise.
-
-== Part 3: Complete `SmartHome`
-
-Complete `addRoom(String name)`.
-
-The method should:
-
-. create a new `Room`;
-. add it to the list of rooms;
-. return the created room.
-
-The following code should work:
-
-[source,java]
-----
-SmartHome home = new SmartHome("My Smart Home");
-
-Room livingRoom = home.addRoom("Living Room");
-Room office = home.addRoom("Office");
+public Room addRoom(String name) {
+    Room room = new Room(name);
+    rooms.add(room);
+    return room;
+}
 ----
 
-Why does creating the room through `SmartHome` support modeling this relationship as composition?
+Das SmartHome erstellt und verwaltet seine Räume.
+Deshalb wird die Beziehung im vorgesehenen Modell als Komposition verstanden.
+
+Java erzwingt dieses Besitzverhältnis nicht automatisch.
+Der öffentliche Room-Konstruktor erlaubt technisch auch,
+Räume ausserhalb eines SmartHome zu erstellen.
 
 == Part 4: Complete the Device Classes
 
-Inspect `Device.java`.
+=== Bestandteile von Device
 
-Identify:
-
-* the common field;
-* the constructor;
-* the concrete method;
-* the abstract method.
-
-Then complete the missing methods in `Lamp` and `Thermostat`.
+* Gemeinsames Feld: `private final String name`.
+* Konstruktor: `public Device(String name)`.
+* Konkrete Methode: `public String getName()`.
+* Abstrakte Methode: `public abstract String getStatus()`.
 
 === Lamp
 
-Complete:
-
-* `turnOn()`;
-* `turnOff()`;
-* `getStatus()`.
-
-Possible output:
-
-[source,text]
-----
-Desk Lamp: ON
-----
+* `turnOn()` setzt `switchedOn` auf `true`.
+* `turnOff()` setzt `switchedOn` auf `false`.
+* `getStatus()` liefert den Gerätenamen und `ON` oder `OFF`.
+* Das boolean-Instanzfeld hat anfangs den Standardwert `false`.
 
 === Thermostat
 
-Complete `getStatus()`.
+`getStatus()` liefert den Gerätenamen und die Temperatur in Grad Celsius.
 
-Possible output:
+=== Antworten
 
-[source,text]
-----
-Living Room Thermostat: 21.5 °C
-----
+. Warum gehört name in Device?
++
+Alle Geräte besitzen einen Namen.
+Das gemeinsame Feld und die Methode `getName()` müssen dadurch
+nicht in jeder Geräteklasse erneut geschrieben werden.
 
-Answer:
+. Warum ist getStatus() abstrakt?
++
+Jedes konkrete Gerät muss einen Status liefern,
+aber der Inhalt hängt vom Gerätetyp ab.
+Eine Lampe meldet ihren Schaltzustand, ein Thermostat seine Temperatur.
 
-. Why does `name` belong in `Device`?
-. Why is `getStatus()` abstract?
-. Why does `Lamp` implement `Switchable`, while `Thermostat` does not?
+. Warum implementiert Lamp Switchable, Thermostat aber nicht?
++
+Die Lampe kann in diesem Modell ein- und ausgeschaltet werden.
+Der Thermostat verwaltet hier nur seine Temperatur.
+Er bietet in diesem vereinfachten Modell keine Schaltfunktionen an.
 
 == Part 5: Complete the Controller
 
-Complete:
-
-* `switchOn(Switchable device)`;
-* `switchOff(Switchable device)`.
-
-The controller must delegate the operation to the supplied object.
-
 [source,text]
 ----
-SmartHomeController
-        |
-        | delegates
-        v
-   Switchable object
-        |
-        v
-   turnOn() / turnOff()
+public void switchOn(Switchable device) {
+    device.turnOn();
+}
+
+public void switchOff(Switchable device) {
+    device.turnOff();
+}
 ----
 
-Which object actually changes its own state?
+=== Welches Objekt verändert seinen Zustand?
 
-Why is this delegation?
+Das übergebene Gerät selbst, beispielsweise die Lampe.
+Seine Methode verändert das Feld `switchedOn`.
 
-== Part 6: Complete `Main`
+=== Warum ist das Delegation?
 
-Complete `Main.java`.
+Der Controller führt die Zustandsänderung nicht selbst durch.
+Er ruft die passende Methode am übergebenen Gerät auf
+und übergibt diesem damit die Aufgabe.
 
-Your program should:
+== Part 6: Complete Main
 
-. create `Living Room` and `Office` through `SmartHome`;
-. create all four devices;
-. add the devices to the correct rooms;
-. switch on the Ceiling Lamp through `SmartHomeController`;
-. leave the Desk Lamp switched off;
-. print every room and every device status.
+Main erstellt:
 
-A possible output is:
+* das SmartHome „My Smart Home“;
+* die Räume „Living Room“ und „Office“ über `home.addRoom(...)`;
+* die Ceiling Lamp und den Living Room Thermostat mit 21.5 °C;
+* die Desk Lamp und den Office Thermostat mit 20.0 °C.
+
+Die Geräte werden ihren Räumen hinzugefügt.
+
+Der Controller schaltet die Ceiling Lamp ein.
+Die Desk Lamp wird zum Prüfen kurz ein- und wieder ausgeschaltet.
+Bei der Ausgabe ist sie ausgeschaltet.
+
+Eine äussere Schleife durchläuft die Räume.
+Eine innere Schleife durchläuft die Geräte des jeweiligen Raumes
+und gibt deren Status aus.
+
+== Part 7: Review the Relationships
+
+[cols="2,2,2,3", options="header"]
+|===
+|Relationship |Type |Direction |Multiplicity
+
+|SmartHome – Room
+|Komposition
+|SmartHome → Room
+|Vorgesehenes Modell: ein SmartHome hat 1..* Räume;
+jeder zugehörige Raum gehört zu einem SmartHome.
+
+|Room – Device
+|Aggregation
+|Room → Device
+|Ein Raum enthält 0..* Geräte.
+Im Code kann dasselbe Gerät in 0..* Räumen gespeichert werden.
+
+|Lamp – Device
+|Vererbung / Generalisierung
+|Lamp → Device
+|Keine Assoziationsmultiplizität; Lamp ist ein Untertyp von Device.
+
+|Lamp – Switchable
+|Interface-Realisierung
+|Lamp → Switchable
+|Keine Assoziationsmultiplizität; Lamp erfüllt den Switchable-Vertrag.
+
+|SmartHomeController – Switchable
+|Abhängigkeit durch Nutzung; Delegation
+|SmartHomeController → Switchable
+|Keine dauerhaft gespeicherte Beziehung;
+pro Methodenaufruf wird ein Switchable-Objekt übergeben.
+|===
+
+=== Modell und tatsächlicher Code
+
+Die Aufgabe sieht für SmartHome zu Room die Multiplizität `1..*` vor.
+Direkt nach `new SmartHome(...)` ist die Liste jedoch noch leer.
+Der Code erlaubt deshalb zunächst `0..*` Räume.
+Main stellt den vorgesehenen Zustand durch das Hinzufügen zweier Räume her.
+
+Der Code verhindert nicht, dass dieselbe Gerätereferenz
+mehreren Räumen hinzugefügt wird.
+Eine Beschränkung auf genau einen Raum wäre eine zusätzliche Regel,
+die hier nicht implementiert ist.
+
+== Optional Extension: SmartPlug
+
+`SmartPlug` erbt von Device und implementiert Switchable.
+
+Die Klasse besitzt einen eigenen Schaltzustand.
+Sie implementiert `turnOn()`, `turnOff()` und `getStatus()`.
+
+Der vorhandene Controller kann die Steckdose unverändert steuern,
+weil seine Methoden den Typ Switchable erwarten.
+Er muss die konkrete Geräteklasse nicht kennen.
+
+== Erwartete Ausgabe
 
 [source,text]
 ----
@@ -203,68 +230,29 @@ Ceiling Lamp: ON
 Living Room Thermostat: 21.5 °C
 
 Office
-------
+------------
 Desk Lamp: OFF
 Office Thermostat: 20.0 °C
+
+Optional extension:
+Office Smart Plug: ON
+Office Smart Plug: OFF
 ----
-
-== Part 7: Review the Relationships
-
-Complete the table.
-
-[cols="2,2,2,2"]
-|===
-|Relationship |Type |Direction |Multiplicity
-
-|`SmartHome` - `Room`
-|
-|
-|
-
-|`Room` - `Device`
-|
-|
-|
-
-|`Lamp` - `Device`
-|
-|
-|
-
-|`Lamp` - `Switchable`
-|
-|
-|
-
-|`SmartHomeController` - `Switchable`
-|
-|
-|
-|===
-
-Not every relationship is an aggregation or composition.
-
-== Optional Extension: `SmartPlug`
-
-Create a `SmartPlug`.
-
-A Smart Plug:
-
-* is a `Device`;
-* can be switched on and off;
-* implements `Switchable`;
-* reports its state through `getStatus()`.
-
-The existing `SmartHomeController` should be able to switch it on without being modified.
 
 == Final Check
 
-Make sure that:
+Nach dem Einfügen prüfen:
 
-* the project compiles;
-* all required `TODO` sections are completed;
-* rooms are created through `SmartHome`;
-* devices are added to rooms;
-* lamps can be controlled through `SmartHomeController`;
-* all device statuses can be printed;
-* you can explain aggregation, composition, inheritance, interfaces, overriding, and delegation using your code.
+* Main starten und die Ausgabe mit der erwarteten Ausgabe vergleichen.
+* Prüfen, dass das Programm mit Exit Code 0 endet.
+* Prüfen, dass die ursprünglichen TODO-Stellen vollständig ersetzt wurden.
+
+=== Begriffe am Beispiel
+
+* Aggregation: Room speichert unabhängig erstellte Geräte.
+* Komposition: SmartHome erstellt und verwaltet seine Räume.
+* Vererbung: Lamp, Thermostat und SmartPlug erweitern Device.
+* Abstrakte Klasse: Device definiert gemeinsame Eigenschaften und Verhalten.
+* Interface: Switchable legt die Schaltoperationen fest.
+* Überschreiben: Die Geräte implementieren `getStatus()` mit `@Override`.
+* Delegation: Der Controller ruft `turnOn()` oder `turnOff()` am Gerät auf.
