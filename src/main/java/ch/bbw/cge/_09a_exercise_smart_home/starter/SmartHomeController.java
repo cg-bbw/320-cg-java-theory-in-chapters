@@ -4,9 +4,11 @@ public class SmartHomeController {
 
     public void switchOn(Switchable device) {
         // TODO: Delegate the operation to the provided device.
+        device.turnOn();
     }
 
     public void switchOff(Switchable device) {
         // TODO: Delegate the operation to the provided device.
+        device.turnOff();
     }
 }

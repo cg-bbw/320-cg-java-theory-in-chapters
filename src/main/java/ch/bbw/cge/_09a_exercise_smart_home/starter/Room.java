@@ -18,6 +18,7 @@ public class Room {
 
     public void addDevice(Device device) {
         // TODO: Add the existing device to this room.
+        devices.add(device);
     }
 
     public List<Device> getDevices() {
