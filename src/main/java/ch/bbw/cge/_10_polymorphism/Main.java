@@ -6,7 +6,8 @@ public class Main {
         Animal[] animals = {
                 new Dog(),
                 new Cat(),
-                new Cow()
+                new Cow(),
+                new Duck()
         };
 
         // The variable type is Animal, but the runtime object decides which overridden method executes.
