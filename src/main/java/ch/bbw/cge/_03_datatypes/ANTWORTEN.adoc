@@ -1,0 +1,30 @@
+= Antworten Datentypen
+
+== Check Your Understanding
+
+. `byte`, `short`, `int`, `long`, `float`, `double`, `char`, `boolean`
+. Referenztyp. `String` ist eine Klasse.
+. Deklaration: Variable wird mit Typ und Name erstellt (`int age;`). Initialisierung: Variable bekommt den ersten Wert (`age = 18;`).
+. Einer Variable, die schon einen Wert hat, wird ein neuer Wert zugewiesen.
+. Beim Cast nach `int` werden die Nachkommastellen abgeschnitten, nicht gerundet. Aus 3.9 wird 3.
+. `Boolean`
+
+== Identify the Types
+
+* Primitive Typen: `int age`, `double temperature`, `boolean courseFinished`, `char grade`
+* Referenztyp: `String courseName`
+* Widening: `double ageAsDouble = age;`
+* Narrowing: `int wholeTemperature = (int) temperature;`
+* Wrapper-Klasse: `Integer boxedAge = age;`
+
+== Predict the Output
+
+Es wird `8` ausgegeben. Der Cast `(int)` schneidet die Nachkommastellen ab, darum wird aus 8.7 nicht 9 sondern 8.
+
+== Choose a Type
+
+. Alter: `int`, ist eine ganze Zahl und `int` reicht locker.
+. Tür offen: `boolean`, es gibt nur offen oder zu.
+. Preis: `double`, weil es Nachkommastellen hat. (Für echtes Geld wäre `BigDecimal` genauer.)
+. Ein Zeichen: `char`
+. Ganzer Name: `String`, weil es mehrere Zeichen sind.
