@@ -6,11 +6,18 @@ The optional `DEEP_DIVE.adoc` material is not required.
 == Check Your Understanding
 
 . What is the difference between a class and an object?
+A class is a blueprint that describes the fields and methods of objects. An object is a concrete instance created from a class.
 . What is an instance field?
+An instance field is a variable declared inside a class but outside methods and constructors. Every object has its own values for these fields.
 . What is the difference between a parameter and an argument?
+A parameter is a variable declared in a method or constructor. An argument is the actual value passed to that parameter when the method or constructor is called.
 . Why does a constructor have no return type?
+A constructor is a special class member that initializes a newly created object. It does not return a value.
 . What does `this.model = model;` mean?
+this.model refers to the instance field, while model refers to the constructor parameter. The statement assigns the parameter value to the instance field.
 . What is the difference between object state and behavior?
+State describes the current values stored in an object's instance fields.
+Behavior describes what an object can do through its methods.
 
 == Mark the Code
 
@@ -40,13 +47,27 @@ firstCar.accelerate(50);
 
 Explain:
 
-* the object reference;
-* the method name;
-* the argument;
-* the matching parameter;
-* the effect on the object's state.
+* the object reference: firstCar;
+* the method name: accelerate;
+* the argument: 50;
+* the matching parameter: targetSpeed ;
+* the effect on the object's state.: he method changes the speed of the first car to 50. The second car remains unchanged.
 
 == UML Practice
 
 Draw a class diagram for `Car` with its fields, constructor, and public methods.
 Then draw an object diagram for the two objects created in `Main.java` after `firstCar.accelerate(50)` has executed.
+
+
+firstCar : Car
+-----------------------
+model = "Audi A3"
+year = 2023
+speed = 50
+
+
+secondCar : Car
+-----------------------
+model = "VW Golf"
+year = 2022
+speed = 0
