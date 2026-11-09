@@ -56,6 +56,8 @@ Only conversions permitted by Java's type system are valid.
 == Autoboxing and Unboxing
 
 Java can automatically convert between a primitive and its matching wrapper class.
+When a primitive type value is stored inside a wrapper class variable, it is called autoboxing.
+When a variable from a wrapper class type should be stored in a primitive type variable, it is called unboxing.
 
 [source,java]
 ----

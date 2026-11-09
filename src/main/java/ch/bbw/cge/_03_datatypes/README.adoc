@@ -78,7 +78,10 @@ Declaration introduces the variable.
 Initialization gives it its first usable value.
 A later assignment replaces the previous value and is a reassignment.
 
-== Widening and Narrowing
+== Type Casting and Type Conversion (Implicit Casting)
+
+Type casting can happen in two ways: implicit, without mentioning the data type (Widening) and explicit, with writing down the type (Narrowing).
+When the type casting happens implicit, it is called Type Conversion. When it requires the type mentioned (explicit) it is called Casting.
 
 [source,java]
 ----
