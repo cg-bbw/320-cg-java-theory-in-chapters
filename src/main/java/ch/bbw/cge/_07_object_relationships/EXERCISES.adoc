@@ -6,10 +6,15 @@ The optional `DEEP_DIVE.adoc` material is not required.
 == Check Your Understanding
 
 . Why is `Car` to `Engine` modeled as composition in this example?
+Because the Car creates and owns its Engine. The engine is created inside the constructor of the Car and is considered part of the car.
 . Why is `Team` to `Player` modeled as aggregation?
+Because a Player can exist independently of a Team. The team only stores references to existing players and does not create or control their lifetime.
 . Does Java enforce the difference between aggregation and composition?
+No. Java has no specific keywords for aggregation or composition. The difference depends on the intended ownership and lifetime of the objects.
 . What does unidirectional mean?
+Unidirectional means that only one object stores or uses a reference to the other object. The relationship only works in one direction.
 . What does multiplicity describe?
+Multiplicity describes how many objects can participate at one end of a relationship.
 
 == Inspect the Code
 
@@ -20,14 +25,36 @@ For each relationship below, identify which class stores the reference:
 
 Explain why the relationships are unidirectional in the current code.
 
+Car and Engine
+- The Car class stores the reference to the Engine.
+- The Engine does not store a reference to the Car.
+
+Team and Player
+- The Team class stores references to multiple Player objects in a List<Player>.
+- The Player class does not store a reference to the Team.
+Why are the relationships unidirectional?
+
+Because only one side stores a reference to the other. The Car knows its Engine, and the Team knows its Players, but neither Engine nor Player knows the other side.
+
 == Classify the Relationship
 
 For each situation, choose the most suitable modeling term and explain your reasoning:
 
 . A `House` creates and owns its `Room` objects.
+Composition
+The house creates and owns its rooms. The rooms are considered parts of the house, and the house controls their lifetime in the model.
 . A `Playlist` stores references to existing `Song` objects.
+Aggregation
+Songs can exist independently of a playlist. The playlist only stores references to existing songs.
 . A `Doctor` treats a `Patient` during an appointment.
+Association
+The doctor and patient interact with each other, but neither owns the other. This is a general relationship between objects.
 
 == UML Practice
 
 Draw the two relationships from this package and include a suitable multiplicity for the simplified code.
+
+------- <──────── --------
+| Team |          | Player |
+--------           --------
+1                   0..*
