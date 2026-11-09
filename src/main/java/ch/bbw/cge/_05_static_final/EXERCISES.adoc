@@ -6,10 +6,16 @@ The optional `DEEP_DIVE.adoc` material is not required.
 == Check Your Understanding
 
 . How many copies of a static field are associated with one loaded class?
+There is only one copy of a static field per loaded class. It is shared by all objects of that class.
 . How do static fields differ from instance fields?
+Static fields belong to the class and are shared by all objects.
+Instance fields belong to individual objects. Every object has its own copy.
 . What does `final` prevent for a variable?
+The keyword final prevents a variable from being reassigned after it has received its value.
 . Why can the state of an object still change through a final reference?
+Because final only prevents the reference from being reassigned. It does not make the referenced object immutable. Its state can still change through methods.
 . Why is `MAX_STUDENTS` written in `UPPER_SNAKE_CASE`?
+Because it is a constant. Java naming conventions use uppercase letters with underscores to separate words in constant names.
 
 == Predict the Result
 
@@ -21,6 +27,9 @@ selectedCourse = databaseCourse;
 ----
 
 Explain why.
+
+No, this line will not compile if selectedCourse has already been initialized and declared as final.
+The keyword final prevents reassignment. Therefore, selectedCourse cannot refer to another object after its initial assignment.
 
 == Inspect the Code
 
